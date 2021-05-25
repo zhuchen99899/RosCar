@@ -1,12 +1,15 @@
-#ifndef __Task_KEY_H
-#define __Task_KEY_H
+#ifndef __Task_WIFI_H
+#define __Task_WIFI_H
 #include "FreeRTOS.h"
+#include "string.h"
 #include "task.h"
 #include "queue.h"
 #include "key.h"
 #include "OS_AppObjCreate.h"
 #include "config.h"
-void key_task(void *pvParameters);
+#include "CRC16.h"
+
+void WIFI_task(void *pvParameters);
 
 
 

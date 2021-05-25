@@ -33,7 +33,8 @@
 ..\obj\wifi.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\wifi.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\string.h
 ..\obj\wifi.o: ..\USER\config.h
-..\obj\wifi.o: ..\FreeRTOS\include\freertos.h
+..\obj\wifi.o: ..\USER\OS_AppObjCreate.h
+..\obj\wifi.o: ..\FreeRTOS\include\FreeRTOS.h
 ..\obj\wifi.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stddef.h
 ..\obj\wifi.o: ..\FreeRTOS\include\FreeRTOSConfig.h
 ..\obj\wifi.o: ..\SYSTEM\usart\usart.h
@@ -42,7 +43,5 @@
 ..\obj\wifi.o: ..\FreeRTOS\include\deprecated_definitions.h
 ..\obj\wifi.o: ..\FreeRTOS\portable\RVDS\ARM_CM3\portmacro.h
 ..\obj\wifi.o: ..\FreeRTOS\include\mpu_wrappers.h
-..\obj\wifi.o: ..\FreeRTOS\include\task.h
-..\obj\wifi.o: ..\FreeRTOS\include\list.h
 ..\obj\wifi.o: ..\FreeRTOS\include\queue.h
 ..\obj\wifi.o: ..\FreeRTOS\include\semphr.h

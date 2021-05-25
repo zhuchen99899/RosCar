@@ -1,15 +1,11 @@
 #include "timer_Encoder.h"
 	
-#define 	Encoder1_period  300
+int overflow_count_Encoder1=0;
 
-//static void timer_count_init(){
-//	
-//	
-//	
-//	
-//}
 
-static void Encoder1_init(u32 ENCODER_TIM_PERIOD){
+
+
+static void Encoder1_init(u32 ENCODER_TIM_PERIOD,u16 TIM_ICPolarity_Mode1,u16 TIM_ICPolarity_Mode2){
 	//结构体声明
   TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;  
   TIM_ICInitTypeDef TIM_ICInitStructure;  
@@ -25,8 +21,9 @@ static void Encoder1_init(u32 ENCODER_TIM_PERIOD){
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);                           
 	
-  TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
 	
+	/*- TIM5编码器模式配置 -*/
+  TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
   TIM_TimeBaseStructure.TIM_Prescaler = 0x0;  //***预分频率系统***********		
   TIM_TimeBaseStructure.TIM_Period = ENCODER_TIM_PERIOD; //***自动重载值***************
   TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1; //***时钟分割*****************
@@ -35,14 +32,16 @@ static void Encoder1_init(u32 ENCODER_TIM_PERIOD){
 	
 
 	/************编码器接口模式*****************/
-	/************编码器接口TIM4、模式选择IC1+IC2、IC1\IC2反向(电机反装)  2倍频 ********************/
+	/************编码器接口TIM5、模式选择IC1+IC2、IC1\IC2反向(电机反装)  2倍频 ********************/
 	/************正装的话TIM_ICPolarity_Falling---->TIM_ICPolarity_Rising(正相)   2倍频************/
 	/************同时对下降沿上升沿计算，即为四倍频模式********************************************/
-	
-  TIM_EncoderInterfaceConfig(TIM5, TIM_EncoderMode_TI12, TIM_ICPolarity_BothEdge ,TIM_ICPolarity_BothEdge);
-  TIM_ICStructInit(&TIM_ICInitStructure);
-  TIM_ICInitStructure.TIM_ICFilter = 9;//指定输入捕获滤波器
+
+  TIM_EncoderInterfaceConfig(TIM5, TIM_EncoderMode_TI12, TIM_ICPolarity_Mode1 ,TIM_ICPolarity_Mode2);
+//  TIM_ICStructInit(&TIM_ICInitStructure);
+//  TIM_ICInitStructure.TIM_ICFilter = 9;//指定输入捕获滤波器
   TIM_ICInit(TIM5, &TIM_ICInitStructure);
+	TIM_SetCounter(TIM5,0);
+
 	
 	
 	
@@ -57,30 +56,87 @@ static void Encoder1_init(u32 ENCODER_TIM_PERIOD){
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; //IRQ通道被使能
 	NVIC_Init(&NVIC_InitStructure);  //初始化NVIC寄存器
 	
-	TIM_ITConfig(TIM5,TIM_IT_Update,ENABLE ); //使能指定的TIM3中断,允许更新中断
+	
 
 
 	
   TIM_Cmd(TIM5, ENABLE); 
-
+	TIM_SetCounter(TIM5,0);
+	TIM_ITConfig(TIM5,TIM_IT_Update,ENABLE ); //使能指定的TIM5中断,允许更新中断
 }
 
 
 void Encoder_init(void){
-	Encoder1_init(Encoder1_period);
+	u32 time_period=0;
+	u16 period_mode_1=0,period_mode_2=0;
+
 	
+
+	
+	
+	switch(period_mode){
+		case 0:
+		period_mode_1=TIM_ICPolarity_Rising;
+		period_mode_1=TIM_ICPolarity_Falling;
+		break;
+		case 1:
+		period_mode_1=TIM_ICPolarity_Falling;
+		period_mode_1=TIM_ICPolarity_Rising;
+		break;
+			
+		case 2:
+		period_mode_1=TIM_ICPolarity_Rising;
+		period_mode_1=TIM_ICPolarity_Rising;	
+		break;
+		case 3:
+		period_mode_1=TIM_ICPolarity_Falling;
+		period_mode_1=TIM_ICPolarity_Falling;	
+		break;
+		case 4: //四倍频模式
+		period_mode_1=TIM_ICPolarity_BothEdge;
+		period_mode_1=TIM_ICPolarity_BothEdge;
+		break;
+	}
+	
+	time_period=Encoder1_period; //定时器溢出值
+	
+	/*设定定时器编码器模式*/
+	Encoder1_init(time_period,period_mode_1,period_mode_2);
+	
+
 }
 	
 
 
-//定时器3中断服务程序
-void TIM5_IRQHandler(void)   //TIM3中断
+//定时器5中断服务程序
+void TIM5_IRQHandler(void)   //TIM5中断
 {
+extern QueueHandle_t Encoder1_Overflow_Queue;
+
+BaseType_t xHigherPriorityTaskWoken;
+	
 	if (TIM_GetITStatus(TIM5, TIM_IT_Update) != RESET)  //检查TIM3更新中断发生与否
 		{
-		TIM_ClearITPendingBit(TIM5, TIM_IT_Update  );  //清除TIMx更新中断标志 
-			pr_warn_pure("中断打印:定时器4计数溢出发生中断\r\n");
+
+			if((TIM5->CR1>>4 & 0x01)==0){ //DIR==1  //上溢
+				overflow_count_Encoder1++;
+				xQueueOverwriteFromISR(Encoder1_Overflow_Queue,&overflow_count_Encoder1,&xHigherPriorityTaskWoken);
+//				pr_warn_pure("中断打印：方向1,Overflow_count=%d\r\n",overflow_count_Encoder1);
+			}
+      else if((TIM5->CR1>>4 & 0x01)==1){//DIR==2  //下溢
+				overflow_count_Encoder1--;
+				xQueueOverwriteFromISR(Encoder1_Overflow_Queue,&overflow_count_Encoder1,&xHigherPriorityTaskWoken);
+//				pr_warn_pure("中断打印：方向2,Overflow_count=%d\r\n",overflow_count_Encoder1);		
+			}
+			
+
+
+			
+		TIM_ClearITPendingBit(TIM5, TIM_IT_Update);  //清除TIMx更新中断标志 
 		}
+		
+
+
 }
 
 

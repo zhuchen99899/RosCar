@@ -32,10 +32,26 @@
 ..\obj\bsp_init.o: ..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h
 ..\obj\bsp_init.o: ..\STM32F10x_FWLib\inc\misc.h
 ..\obj\bsp_init.o: ..\HARDWARE\PWM\pwm.h
-..\obj\bsp_init.o: ..\HARDWARE\KEY\key.h
-..\obj\bsp_init.o: ..\SYSTEM\delay\delay.h
 ..\obj\bsp_init.o: ..\SYSTEM\usart\usart.h
 ..\obj\bsp_init.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\bsp_init.o: ..\HARDWARE\GPIO\Motor_Dir_Output.h
 ..\obj\bsp_init.o: ..\HARDWARE\Timer_Encoder\timer_Encoder.h
 ..\obj\bsp_init.o: ..\USER\config.h
+..\obj\bsp_init.o: ..\USER\OS_AppObjCreate.h
+..\obj\bsp_init.o: ..\FreeRTOS\include\FreeRTOS.h
+..\obj\bsp_init.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stddef.h
+..\obj\bsp_init.o: ..\FreeRTOS\include\FreeRTOSConfig.h
+..\obj\bsp_init.o: ..\FreeRTOS\include\projdefs.h
+..\obj\bsp_init.o: ..\FreeRTOS\include\portable.h
+..\obj\bsp_init.o: ..\FreeRTOS\include\deprecated_definitions.h
+..\obj\bsp_init.o: ..\FreeRTOS\portable\RVDS\ARM_CM3\portmacro.h
+..\obj\bsp_init.o: ..\FreeRTOS\include\mpu_wrappers.h
+..\obj\bsp_init.o: ..\FreeRTOS\include\queue.h
+..\obj\bsp_init.o: ..\FreeRTOS\include\semphr.h
+..\obj\bsp_init.o: ..\FreeRTOS\include\task.h
+..\obj\bsp_init.o: ..\FreeRTOS\include\list.h
+..\obj\bsp_init.o: ..\HARDWARE\WIFI\wifi.h
+..\obj\bsp_init.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\string.h
+..\obj\bsp_init.o: ..\HARDWARE\Timer\timer_read_encoder.h
+..\obj\bsp_init.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\math.h
+..\obj\bsp_init.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdlib.h

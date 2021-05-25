@@ -239,16 +239,10 @@ NVIC_cofig_Init();
 串口2中断服务函数
 *********************/
 
-typedef struct wifibuff
-{
-u32 wifi_lenth;
-u8 wifi_buffer[256];
-}wifibuff;
-
-wifibuff wifi_tMsg;
 
 void USART2_IRQHandler(void)  
 {
+	wifibuff wifi_tMsg;
 
 	extern QueueHandle_t Wifi_buffer_Queue;
 	extern SemaphoreHandle_t BinarySemaphore_USART2ISR;	//二值信号量句柄
@@ -270,25 +264,25 @@ void USART2_IRQHandler(void)
 		DMA_ClearFlag(DMA1_FLAG_GL6 | DMA1_FLAG_TC6 | DMA1_FLAG_TE6 | DMA1_FLAG_HT6);//清除标志位
 	 //printf("标记2");
 
-			DATA_LEN = 256 - DMA_GetCurrDataCounter(DMA1_Channel6); 
-			if(DATA_LEN > 0 && DATA_LEN <= 256)
+			DATA_LEN = DMA_Rec_Len - DMA_GetCurrDataCounter(DMA1_Channel6); 
+			if(DATA_LEN > 0 && DATA_LEN <= DMA_Rec_Len)
 			{	 
 				//printf("标记3");
 			 DMA_Cmd(DMA1_Channel6, DISABLE); //改变通道datasize前要禁止通道工作
-		   DMA1_CH6->CNDTR = 256; //修改DMA1数据传输量
+		   DMA1_CH6->CNDTR = DMA_Rec_Len; //修改DMA1数据传输量
 
 				
 
 			memset(receivebuff->wifi_buffer,0x00,sizeof(receivebuff->wifi_buffer));
 			//传输消息队列
 					//printf("标记4");
-				pr_warn_pure("WIFI模组接收到数据\r\n");
+//				pr_warn_pure("WIFI模组接收到数据\r\n");
 				receivebuff->wifi_lenth=DATA_LEN;
 					//printf("标记5");
-				
-				memcpy(receivebuff->wifi_buffer,DMA_Receive_Buf,256);
+
+				memcpy(receivebuff->wifi_buffer,DMA_Receive_Buf,DMA_Rec_Len);
 				xQueueOverwriteFromISR(Wifi_buffer_Queue,(void *)&receivebuff,&xHigherPriorityTaskWoken);		
-				
+
 					//printf("标记6");
 				xSemaphoreGiveFromISR(BinarySemaphore_USART2ISR,&xHigherPriorityTaskWoken);	//释放二值信号量
 				
@@ -334,7 +328,9 @@ void USART2_IRQHandler(void)
 			 	//printf("标记9");
 	
 	DMA_Cmd(DMA1_Channel6, DISABLE);//关闭DMA
-	DMA1_CH6->CNDTR = 256;//重装填
+	DMA1_CH6->CNDTR = DMA_Rec_Len;//重装填
+	//清除dma缓冲区数据
+	memset(DMA_Receive_Buf,0x00,sizeof(DMA_Receive_Buf));
 	DMA_Cmd(DMA1_Channel6, ENABLE);//处理完成，重启DMA
 		 //	printf("标记10");
 	
@@ -371,9 +367,11 @@ void DMA1_Channel6_IRQHandler(void)
 	DMA_ClearITPendingBit(DMA1_IT_TE6); //清除空闲中断
 
 	DMA_Cmd(DMA1_Channel6, DISABLE);//DMA接收关闭
+	
 
-	DMA1_CH6->CNDTR = 256;//重新装填数据大小
-
+	DMA1_CH6->CNDTR = DMA_Rec_Len;//重新装填数据大小
+	//清除缓冲区数据
+	memset(DMA_Receive_Buf,0x00,sizeof(DMA_Receive_Buf));
 	DMA_Cmd(DMA1_Channel6, ENABLE);//DMA接收开启
 		 	//printf("标记13");
 }

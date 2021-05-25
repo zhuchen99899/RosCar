@@ -369,7 +369,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\USER;..\CORE;..\STM32F10x_FWLib\inc;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\HARDWARE\LED;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM3;..\HARDWARE\PWM;..\FreeRTOS\app;..\HARDWARE\KEY;..\HARDWARE\BSP_Init;..\HARDWARE\GPIO;..\HARDWARE\Timer_Encoder;..\HARDWARE\WIFI</IncludePath>
+              <IncludePath>..\USER;..\CORE;..\STM32F10x_FWLib\inc;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\HARDWARE\LED;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM3;..\HARDWARE\PWM;..\FreeRTOS\app;..\HARDWARE\KEY;..\HARDWARE\BSP_Init;..\HARDWARE\GPIO;..\HARDWARE\Timer_Encoder;..\CRC16;..\HARDWARE\WIFI;..\HARDWARE\Timer</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -442,6 +442,11 @@
               <FileType>5</FileType>
               <FilePath>.\config.h</FilePath>
             </File>
+            <File>
+              <FileName>data_init.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\data_init.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -481,6 +486,11 @@
               <FileName>wifi.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\WIFI\wifi.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer_read_encoder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\Timer\timer_read_encoder.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -623,11 +633,6 @@
               <FilePath>..\FreeRTOS\app\Task_Encoder1.c</FilePath>
             </File>
             <File>
-              <FileName>Task_Key.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\FreeRTOS\app\Task_Key.c</FilePath>
-            </File>
-            <File>
               <FileName>Task_Motor1_Dir.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\FreeRTOS\app\Task_Motor1_Dir.c</FilePath>
@@ -642,6 +647,11 @@
               <FileType>1</FileType>
               <FilePath>..\FreeRTOS\app\Task_IdleTask.c</FilePath>
             </File>
+            <File>
+              <FileName>Task_WIFI.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\FreeRTOS\app\Task_WIFI.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -651,6 +661,16 @@
               <FileName>README.TXT</FileName>
               <FileType>5</FileType>
               <FilePath>..\README.TXT</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>CRC</GroupName>
+          <Files>
+            <File>
+              <FileName>CRC16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\CRC16\CRC16.c</FilePath>
             </File>
           </Files>
         </Group>

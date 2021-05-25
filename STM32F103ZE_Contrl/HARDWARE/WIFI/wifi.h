@@ -4,12 +4,11 @@
 #include "stdio.h"	
 #include "string.h"
 #include "config.h"
-#include "freertos.h"
-#include "task.h"
-#include "queue.h"
-#include "stdio.h"
 
-#include "semphr.h"
+#include "stdio.h"
+#include <OS_AppObjCreate.h>
+
+
 
 void usart2_init(u32 bound);
 void DMA_USART2_Init(void);

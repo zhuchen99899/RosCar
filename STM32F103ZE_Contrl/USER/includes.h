@@ -18,11 +18,12 @@
 #include "OS_AppObjCreate.h"
 
 
+
 /*freertos任务APP*/
 #include "Task_Motor1_Dir.h"
 #include "Task_Motor1_Speed.h"
 #include "Task_Encoder1.h"
-#include "Task_Key.h"
+#include "Task_WIFI.h"
 #include "Task_IdleTask.h"
 
 
@@ -35,6 +36,12 @@
 #include "pwm.h"
 #include "key.h"
 #include "timer_Encoder.h"
+#include "timer_read_encoder.h"
+
+
+/*其他*/
+#include "config.h"
+#include "data_init.h"
 
 #endif
 

@@ -4,8 +4,12 @@
 /*********消息队列句柄********/
 QueueHandle_t Key_Queue;
 QueueHandle_t Motor1_Direction_Queue;
-QueueHandle_t Motor1_Speed_Queue;
+QueueHandle_t Motor1_PWM_Queue;
 QueueHandle_t Wifi_buffer_Queue;
+QueueHandle_t Encoder1_Overflow_Queue;
+QueueHandle_t Encoder1_last_count_Queue;
+QueueHandle_t Encoder1_Status_Queue;
+
 /*********信号量句柄********/
 SemaphoreHandle_t BinarySemaphore_Motor1_DirChange;//电机1方向更改报文二值信号量句柄
 SemaphoreHandle_t BinarySemaphore_Motor1_SpeedChange;//电机1速度更改报文二值信号量句柄
@@ -62,16 +66,16 @@ void Encoder1_task(void *pvParameters);
 
 
 
-/**********按键任务*************/
+/**********WIFI_task任务*************/
 
 //任务优先级
-#define KEY_TASK_PRIO		1
+#define WIFI_TASK_PRIO		3
 //任务堆栈大小	
-#define KEY_STK_SIZE 		256  
+#define WIFI_STK_SIZE 		512  
 //任务句柄
-TaskHandle_t KEYTask_Handler;
+TaskHandle_t WIFITask_Handler;
 //任务函数
-void key_task(void *pvParameters);
+void WIFI_task(void *pvParameters);
 
 
 /********空闲任务***************/
@@ -103,6 +107,9 @@ int main(void)
 //开始任务任务函数
 void start_task(void *pvParameters)
 {
+	
+		init_set();//开机需要初始化的数据与配置
+	
     taskENTER_CRITICAL();           //进入临界区
     //创建电机1方向控制任务
     xTaskCreate((TaskFunction_t )motor1_dir_task,     	
@@ -125,13 +132,13 @@ void start_task(void *pvParameters)
                 (void*          )NULL,
                 (UBaseType_t    )Encoder1_TASK_PRIO,
                 (TaskHandle_t*  )&Encoder1Task_Handler);     
-    //创建按键任务
-    xTaskCreate((TaskFunction_t )key_task,     
-                (const char*    )"key_task",   
-                (uint16_t       )KEY_STK_SIZE, 
+    //创建WIFI_task任务
+    xTaskCreate((TaskFunction_t )WIFI_task,     
+                (const char*    )"wifi_task",   
+                (uint16_t       )WIFI_STK_SIZE, 
                 (void*          )NULL,
-                (UBaseType_t    )KEY_TASK_PRIO,
-                (TaskHandle_t*  )&KEYTask_Handler);     
+                (UBaseType_t    )WIFI_TASK_PRIO,
+                (TaskHandle_t*  )&WIFITask_Handler);     
     //创建按键任务
     xTaskCreate((TaskFunction_t )Idle_task,     
                 (const char*    )"Idle_task",   

@@ -32,3 +32,17 @@
 ..\obj\timer_encoder.o: ..\STM32F10x_FWLib\inc\misc.h
 ..\obj\timer_encoder.o: ..\USER\config.h
 ..\obj\timer_encoder.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\timer_encoder.o: ..\USER\OS_AppObjCreate.h
+..\obj\timer_encoder.o: ..\FreeRTOS\include\FreeRTOS.h
+..\obj\timer_encoder.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stddef.h
+..\obj\timer_encoder.o: ..\FreeRTOS\include\FreeRTOSConfig.h
+..\obj\timer_encoder.o: ..\SYSTEM\usart\usart.h
+..\obj\timer_encoder.o: ..\FreeRTOS\include\projdefs.h
+..\obj\timer_encoder.o: ..\FreeRTOS\include\portable.h
+..\obj\timer_encoder.o: ..\FreeRTOS\include\deprecated_definitions.h
+..\obj\timer_encoder.o: ..\FreeRTOS\portable\RVDS\ARM_CM3\portmacro.h
+..\obj\timer_encoder.o: ..\FreeRTOS\include\mpu_wrappers.h
+..\obj\timer_encoder.o: ..\FreeRTOS\include\queue.h
+..\obj\timer_encoder.o: ..\FreeRTOS\include\semphr.h
+..\obj\timer_encoder.o: ..\FreeRTOS\include\task.h
+..\obj\timer_encoder.o: ..\FreeRTOS\include\list.h

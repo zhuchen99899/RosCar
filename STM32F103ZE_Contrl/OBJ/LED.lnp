@@ -3,6 +3,7 @@
 "..\obj\stm32f10x_it.o"
 "..\obj\system_stm32f10x.o"
 "..\obj\os_appobjcreate.o"
+"..\obj\data_init.o"
 "..\obj\bsp_init.o"
 "..\obj\led.o"
 "..\obj\pwm.o"
@@ -10,6 +11,7 @@
 "..\obj\motor_dir_output.o"
 "..\obj\timer_encoder.o"
 "..\obj\wifi.o"
+"..\obj\timer_read_encoder.o"
 "..\obj\delay.o"
 "..\obj\sys.o"
 "..\obj\usart.o"
@@ -27,14 +29,15 @@
 "..\obj\queue.o"
 "..\obj\tasks.o"
 "..\obj\timers.o"
-"..\obj\stm32f10x_tim_1.o"
+"..\obj\stm32f10x_tim.o"
 "..\obj\heap_4.o"
 "..\obj\port.o"
 "..\obj\task_encoder1.o"
-"..\obj\task_key.o"
 "..\obj\task_motor1_dir.o"
 "..\obj\task_motor1_speed.o"
 "..\obj\task_idletask.o"
+"..\obj\task_wifi.o"
+"..\obj\crc16.o"
 --ro-base 0x08000000 --entry 0x08000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "..\OBJ\LED.map" -o ..\OBJ\LED.axf
