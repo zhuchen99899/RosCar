@@ -4,6 +4,8 @@
 #include "stm32f10x.h"
 #include "config.h"
 u16 CRC16(uint8_t *_pBuf, int _usLen);
+
+void CRC16_uch(uint8_t *_pBuf, int _usLen,u8 crc_res[]);
 u16 Combine_CRC_2Byte(u8 high_byte,u8 low_byte);
 
 #endif

@@ -11,7 +11,12 @@
 
 // wifi_buffer 缓冲区长度为DMA 缓冲区长度
 #define wifi_buffer_len   256
-//电机1方向消息队列结构体
+
+
+
+
+
+
 typedef struct Motor1_Direction
 {
 u8 Positive;

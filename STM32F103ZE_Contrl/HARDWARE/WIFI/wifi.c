@@ -276,7 +276,7 @@ void USART2_IRQHandler(void)
 			memset(receivebuff->wifi_buffer,0x00,sizeof(receivebuff->wifi_buffer));
 			//传输消息队列
 					//printf("标记4");
-//				pr_warn_pure("WIFI模组接收到数据\r\n");
+
 				receivebuff->wifi_lenth=DATA_LEN;
 					//printf("标记5");
 

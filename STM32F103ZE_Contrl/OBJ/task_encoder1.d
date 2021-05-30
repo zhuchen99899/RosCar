@@ -43,3 +43,12 @@
 ..\obj\task_encoder1.o: ..\FreeRTOS\include\task.h
 ..\obj\task_encoder1.o: ..\FreeRTOS\include\list.h
 ..\obj\task_encoder1.o: ..\HARDWARE\LED\led.h
+..\obj\task_encoder1.o: ..\FreeRTOS\include\queue.h
+..\obj\task_encoder1.o: ..\USER\protocol.h
+..\obj\task_encoder1.o: ..\USER\Car_config.h
+..\obj\task_encoder1.o: ..\CRC16\crc16.h
+..\obj\task_encoder1.o: ..\USER\config.h
+..\obj\task_encoder1.o: ..\USER\OS_AppObjCreate.h
+..\obj\task_encoder1.o: ..\FreeRTOS\include\semphr.h
+..\obj\task_encoder1.o: ..\HARDWARE\WIFI\wifi.h
+..\obj\task_encoder1.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\string.h

@@ -8,7 +8,7 @@
 #include "OS_AppObjCreate.h"
 #include "config.h"
 #include "CRC16.h"
-
+#include "protocol.h"
 void WIFI_task(void *pvParameters);
 
 

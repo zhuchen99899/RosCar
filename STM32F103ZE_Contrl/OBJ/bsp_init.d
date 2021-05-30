@@ -50,6 +50,7 @@
 ..\obj\bsp_init.o: ..\FreeRTOS\include\semphr.h
 ..\obj\bsp_init.o: ..\FreeRTOS\include\task.h
 ..\obj\bsp_init.o: ..\FreeRTOS\include\list.h
+..\obj\bsp_init.o: ..\USER\Car_config.h
 ..\obj\bsp_init.o: ..\HARDWARE\WIFI\wifi.h
 ..\obj\bsp_init.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\string.h
 ..\obj\bsp_init.o: ..\HARDWARE\Timer\timer_read_encoder.h

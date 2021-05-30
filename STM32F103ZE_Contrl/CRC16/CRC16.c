@@ -1,5 +1,5 @@
 #include "CRC16.h"
-#define FUNC_EXIT_RC(x) 
+
 
 
     // CRC 高位字节值表
@@ -91,6 +91,24 @@ u16 CRC16(uint8_t *_pBuf, int _usLen)
     }
     return ((uint16_t)ucCRCHi << 8 | ucCRCLo);
 }
+
+/********两字节返回的crc校验*******/
+void CRC16_uch(uint8_t *_pBuf, int _usLen,u8 crc_res[])
+{
+	u8 ucCRCHi = 0xFF; /* 高CRC字节初始化 */
+	u8 ucCRCLo = 0xFF; /* 低CRC 字节初始化 */
+	u16 usIndex;  /* CRC循环中的索引 */
+
+    while (_usLen--)
+    {
+		usIndex = ucCRCHi ^ *_pBuf++; /* 计算CRC */
+		ucCRCHi = ucCRCLo ^ s_CRCHi[usIndex];
+		ucCRCLo = s_CRCLo[usIndex];
+    }
+		crc_res[0]=ucCRCHi;
+		crc_res[1]=ucCRCLo;
+}
+
 
 
 

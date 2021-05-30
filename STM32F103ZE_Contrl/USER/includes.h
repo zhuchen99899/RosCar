@@ -42,6 +42,8 @@
 /*ÆäËû*/
 #include "config.h"
 #include "data_init.h"
+#include "Car_config.h"
+
 
 #endif
 

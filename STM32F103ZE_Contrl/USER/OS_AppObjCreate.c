@@ -75,6 +75,10 @@ Motor1_PWM_Queue =xQueueCreate(Motor1_PWM_Q_NUM,sizeof(float));
 
 }
 
+
+
+
+
 static void WIFI_buffer_QueueCreat(void)
 {
 	extern QueueHandle_t Wifi_buffer_Queue;
@@ -165,6 +169,7 @@ WIFI_buffer_QueueCreat();
 Encoder1_Overflow_QueueCreat();
 Encoder1_last_count_QueueCreat();
 Encoder1_Status_QueueCreat();
+	
 }
 
 

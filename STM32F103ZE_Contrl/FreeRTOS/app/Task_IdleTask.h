@@ -5,6 +5,7 @@
 #include "queue.h"
 #include "led.h"
 #include "OS_AppObjCreate.h"
+#include "Car_config.h"
 
 
 void Idle_task(void *pvParameters);

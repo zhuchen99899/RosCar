@@ -47,3 +47,4 @@
 ..\obj\task_idletask.o: ..\USER\OS_AppObjCreate.h
 ..\obj\task_idletask.o: ..\FreeRTOS\include\semphr.h
 ..\obj\task_idletask.o: ..\USER\config.h
+..\obj\task_idletask.o: ..\USER\Car_config.h

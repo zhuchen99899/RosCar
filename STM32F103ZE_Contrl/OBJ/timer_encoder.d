@@ -46,3 +46,4 @@
 ..\obj\timer_encoder.o: ..\FreeRTOS\include\semphr.h
 ..\obj\timer_encoder.o: ..\FreeRTOS\include\task.h
 ..\obj\timer_encoder.o: ..\FreeRTOS\include\list.h
+..\obj\timer_encoder.o: ..\USER\Car_config.h

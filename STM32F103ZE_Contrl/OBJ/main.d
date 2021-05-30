@@ -53,14 +53,16 @@
 ..\obj\main.o: ..\FreeRTOS\app\Task_Motor1_Speed.h
 ..\obj\main.o: ..\HARDWARE\PWM\pwm.h
 ..\obj\main.o: ..\FreeRTOS\app\Task_Encoder1.h
-..\obj\main.o: ..\FreeRTOS\app\Task_WIFI.h
+..\obj\main.o: ..\USER\protocol.h
+..\obj\main.o: ..\USER\Car_config.h
+..\obj\main.o: ..\CRC16\crc16.h
+..\obj\main.o: ..\HARDWARE\WIFI\wifi.h
 ..\obj\main.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\string.h
+..\obj\main.o: ..\FreeRTOS\app\Task_WIFI.h
 ..\obj\main.o: ..\HARDWARE\KEY\key.h
-..\obj\main.o: ..\CRC16\CRC16.h
 ..\obj\main.o: ..\FreeRTOS\app\Task_IdleTask.h
 ..\obj\main.o: ..\HARDWARE\BSP_Init\Bsp_init.h
 ..\obj\main.o: ..\HARDWARE\Timer_Encoder\timer_Encoder.h
-..\obj\main.o: ..\HARDWARE\WIFI\wifi.h
 ..\obj\main.o: ..\HARDWARE\Timer\timer_read_encoder.h
 ..\obj\main.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\math.h
 ..\obj\main.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdlib.h

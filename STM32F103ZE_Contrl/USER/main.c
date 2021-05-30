@@ -53,7 +53,7 @@ TaskHandle_t MOTOR1_SPEED_TASK_Handler;
 void motor1_speed_task(void *pvParameters);
 
 
-/**********编码器任务***********/
+/**********编码器1任务***********/
 
 //任务优先级
 #define Encoder1_TASK_PRIO		1
@@ -139,7 +139,7 @@ void start_task(void *pvParameters)
                 (void*          )NULL,
                 (UBaseType_t    )WIFI_TASK_PRIO,
                 (TaskHandle_t*  )&WIFITask_Handler);     
-    //创建按键任务
+    //创建空闲任务
     xTaskCreate((TaskFunction_t )Idle_task,     
                 (const char*    )"Idle_task",   
                 (uint16_t       )Idle_STK_SIZE, 

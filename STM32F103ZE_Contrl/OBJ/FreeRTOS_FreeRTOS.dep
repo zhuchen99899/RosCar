@@ -1,6 +1,6 @@
 Dependencies for Project 'FreeRTOS', Target 'FreeRTOS': (DO NOT MODIFY !)
-F (.\main.c)(0x60ACAFC6)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
-I (includes.h)(0x60AB9420)
+F (.\main.c)(0x60B36529)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
+I (includes.h)(0x60B36035)
 I (..\SYSTEM\sys\sys.h)(0x583BA68A)
 I (..\USER\stm32f10x.h)(0x4D783CB4)
 I (..\CORE\core_cm3.h)(0x4D523B58)
@@ -45,26 +45,28 @@ I (..\FreeRTOS\include\task.h)(0x6074028A)
 I (..\FreeRTOS\include\list.h)(0x573F3A16)
 I (..\FreeRTOS\include\queue.h)(0x573F3A16)
 I (..\FreeRTOS\include\semphr.h)(0x573F3A16)
-I (OS_AppObjCreate.h)(0x60AC6F0F)
+I (OS_AppObjCreate.h)(0x60B36515)
 I (config.h)(0x60A37F7E)
 I (..\FreeRTOS\app\Task_Motor1_Dir.h)(0x60A37941)
 I (..\HARDWARE\LED\led.h)(0x60A2476F)
 I (..\HARDWARE\GPIO\Motor_Dir_Output.h)(0x60792B91)
 I (..\FreeRTOS\app\Task_Motor1_Speed.h)(0x6078F48F)
 I (..\HARDWARE\PWM\pwm.h)(0x60792AD6)
-I (..\FreeRTOS\app\Task_Encoder1.h)(0x60A35851)
-I (..\FreeRTOS\app\Task_WIFI.h)(0x60A8801D)
-I (D:\tools\code tools\keil\ARM\ARMCC\include\string.h)(0x5475F300)
-I (..\HARDWARE\KEY\key.h)(0x60742230)
-I (..\CRC16\CRC16.h)(0x60A8B2AE)
-I (..\FreeRTOS\app\Task_IdleTask.h)(0x60A35988)
-I (..\HARDWARE\BSP_Init\Bsp_init.h)(0x60AB910E)
-I (..\HARDWARE\Timer_Encoder\timer_Encoder.h)(0x60AC6E74)
+I (..\FreeRTOS\app\Task_Encoder1.h)(0x60B0725D)
+I (..\USER\protocol.h)(0x60B0E402)
+I (..\USER\Car_config.h)(0x60B364B3)
+I (..\CRC16\crc16.h)(0x60B0E55F)
 I (..\HARDWARE\WIFI\wifi.h)(0x60AA49B5)
+I (D:\tools\code tools\keil\ARM\ARMCC\include\string.h)(0x5475F300)
+I (..\FreeRTOS\app\Task_WIFI.h)(0x60AF9C83)
+I (..\HARDWARE\KEY\key.h)(0x60742230)
+I (..\FreeRTOS\app\Task_IdleTask.h)(0x60B36387)
+I (..\HARDWARE\BSP_Init\Bsp_init.h)(0x60AB910E)
+I (..\HARDWARE\Timer_Encoder\timer_Encoder.h)(0x60AF8D19)
 I (..\HARDWARE\Timer\timer_read_encoder.h)(0x60ACAECD)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\math.h)(0x5475F2FE)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\stdlib.h)(0x5475F300)
-I (data_init.h)(0x60AC55AE)
+I (data_init.h)(0x60B35A74)
 F (.\stm32f10x_it.c)(0x583BA648)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\stm32f10x_it.o --omf_browse ..\obj\stm32f10x_it.crf --depend ..\obj\stm32f10x_it.d)
 I (stm32f10x_it.h)(0x4D99A426)
 I (stm32f10x.h)(0x4D783CB4)
@@ -126,8 +128,8 @@ I (..\STM32F10x_FWLib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x504F415E)
 I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
-F (.\OS_AppObjCreate.c)(0x60ACB091)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\os_appobjcreate.o --omf_browse ..\obj\os_appobjcreate.crf --depend ..\obj\os_appobjcreate.d)
-I (..\USER\OS_AppObjCreate.h)(0x60AC6F0F)
+F (.\OS_AppObjCreate.c)(0x60B36522)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\os_appobjcreate.o --omf_browse ..\obj\os_appobjcreate.crf --depend ..\obj\os_appobjcreate.d)
+I (..\USER\OS_AppObjCreate.h)(0x60B36515)
 I (..\FreeRTOS\include\FreeRTOS.h)(0x6076D3CD)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\stddef.h)(0x5475F300)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\stdint.h)(0x5475F300)
@@ -170,10 +172,10 @@ I (..\FreeRTOS\include\mpu_wrappers.h)(0x573F3A16)
 I (..\FreeRTOS\include\queue.h)(0x573F3A16)
 I (..\FreeRTOS\include\semphr.h)(0x573F3A16)
 I (..\USER\config.h)(0x60A37F7E)
-F (.\includes.h)(0x60AB9420)()
+F (.\includes.h)(0x60B36035)()
 F (.\config.h)(0x60A37F7E)()
-F (.\data_init.c)(0x60ACA94C)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\data_init.o --omf_browse ..\obj\data_init.crf --depend ..\obj\data_init.d)
-I (data_init.h)(0x60AC55AE)
+F (.\data_init.c)(0x60B363E0)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\data_init.o --omf_browse ..\obj\data_init.crf --depend ..\obj\data_init.d)
+I (data_init.h)(0x60B35A74)
 I (..\FreeRTOS\include\FreeRTOS.h)(0x6076D3CD)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\stddef.h)(0x5475F300)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\stdint.h)(0x5475F300)
@@ -216,9 +218,55 @@ I (..\FreeRTOS\include\mpu_wrappers.h)(0x573F3A16)
 I (..\FreeRTOS\include\task.h)(0x6074028A)
 I (..\FreeRTOS\include\list.h)(0x573F3A16)
 I (..\FreeRTOS\include\queue.h)(0x573F3A16)
-I (OS_AppObjCreate.h)(0x60AC6F0F)
+I (OS_AppObjCreate.h)(0x60B36515)
 I (..\FreeRTOS\include\semphr.h)(0x573F3A16)
 I (config.h)(0x60A37F7E)
+I (Car_config.h)(0x60B364B3)
+F (.\Car_config.h)(0x60B364B3)()
+F (.\protocol.c)(0x60B0F4DB)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\protocol.o --omf_browse ..\obj\protocol.crf --depend ..\obj\protocol.d)
+I (protocol.h)(0x60B0E402)
+I (Car_config.h)(0x60B364B3)
+I (..\CRC16\crc16.h)(0x60B0E55F)
+I (..\USER\stm32f10x.h)(0x4D783CB4)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\tools\code tools\keil\ARM\ARMCC\include\stdint.h)(0x5475F300)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5501900A)
+I (..\STM32F10x_FWLib\inc\stm32f10x_adc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_bkp.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_can.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_cec.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_crc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_dac.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_exti.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_flash.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_fsmc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_i2c.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_iwdg.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_pwr.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_rtc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_sdio.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_spi.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_tim.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x504F415E)
+I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
+I (..\USER\config.h)(0x60A37F7E)
+I (..\SYSTEM\sys\sys.h)(0x583BA68A)
+I (..\FreeRTOS\include\FreeRTOS.h)(0x6076D3CD)
+I (D:\tools\code tools\keil\ARM\ARMCC\include\stddef.h)(0x5475F300)
+I (..\FreeRTOS\include\FreeRTOSConfig.h)(0x60AC9AEC)
+I (..\SYSTEM\usart\usart.h)(0x50517A82)
+I (D:\tools\code tools\keil\ARM\ARMCC\include\stdio.h)(0x5475F300)
+I (..\FreeRTOS\include\projdefs.h)(0x573F3A16)
+I (..\FreeRTOS\include\portable.h)(0x573F3A16)
+I (..\FreeRTOS\include\deprecated_definitions.h)(0x573F3A16)
+I (..\FreeRTOS\portable\RVDS\ARM_CM3\portmacro.h)(0x573F3A17)
+I (..\FreeRTOS\include\mpu_wrappers.h)(0x573F3A16)
 F (..\HARDWARE\BSP_Init\Bsp_init.c)(0x60ACA53A)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\bsp_init.o --omf_browse ..\obj\bsp_init.crf --depend ..\obj\bsp_init.d)
 I (..\HARDWARE\BSP_Init\Bsp_init.h)(0x60AB910E)
 I (..\HARDWARE\LED\led.h)(0x60A2476F)
@@ -255,9 +303,9 @@ I (..\HARDWARE\PWM\pwm.h)(0x60792AD6)
 I (..\SYSTEM\usart\usart.h)(0x50517A82)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\stdio.h)(0x5475F300)
 I (..\HARDWARE\GPIO\Motor_Dir_Output.h)(0x60792B91)
-I (..\HARDWARE\Timer_Encoder\timer_Encoder.h)(0x60AC6E74)
+I (..\HARDWARE\Timer_Encoder\timer_Encoder.h)(0x60AF8D19)
 I (..\USER\config.h)(0x60A37F7E)
-I (..\USER\OS_AppObjCreate.h)(0x60AC6F0F)
+I (..\USER\OS_AppObjCreate.h)(0x60B36515)
 I (..\FreeRTOS\include\FreeRTOS.h)(0x6076D3CD)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\stddef.h)(0x5475F300)
 I (..\FreeRTOS\include\FreeRTOSConfig.h)(0x60AC9AEC)
@@ -270,6 +318,7 @@ I (..\FreeRTOS\include\queue.h)(0x573F3A16)
 I (..\FreeRTOS\include\semphr.h)(0x573F3A16)
 I (..\FreeRTOS\include\task.h)(0x6074028A)
 I (..\FreeRTOS\include\list.h)(0x573F3A16)
+I (..\USER\Car_config.h)(0x60B364B3)
 I (..\HARDWARE\WIFI\wifi.h)(0x60AA49B5)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\string.h)(0x5475F300)
 I (..\HARDWARE\Timer\timer_read_encoder.h)(0x60ACAECD)
@@ -402,7 +451,7 @@ I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x504F415E)
 I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
 F (..\HARDWARE\Timer_Encoder\timer_Encoder.c)(0x60ACADD1)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\timer_encoder.o --omf_browse ..\obj\timer_encoder.crf --depend ..\obj\timer_encoder.d)
-I (..\HARDWARE\Timer_Encoder\timer_Encoder.h)(0x60AC6E74)
+I (..\HARDWARE\Timer_Encoder\timer_Encoder.h)(0x60AF8D19)
 I (..\SYSTEM\sys\sys.h)(0x583BA68A)
 I (..\USER\stm32f10x.h)(0x4D783CB4)
 I (..\CORE\core_cm3.h)(0x4D523B58)
@@ -434,7 +483,7 @@ I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
 I (..\USER\config.h)(0x60A37F7E)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\stdio.h)(0x5475F300)
-I (..\USER\OS_AppObjCreate.h)(0x60AC6F0F)
+I (..\USER\OS_AppObjCreate.h)(0x60B36515)
 I (..\FreeRTOS\include\FreeRTOS.h)(0x6076D3CD)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\stddef.h)(0x5475F300)
 I (..\FreeRTOS\include\FreeRTOSConfig.h)(0x60AC9AEC)
@@ -448,7 +497,8 @@ I (..\FreeRTOS\include\queue.h)(0x573F3A16)
 I (..\FreeRTOS\include\semphr.h)(0x573F3A16)
 I (..\FreeRTOS\include\task.h)(0x6074028A)
 I (..\FreeRTOS\include\list.h)(0x573F3A16)
-F (..\HARDWARE\WIFI\wifi.c)(0x60AB89CF)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\wifi.o --omf_browse ..\obj\wifi.crf --depend ..\obj\wifi.d)
+I (..\USER\Car_config.h)(0x60B364B3)
+F (..\HARDWARE\WIFI\wifi.c)(0x60AFA4D4)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\wifi.o --omf_browse ..\obj\wifi.crf --depend ..\obj\wifi.d)
 I (..\HARDWARE\WIFI\wifi.h)(0x60AA49B5)
 I (..\SYSTEM\sys\sys.h)(0x583BA68A)
 I (..\USER\stm32f10x.h)(0x4D783CB4)
@@ -482,7 +532,7 @@ I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\stdio.h)(0x5475F300)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\string.h)(0x5475F300)
 I (..\USER\config.h)(0x60A37F7E)
-I (..\USER\OS_AppObjCreate.h)(0x60AC6F0F)
+I (..\USER\OS_AppObjCreate.h)(0x60B36515)
 I (..\FreeRTOS\include\FreeRTOS.h)(0x6076D3CD)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\stddef.h)(0x5475F300)
 I (..\FreeRTOS\include\FreeRTOSConfig.h)(0x60AC9AEC)
@@ -494,7 +544,7 @@ I (..\FreeRTOS\portable\RVDS\ARM_CM3\portmacro.h)(0x573F3A17)
 I (..\FreeRTOS\include\mpu_wrappers.h)(0x573F3A16)
 I (..\FreeRTOS\include\queue.h)(0x573F3A16)
 I (..\FreeRTOS\include\semphr.h)(0x573F3A16)
-F (..\HARDWARE\Timer\timer_read_encoder.c)(0x60ACAF54)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\timer_read_encoder.o --omf_browse ..\obj\timer_read_encoder.crf --depend ..\obj\timer_read_encoder.d)
+F (..\HARDWARE\Timer\timer_read_encoder.c)(0x60B06DEA)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\timer_read_encoder.o --omf_browse ..\obj\timer_read_encoder.crf --depend ..\obj\timer_read_encoder.d)
 I (..\HARDWARE\Timer\timer_read_encoder.h)(0x60ACAECD)
 I (..\SYSTEM\sys\sys.h)(0x583BA68A)
 I (..\USER\stm32f10x.h)(0x4D783CB4)
@@ -529,8 +579,8 @@ I (..\USER\config.h)(0x60A37F7E)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\math.h)(0x5475F2FE)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\stdlib.h)(0x5475F300)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\stdio.h)(0x5475F300)
-I (..\HARDWARE\Timer_Encoder\timer_Encoder.h)(0x60AC6E74)
-I (..\USER\OS_AppObjCreate.h)(0x60AC6F0F)
+I (..\HARDWARE\Timer_Encoder\timer_Encoder.h)(0x60AF8D19)
+I (..\USER\OS_AppObjCreate.h)(0x60B36515)
 I (..\FreeRTOS\include\FreeRTOS.h)(0x6076D3CD)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\stddef.h)(0x5475F300)
 I (..\FreeRTOS\include\FreeRTOSConfig.h)(0x60AC9AEC)
@@ -544,6 +594,7 @@ I (..\FreeRTOS\include\queue.h)(0x573F3A16)
 I (..\FreeRTOS\include\semphr.h)(0x573F3A16)
 I (..\FreeRTOS\include\task.h)(0x6074028A)
 I (..\FreeRTOS\include\list.h)(0x573F3A16)
+I (..\USER\Car_config.h)(0x60B364B3)
 F (..\SYSTEM\delay\delay.c)(0x5E9459D0)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\delay.o --omf_browse ..\obj\delay.crf --depend ..\obj\delay.d)
 I (..\SYSTEM\delay\delay.h)(0x583BAA09)
 I (..\SYSTEM\sys\sys.h)(0x583BA68A)
@@ -1215,8 +1266,8 @@ I (..\FreeRTOS\portable\RVDS\ARM_CM3\portmacro.h)(0x573F3A17)
 I (..\FreeRTOS\include\mpu_wrappers.h)(0x573F3A16)
 I (..\FreeRTOS\include\task.h)(0x6074028A)
 I (..\FreeRTOS\include\list.h)(0x573F3A16)
-F (..\FreeRTOS\app\Task_Encoder1.c)(0x60A35C26)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\task_encoder1.o --omf_browse ..\obj\task_encoder1.crf --depend ..\obj\task_encoder1.d)
-I (..\FreeRTOS\app\Task_Encoder1.h)(0x60A35851)
+F (..\FreeRTOS\app\Task_Encoder1.c)(0x60B364F9)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\task_encoder1.o --omf_browse ..\obj\task_encoder1.crf --depend ..\obj\task_encoder1.d)
+I (..\FreeRTOS\app\Task_Encoder1.h)(0x60B0725D)
 I (..\FreeRTOS\include\FreeRTOS.h)(0x6076D3CD)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\stddef.h)(0x5475F300)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\stdint.h)(0x5475F300)
@@ -1259,6 +1310,15 @@ I (..\FreeRTOS\include\mpu_wrappers.h)(0x573F3A16)
 I (..\FreeRTOS\include\task.h)(0x6074028A)
 I (..\FreeRTOS\include\list.h)(0x573F3A16)
 I (..\HARDWARE\LED\led.h)(0x60A2476F)
+I (..\FreeRTOS\include\queue.h)(0x573F3A16)
+I (..\USER\protocol.h)(0x60B0E402)
+I (..\USER\Car_config.h)(0x60B364B3)
+I (..\CRC16\crc16.h)(0x60B0E55F)
+I (..\USER\config.h)(0x60A37F7E)
+I (..\USER\OS_AppObjCreate.h)(0x60B36515)
+I (..\FreeRTOS\include\semphr.h)(0x573F3A16)
+I (..\HARDWARE\WIFI\wifi.h)(0x60AA49B5)
+I (D:\tools\code tools\keil\ARM\ARMCC\include\string.h)(0x5475F300)
 F (..\FreeRTOS\app\Task_Motor1_Dir.c)(0x60A8C0F4)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\task_motor1_dir.o --omf_browse ..\obj\task_motor1_dir.crf --depend ..\obj\task_motor1_dir.d)
 I (..\FreeRTOS\app\Task_Motor1_Dir.h)(0x60A37941)
 I (..\FreeRTOS\include\FreeRTOS.h)(0x6076D3CD)
@@ -1304,11 +1364,11 @@ I (..\FreeRTOS\include\task.h)(0x6074028A)
 I (..\FreeRTOS\include\list.h)(0x573F3A16)
 I (..\FreeRTOS\include\queue.h)(0x573F3A16)
 I (..\HARDWARE\LED\led.h)(0x60A2476F)
-I (..\USER\OS_AppObjCreate.h)(0x60AC6F0F)
+I (..\USER\OS_AppObjCreate.h)(0x60B36515)
 I (..\FreeRTOS\include\semphr.h)(0x573F3A16)
 I (..\USER\config.h)(0x60A37F7E)
 I (..\HARDWARE\GPIO\Motor_Dir_Output.h)(0x60792B91)
-F (..\FreeRTOS\app\Task_Motor1_Speed.c)(0x60ACB000)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\task_motor1_speed.o --omf_browse ..\obj\task_motor1_speed.crf --depend ..\obj\task_motor1_speed.d)
+F (..\FreeRTOS\app\Task_Motor1_Speed.c)(0x60AF7BA6)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\task_motor1_speed.o --omf_browse ..\obj\task_motor1_speed.crf --depend ..\obj\task_motor1_speed.d)
 I (..\FreeRTOS\app\Task_Motor1_Speed.h)(0x6078F48F)
 I (..\FreeRTOS\include\FreeRTOS.h)(0x6076D3CD)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\stddef.h)(0x5475F300)
@@ -1354,11 +1414,11 @@ I (..\FreeRTOS\include\list.h)(0x573F3A16)
 I (..\FreeRTOS\include\queue.h)(0x573F3A16)
 I (..\HARDWARE\PWM\pwm.h)(0x60792AD6)
 I (..\HARDWARE\LED\led.h)(0x60A2476F)
-I (..\USER\OS_AppObjCreate.h)(0x60AC6F0F)
+I (..\USER\OS_AppObjCreate.h)(0x60B36515)
 I (..\FreeRTOS\include\semphr.h)(0x573F3A16)
 I (..\USER\config.h)(0x60A37F7E)
-F (..\FreeRTOS\app\Task_IdleTask.c)(0x60ACABCC)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\task_idletask.o --omf_browse ..\obj\task_idletask.crf --depend ..\obj\task_idletask.d)
-I (..\FreeRTOS\app\Task_IdleTask.h)(0x60A35988)
+F (..\FreeRTOS\app\Task_IdleTask.c)(0x60B364C8)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\task_idletask.o --omf_browse ..\obj\task_idletask.crf --depend ..\obj\task_idletask.d)
+I (..\FreeRTOS\app\Task_IdleTask.h)(0x60B36387)
 I (..\FreeRTOS\include\FreeRTOS.h)(0x6076D3CD)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\stddef.h)(0x5475F300)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\stdint.h)(0x5475F300)
@@ -1402,11 +1462,12 @@ I (..\FreeRTOS\include\task.h)(0x6074028A)
 I (..\FreeRTOS\include\list.h)(0x573F3A16)
 I (..\FreeRTOS\include\queue.h)(0x573F3A16)
 I (..\HARDWARE\LED\led.h)(0x60A2476F)
-I (..\USER\OS_AppObjCreate.h)(0x60AC6F0F)
+I (..\USER\OS_AppObjCreate.h)(0x60B36515)
 I (..\FreeRTOS\include\semphr.h)(0x573F3A16)
 I (..\USER\config.h)(0x60A37F7E)
-F (..\FreeRTOS\app\Task_WIFI.c)(0x60ACB091)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\task_wifi.o --omf_browse ..\obj\task_wifi.crf --depend ..\obj\task_wifi.d)
-I (..\FreeRTOS\app\Task_WIFI.h)(0x60A8801D)
+I (..\USER\Car_config.h)(0x60B364B3)
+F (..\FreeRTOS\app\Task_WIFI.c)(0x60B364D9)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\task_wifi.o --omf_browse ..\obj\task_wifi.crf --depend ..\obj\task_wifi.d)
+I (..\FreeRTOS\app\Task_WIFI.h)(0x60AF9C83)
 I (..\FreeRTOS\include\FreeRTOS.h)(0x6076D3CD)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\stddef.h)(0x5475F300)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\stdint.h)(0x5475F300)
@@ -1452,13 +1513,15 @@ I (..\FreeRTOS\include\list.h)(0x573F3A16)
 I (..\FreeRTOS\include\queue.h)(0x573F3A16)
 I (..\HARDWARE\KEY\key.h)(0x60742230)
 I (..\SYSTEM\delay\delay.h)(0x583BAA09)
-I (..\USER\OS_AppObjCreate.h)(0x60AC6F0F)
+I (..\USER\OS_AppObjCreate.h)(0x60B36515)
 I (..\FreeRTOS\include\semphr.h)(0x573F3A16)
 I (..\USER\config.h)(0x60A37F7E)
-I (..\CRC16\CRC16.h)(0x60A8B2AE)
-F (..\README.TXT)(0x60A3A57B)()
-F (..\CRC16\CRC16.c)(0x60A8C0BA)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\crc16.o --omf_browse ..\obj\crc16.crf --depend ..\obj\crc16.d)
-I (..\CRC16\CRC16.h)(0x60A8B2AE)
+I (..\CRC16\CRC16.h)(0x60B0E55F)
+I (..\USER\protocol.h)(0x60B0E402)
+I (..\USER\Car_config.h)(0x60B364B3)
+F (..\README.TXT)(0x60ACB137)()
+F (..\CRC16\CRC16.c)(0x60B0E64A)(--c99 -c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\LED -I..\FreeRTOS\include -I..\FreeRTOS\portable\RVDS\ARM_CM3 -I..\HARDWARE\PWM -I..\FreeRTOS\app -I..\HARDWARE\KEY -I..\HARDWARE\BSP_Init -I..\HARDWARE\GPIO -I..\HARDWARE\Timer_Encoder -I..\CRC16 -I..\HARDWARE\WIFI -I..\HARDWARE\Timer-I D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE-I "D:\tools\code tools\keil\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include"-I "D:\tools\code tools\keil\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\crc16.o --omf_browse ..\obj\crc16.crf --depend ..\obj\crc16.d)
+I (..\CRC16\CRC16.h)(0x60B0E55F)
 I (..\USER\stm32f10x.h)(0x4D783CB4)
 I (..\CORE\core_cm3.h)(0x4D523B58)
 I (D:\tools\code tools\keil\ARM\ARMCC\include\stdint.h)(0x5475F300)

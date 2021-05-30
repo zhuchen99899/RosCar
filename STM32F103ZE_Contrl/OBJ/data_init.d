@@ -46,3 +46,4 @@
 ..\obj\data_init.o: OS_AppObjCreate.h
 ..\obj\data_init.o: ..\FreeRTOS\include\semphr.h
 ..\obj\data_init.o: config.h
+..\obj\data_init.o: Car_config.h

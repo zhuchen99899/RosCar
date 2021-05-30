@@ -52,7 +52,7 @@ void TIM6_IRQHandler(void)   //TIM6ÖÐ¶Ï
 	extern QueueHandle_t Encoder1_last_count_Queue;
 	extern QueueHandle_t Encoder1_Overflow_Queue;
 	extern QueueHandle_t Encoder1_Status_Queue;
-	extern QueueHandle_t Motor1_Speed_Queue;
+
 
 
 	BaseType_t xHigherPriorityTaskWoken;

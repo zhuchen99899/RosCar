@@ -4,6 +4,7 @@
 "..\obj\system_stm32f10x.o"
 "..\obj\os_appobjcreate.o"
 "..\obj\data_init.o"
+"..\obj\protocol.o"
 "..\obj\bsp_init.o"
 "..\obj\led.o"
 "..\obj\pwm.o"
