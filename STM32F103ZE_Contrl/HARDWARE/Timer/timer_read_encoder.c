@@ -1,11 +1,20 @@
 #include "timer_read_encoder.h"
 
 
-int last_count=0;
-int Overflow_count=0;
-int capture_count=0;
+int Encoder1_last_count=0;
+int Encoder1_Overflow_count=0;
+int Encoder1_capture_count=0;
+
+
+int Encoder2_last_count=0;
+int Encoder2_Overflow_count=0;
+int Encoder2_capture_count=0;
+
+//电机1、2使用编码器相同
 float S_K=Perimeter*(1000/timer6_IRQ_time)/(Motor_Reduction_ratio*Encoder1_n_lines*period_rate); //速度计算系数
 float S_L=Perimeter/(Motor_Reduction_ratio*Encoder1_n_lines*period_rate); //路程系数
+
+
 
 void TIM6_Int_Init(u16 arr,u16 psc)
 {
@@ -53,16 +62,17 @@ void TIM6_IRQHandler(void)   //TIM6中断
 {
 
 	extern QueueHandle_t Encoder1_Overflow_Queue;
+	extern QueueHandle_t Encoder2_Overflow_Queue;
 	extern QueueHandle_t Encoder1_Status_Queue;
-	extern QueueHandle_t Motor1_Encoder_speed_Queue;
-
+	extern QueueHandle_t Encoder2_Status_Queue;
 	
-
-
-	Encoder1_status_t *Encoder_calculate;
-
-	extern Encoder1_status_t Encoder_struct_init;
-	Encoder_calculate = &Encoder_struct_init;
+	Encoder1_status_t *Encoder1_calculate;
+	extern Encoder1_status_t Encoder1_struct_init;
+	Encoder1_calculate = &Encoder1_struct_init;
+	
+	Encoder2_status_t *Encoder2_calculate;
+	extern Encoder2_status_t Encoder2_struct_init;
+	Encoder2_calculate = &Encoder2_struct_init;
 	
 	BaseType_t xHigherPriorityTaskWoken;
 	
@@ -70,20 +80,24 @@ void TIM6_IRQHandler(void)   //TIM6中断
 	if (TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET)  //检查TIM6更新中断发生与否
 		{
 			
-		last_count=capture_count;
+		Encoder1_last_count=Encoder1_capture_count;
+		Encoder2_last_count=Encoder2_capture_count;
 
 
-
-
-		xQueuePeekFromISR(Encoder1_Overflow_Queue,&Overflow_count);	
-//pr_warn_pure("取出Overflow_count %d",Overflow_count);
+		xQueuePeekFromISR(Encoder1_Overflow_Queue,&Encoder1_Overflow_count);	
+		xQueuePeekFromISR(Encoder2_Overflow_Queue,&Encoder2_Overflow_count);	
+//pr_warn_pure("取出Overflow_count2 %d",Encoder2_Overflow_count);
 
 
 
 		/*计算当前总计数，并写入历史总计数消息队列*/
-		capture_count=TIM_GetCounter(TIM5)+Overflow_count*Encoder1_period;
-		
+		Encoder1_capture_count=TIM_GetCounter(TIM5)+Encoder1_Overflow_count*Encoder1_period;
+		Encoder2_capture_count=TIM_GetCounter(TIM4)+Encoder2_Overflow_count*Encoder2_period;
 
+//	pr_warn_pure("Encoder1_last_count=%d,Encoder1_capture_count=%d\r\n",Encoder1_last_count,Encoder1_capture_count);		
+//	pr_warn_pure("Encoder2_last_count=%d,Encoder2_capture_count=%d\r\n",Encoder2_last_count,Encoder2_capture_count);
+
+			
 
 #if Car_ctrl_speed_loop  		
 		/*计算车轮速度*/
@@ -94,8 +108,8 @@ void TIM6_IRQHandler(void)   //TIM6中断
 			@编码器总分辨率 :编码器线束 * 电机减速比 * 电机齿轮减速(直接连车轮无)*倍频系数
 		*/
 	//  Encoder_calculate->Encoder1_Speed=fabs(Perimeter*((float)capture_count-(float)last_count)*(1000/20)/(Motor_Reduction_ratio*Encoder1_n_lines*period_rate));
-		Encoder_calculate->Encoder1_Speed=fabs(S_K*(capture_count-last_count));
-
+		Encoder1_calculate->Encoder1_Speed=fabs(S_K*(Encoder1_capture_count-Encoder1_last_count));
+		Encoder2_calculate->Encoder2_Speed=fabs(S_K*(Encoder2_capture_count-Encoder2_last_count));
 #endif
 
 
@@ -107,9 +121,9 @@ void TIM6_IRQHandler(void)   //TIM6中断
 		*/
 
 		
-		//Encoder_calculate->Encoder1_distance=Perimeter*(float)capture_count/(Motor_Reduction_ratio*Encoder1_n_lines*period_rate);
-		Encoder_calculate->Encoder1_distance=S_L*capture_count;
-
+		//Encoder_calculate->Encoder1_distance=Perimeter*(float)Encoder1_capture_count/(Motor_Reduction_ratio*Encoder1_n_lines*period_rate);
+		Encoder1_calculate->Encoder1_distance=S_L*Encoder1_capture_count;
+		Encoder2_calculate->Encoder2_distance=S_L*Encoder2_capture_count;
 #endif
 
 #if Car_ctrl_dirc_inquiry 	
@@ -117,17 +131,19 @@ void TIM6_IRQHandler(void)   //TIM6中断
 			
 			if((TIM5->CR1>>4 & 0x01)==0){ //DIR==1  //正向
 
-				Encoder_calculate->Encoder1_Direction=1;
+				Encoder1_calculate->Encoder1_Direction=1;
+				Encoder2_calculate->Encoder2_Direction=1;
 			}
       else if((TIM5->CR1>>4 & 0x01)==1){//DIR==2  //反向
-				Encoder_calculate->Encoder1_Direction=0;
+				Encoder1_calculate->Encoder1_Direction=0;
+				Encoder2_calculate->Encoder2_Direction=0;
 			}	
 		
 #endif
 			
-	xQueueOverwriteFromISR(Encoder1_Status_Queue,(void *)&Encoder_calculate,&xHigherPriorityTaskWoken);	
+xQueueOverwriteFromISR(Encoder1_Status_Queue,(void *)&Encoder1_calculate,&xHigherPriorityTaskWoken);	
+xQueueOverwriteFromISR(Encoder2_Status_Queue,(void *)&Encoder2_calculate,&xHigherPriorityTaskWoken);	
 
-//		pr_warn_pure("读编码器中断:,速度%f",Encoder_calculate->Encoder1_Speed);
 			portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 		
 			TIM_ClearITPendingBit(TIM6, TIM_IT_Update);  //清除TIMx更新中断标志

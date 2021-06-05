@@ -9,7 +9,9 @@ QueueHandle_t Motor2_Direction_Queue;
 QueueHandle_t Motor2_PWM_Queue;
 QueueHandle_t Wifi_buffer_Queue;
 QueueHandle_t Encoder1_Overflow_Queue;
+QueueHandle_t Encoder2_Overflow_Queue;
 QueueHandle_t Encoder1_Status_Queue;
+QueueHandle_t Encoder2_Status_Queue;
 QueueHandle_t Motor1_PID_Parameter_Queue;
 QueueHandle_t Motor1_Ctrl_Parameter_Queue;
 

@@ -2,7 +2,8 @@
 
 /*全局结构体*/
 //用于消息队列传递指针
-Encoder1_status_t Encoder_struct_init; //全局结构体
+Encoder1_status_t Encoder1_struct_init; //全局结构体
+Encoder2_status_t Encoder2_struct_init;
 M1_ctrl   Motor1_ctrl_struct_init;
 M1_PID    Motor1_PID_struct_init;
 Motor1_Direction_t  Motor1_Direction_struct_init;
@@ -28,7 +29,9 @@ wifibuff wifibuff_struct_init;
 
 #define WIFIMESSAGE_buffer_Q_NUM   1   	//wifi接收数据的消息队列的数量 
 #define Encoder1_Overflow_Q_NUM 1  //编码器溢出计数队列数量
+#define Encoder2_Overflow_Q_NUM 1  //编码器溢出计数队列数量
 #define Encoder1_Status_Q_NUM 1 //编码器状态计数
+#define Encoder2_Status_Q_NUM 1
 #define Motor1_PID_Parameter_Q_NUM 1
 #define Motor1_Ctrl_Parameter_Q_NUM  1
 
@@ -135,16 +138,6 @@ Motor2_PWM_Queue =xQueueCreate(Motor2_PWM_Q_NUM,sizeof(float));
 
 
 
-
-
-
-
-
-
-
-
-
-
 static void WIFI_buffer_QueueCreat(void)
 {
 	extern QueueHandle_t Wifi_buffer_Queue;
@@ -185,6 +178,23 @@ static void Encoder1_Overflow_QueueCreat(void)
 }
 
 
+static void Encoder2_Overflow_QueueCreat(void)
+{
+	extern QueueHandle_t Encoder2_Overflow_Queue;
+	Encoder2_Overflow_Queue =xQueueCreate(Encoder2_Overflow_Q_NUM,sizeof(int));
+	
+	if (Encoder2_Overflow_Queue==0)
+	{
+	/*消息创建失败处理机制*/
+	pr_warn_pure("Encoder2_溢出计数消息队列创建失败\r\n");
+	pr_entry_pure("Encoder2_溢出计数消息队列创建失败\r\n");
+	}
+	else 
+	{
+	pr_warn_pure("Encoder2_溢出计数消息队列创建成功\r\n");
+	pr_entry_pure("Encoder2_溢出计数消息队列创建成功\r\n");
+	}
+}
 
 
 
@@ -203,6 +213,24 @@ static void Encoder1_Status_QueueCreat(void)
 	{
 	pr_warn_pure("Encoder1_Status消息队列创建成功\r\n");
 	pr_entry_pure("Encoder1_Status消息队列创建成功\r\n");
+	}
+}
+
+static void Encoder2_Status_QueueCreat(void)
+{
+	extern QueueHandle_t Encoder2_Status_Queue;
+	Encoder2_Status_Queue =xQueueCreate(Encoder2_Status_Q_NUM,sizeof(struct Encoder2_status_t *));
+	
+	if (Encoder2_Status_QueueCreat==0)
+	{
+	/*消息创建失败处理机制*/
+	pr_warn_pure("Encoder2_Status消息队列创建失败\r\n");
+	pr_entry_pure("Encoder2_Status消息队列创建失败\r\n");
+	}
+	else 
+	{
+	pr_warn_pure("Encoder2_Status消息队列创建成功\r\n");
+	pr_entry_pure("Encoder2_Status消息队列创建成功\r\n");
 	}
 }
 
@@ -268,7 +296,9 @@ Motor2_Direction_QueueCreate();
 Motor2_PWM_QueueCreate();
 WIFI_buffer_QueueCreat();
 Encoder1_Overflow_QueueCreat();
+Encoder2_Overflow_QueueCreat();
 Encoder1_Status_QueueCreat();
+Encoder2_Status_QueueCreat();
 Motor1_PID_Parameter_QueueCreat();
 Motor1_Ctrl_Parameter_QueueCreat();
 	

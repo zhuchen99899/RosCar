@@ -98,6 +98,27 @@ typedef struct Encoder1_status
 
 }Encoder1_status_t;
 
+/***编码器2状态结构体***/
+typedef struct Encoder2_status
+{
+#if Car_ctrl_speed_loop	
+/*电机转速(计算车轮周长)*/	
+ float Encoder2_Speed;	
+#endif
+
+#if	Car_ctrl_length_loop
+	///*电机总路程(计算车轮周长)*/
+ float Encoder2_distance;
+#endif
+
+#if	Car_ctrl_dirc_inquiry
+	///*电机方向*/
+ u8 Encoder2_Direction;
+
+#endif
+
+
+}Encoder2_status_t;
 
 	
 

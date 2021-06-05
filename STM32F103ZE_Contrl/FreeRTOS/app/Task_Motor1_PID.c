@@ -23,6 +23,7 @@ vTaskSuspend(MOTOR1_PID_TASK_Handler);
 #endif
 
 	extern QueueHandle_t Encoder1_Status_Queue;
+	extern QueueHandle_t Encoder2_Status_Queue;
 	extern QueueHandle_t Motor1_Ctrl_Parameter_Queue;
 	extern QueueHandle_t Motor1_PWM_Queue;
 	extern QueueHandle_t Motor1_PID_Parameter_Queue;
@@ -35,14 +36,22 @@ extern QueueHandle_t Motor1_Encoder_speed_Queue;
 
 
 	
-float Actual_Speed;
+float Actual_Speed1;
 float Set_Speed=0.0;
 float pid_result=0.0;
 float Motor1_PWM=0.0;
+
+float Actual_Speed2;
+
+
 	
 Encoder1_status_t *Encoder1_status_send_toPID;
-extern Encoder1_status_t Encoder_struct_init;	 //全局结构体
-Encoder1_status_send_toPID=&Encoder_struct_init;
+Encoder1_status_t Encoder1_pidcacl_init;	 //全局结构体
+Encoder1_status_send_toPID=&Encoder1_pidcacl_init;
+
+Encoder2_status_t *Encoder2_status_send_toPID;
+Encoder2_status_t Encoder2_pidcacl_init;	 //全局结构体
+Encoder2_status_send_toPID=&Encoder2_pidcacl_init;
 
 	M1_ctrl *M1_ctrl_r;
 	M1_ctrl M1_ctrl_init;		
@@ -60,13 +69,19 @@ pid_init();
 	{
 
 
-
+		//编码器1
 		xQueuePeek(Encoder1_Status_Queue,(void *)&Encoder1_status_send_toPID,portMAX_DELAY);
 		xQueuePeek(Motor1_Ctrl_Parameter_Queue,&M1_ctrl_r,10);	
 		xQueuePeek(Motor1_PID_Parameter_Queue,&M1_speed_PID_wifiset,portMAX_DELAY);
 		
+		//编码器2
+		xQueuePeek(Encoder2_Status_Queue,(void *)&Encoder2_status_send_toPID,portMAX_DELAY);
+		
+		Actual_Speed1 = Encoder1_status_send_toPID->Encoder1_Speed;
+		Actual_Speed2 = Encoder2_status_send_toPID->Encoder2_Speed;
+		
+//		pr_warn_pure("Actual_Speed2=%f",Actual_Speed2);
 
-		Actual_Speed = Encoder1_status_send_toPID->Encoder1_Speed;
 		Set_Speed= M1_ctrl_r->Speed;
 		
 	M1_S_PID.Kp=M1_speed_PID_wifiset->Kp;
@@ -75,7 +90,7 @@ pid_init();
 		
 
 
-		pid_result=speed_pid_realize(Set_Speed,Actual_Speed);
+		pid_result=speed_pid_realize(Set_Speed,Actual_Speed1);
 
 
 		Motor1_PWM=pid_result/PWM1_MAX_VAL;

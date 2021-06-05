@@ -27,11 +27,14 @@ Project File Date:  06/05/2021
 <h2>Output:</h2>
 *** Using Compiler 'V5.05 update 1 (build 106)', folder: 'D:\tools\code tools\keil\ARM\ARMCC\Bin'
 Build target 'FreeRTOS'
-compiling Task_WIFI.c...
+compiling Task_Motor1_PID.c...
+..\FreeRTOS\app\Task_Motor1_PID.c(44): warning:  #550-D: variable "Actual_Speed2" was set but never used
+  float Actual_Speed2;
+..\FreeRTOS\app\Task_Motor1_PID.c: 1 warning, 0 errors
 linking...
-Program Size: Code=23834 RO-data=1026 RW-data=292 ZI-data=23980  
+Program Size: Code=24298 RO-data=1026 RW-data=320 ZI-data=23976  
 FromELF: creating hex file...
-"..\OBJ\LED.axf" - 0 Error(s), 0 Warning(s).
+"..\OBJ\LED.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   D:\天职师大\IMR\STM32F103ZE_Contrl\USER\RTE

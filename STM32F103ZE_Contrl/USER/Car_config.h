@@ -7,8 +7,11 @@
 
 
 #define  Encoder1_period 65535
+#define  Encoder2_period 65535
+
 #define  Motor_Reduction_ratio  30  //电机减速比
 #define  Encoder1_n_lines 13  //编码器线数
+#define  Encoder2_n_lines 13
 #define  period_mode   4      //四倍频模式
 #define  period_rate   4      //四倍频倍率为4
 #define  Perimeter 11.932 // 小车车轮周长 cm
@@ -17,7 +20,7 @@
 /* 启用 WIFI小车*/
 #define Car_Wifi_Receive_OFF  0
 #define Car_Wifi_Send_OFF  0
-#define Car_PWM_ctrl  1  //小车PWM控制，开启后所有闭环控制失效
+#define Car_PWM_ctrl  0  //小车PWM控制，开启后所有闭环控制失效
 
 
 
