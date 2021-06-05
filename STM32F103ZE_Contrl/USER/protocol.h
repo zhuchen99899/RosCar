@@ -54,8 +54,8 @@ union float_trans_rec{
 #define Motor_dir1         0x01
 #define Motor_dir2         0x02
 
-//电机PWM控制相关宏
-#define control_PWM        0x02
+////电机PWM控制相关宏
+//#define control_PWM        0x02
 
 
 

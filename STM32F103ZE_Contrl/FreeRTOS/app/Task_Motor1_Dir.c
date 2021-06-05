@@ -34,18 +34,18 @@ void motor1_dir_task(void *pvParameters)
 					xQueuePeek(Motor1_Direction_Queue,&Motor1_Dir,portMAX_DELAY);
 					if((Motor1_Dir->Negative==1)&&(Motor1_Dir->Positive==0))
 					{
-					 OC0=0;
-					 OC1=1;
-						pr_warn_pure("电机反向\r\n");
+					 M1_OC0=0;
+					 M1_OC1=1;
+						pr_warn_pure("电机1反向\r\n");
 
 
 					}
 					else if((Motor1_Dir->Negative==0)&&(Motor1_Dir->Positive==1)) 
 					{
 						
-					OC0=1;
-					OC1=0;
-					pr_warn_pure("电机正向\r\n");
+					M1_OC0=1;
+					M1_OC1=0;
+					pr_warn_pure("电机1正向\r\n");
 
 				
 					}

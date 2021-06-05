@@ -32,7 +32,7 @@ float speed[2];
 	/*获取速度值*/
 	speed[0]=Encoder1_status_send->Encoder1_Speed;
 
-	pr_warn_pure("Speed:%f\r\n",Encoder1_status_send->Encoder1_Speed);
+//	pr_warn_pure("Speed:%f\r\n",Encoder1_status_send->Encoder1_Speed);
 	/*组合数据帧*/
 	//暂无电机2
 	speed[1]=0x00;			

@@ -663,6 +663,16 @@
               <FilePath>..\FreeRTOS\app\Task_Motor1_PID.c</FilePath>
             </File>
             <File>
+              <FileName>Task_Motor2_Dir.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\FreeRTOS\app\Task_Motor2_Dir.c</FilePath>
+            </File>
+            <File>
+              <FileName>Task_Motor2_PWM.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\FreeRTOS\app\Task_Motor2_PWM.c</FilePath>
+            </File>
+            <File>
               <FileName>Task_IdleTask.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\FreeRTOS\app\Task_IdleTask.c</FilePath>

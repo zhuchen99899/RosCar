@@ -57,6 +57,15 @@ u8 Negative;
 	
 }Motor1_Direction_t;
 
+
+typedef struct Motor2_Direction
+{
+u8 Positive;
+u8 Negative;
+	
+}Motor2_Direction_t;
+
+
 //WIFI 接收消息队列结构体
 
 typedef struct wifibuff

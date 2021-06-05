@@ -5,6 +5,8 @@
 
 QueueHandle_t Motor1_Direction_Queue;
 QueueHandle_t Motor1_PWM_Queue;
+QueueHandle_t Motor2_Direction_Queue;
+QueueHandle_t Motor2_PWM_Queue;
 QueueHandle_t Wifi_buffer_Queue;
 QueueHandle_t Encoder1_Overflow_Queue;
 QueueHandle_t Encoder1_Status_Queue;
@@ -14,6 +16,8 @@ QueueHandle_t Motor1_Ctrl_Parameter_Queue;
 /*********信号量句柄********/
 SemaphoreHandle_t BinarySemaphore_Motor1_DirChange;//电机1方向更改报文二值信号量句柄
 SemaphoreHandle_t BinarySemaphore_Motor1_SpeedChange;//电机1速度更改报文二值信号量句柄
+SemaphoreHandle_t BinarySemaphore_Motor2_DirChange;//电机1方向更改报文二值信号量句柄
+SemaphoreHandle_t BinarySemaphore_Motor2_SpeedChange;//电机1速度更改报文二值信号量句柄
 SemaphoreHandle_t BinarySemaphore_USART2ISR;	//USART2空闲中断二值信号量句柄
 /********************************FreeRTOS任务****************************/
 
@@ -42,7 +46,7 @@ TaskHandle_t MOTOR1Task_Handler;
 void motor1_dir_task(void *pvParameters);
 
 
-/**********电机1速度控制任务***********/
+/**********电机1PWM控制任务***********/
 
 //任务优先级
 #define MOTOR1_PWM_TASK_PRIO		2
@@ -52,6 +56,32 @@ void motor1_dir_task(void *pvParameters);
 TaskHandle_t MOTOR1_PWM_TASK_Handler;
 //任务函数
 void motor1_pwm_task(void *pvParameters);
+
+
+
+/**********电机2方向控制任务***********/
+
+//任务优先级
+#define MOTOR2_TASK_PRIO		4
+//任务堆栈大小	
+#define MOTOR2_STK_SIZE 		256  
+//任务句柄
+TaskHandle_t MOTOR2Task_Handler;
+//任务函数
+void motor2_dir_task(void *pvParameters);
+
+
+/**********电机2PWM控制任务***********/
+
+//任务优先级
+#define MOTOR2_PWM_TASK_PRIO		2
+//任务堆栈大小	
+#define MOTOR2_PWM_STK_SIZE 		256  
+//任务句柄
+TaskHandle_t MOTOR2_PWM_TASK_Handler;
+//任务函数
+void motor2_pwm_task(void *pvParameters);
+
 
 
 /*********电机1PID计算任务************/
@@ -141,6 +171,21 @@ void start_task(void *pvParameters)
                 (void*          )NULL,
                 (UBaseType_t    )MOTOR1_PWM_TASK_PRIO,
                 (TaskHandle_t*  )&MOTOR1_PWM_TASK_Handler);     
+								
+		//创建电机2方向控制任务											
+	  xTaskCreate((TaskFunction_t )motor2_dir_task,     	
+                (const char*    )"motor2_dir_task",   	
+                (uint16_t       )MOTOR2_STK_SIZE, 
+                (void*          )NULL,				
+                (UBaseType_t    )MOTOR2_TASK_PRIO,	
+                (TaskHandle_t*  )&MOTOR2Task_Handler);   
+		//创建电机2速度控制任务
+    xTaskCreate((TaskFunction_t )motor2_pwm_task,     
+                (const char*    )"motor2_pwm_task",   
+                (uint16_t       )MOTOR2_PWM_STK_SIZE, 
+                (void*          )NULL,
+                (UBaseType_t    )MOTOR2_PWM_TASK_PRIO,
+                (TaskHandle_t*  )&MOTOR2_PWM_TASK_Handler);     					
 		//创建电机1PID计算任务
     xTaskCreate((TaskFunction_t )motor1_PID_task,     
                 (const char*    )"motor1_PID_task",   

@@ -38,6 +38,8 @@
 "..\obj\task_motor1_dir.o"
 "..\obj\task_motor1_pwm.o"
 "..\obj\task_motor1_pid.o"
+"..\obj\task_motor2_dir.o"
+"..\obj\task_motor2_pwm.o"
 "..\obj\task_idletask.o"
 "..\obj\task_wifi.o"
 "..\obj\crc16.o"

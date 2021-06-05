@@ -41,7 +41,7 @@ float speed_pid_realize(float setSpeed,float Actual_Speed)
 	M1_S_PID.err=M1_S_PID.Set_Speed-M1_S_PID.Actual_Speed;
 	M1_S_PID.integral+=M1_S_PID.err;
 	
-	printf("integral=%f",M1_S_PID.integral);
+//	printf("integral=%f",M1_S_PID.integral);
 	
 	
 	M1_S_PID.voltage=M1_S_PID.Kp*M1_S_PID.err+M1_S_PID.Ki*M1_S_PID.integral+M1_S_PID.Kd*(M1_S_PID.err-M1_S_PID.err_last);

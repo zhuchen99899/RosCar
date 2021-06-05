@@ -22,18 +22,22 @@ void usart2_init(u32 bound)
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2,ENABLE); //串口2时钟使能  
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);//串口2引脚TX,RX(PA2,PA3)时钟使能
 	
+	
+	GPIO_PinRemapConfig(GPIO_Remap_USART2, ENABLE);   /*完全重映射串口2IO*/
+//	PA2(TX)->PD5,PA3(RX)->PD6
+	
 	/************gpio配设************************/
 	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_AF_PP;
-	GPIO_InitStructure.GPIO_Pin=GPIO_Pin_2;
+	GPIO_InitStructure.GPIO_Pin=GPIO_Pin_5;
 	GPIO_InitStructure.GPIO_Speed=GPIO_Speed_50MHz;    //串口2TX （PA2）要设为推挽复用
 	//PA9初始化结构体成员变量赋值
-	GPIO_Init(GPIOA,&GPIO_InitStructure);
+	GPIO_Init(GPIOD,&GPIO_InitStructure);
 	
 	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_IN_FLOATING;
-	GPIO_InitStructure.GPIO_Pin=GPIO_Pin_3;
+	GPIO_InitStructure.GPIO_Pin=GPIO_Pin_6;
 	GPIO_InitStructure.GPIO_Speed=GPIO_Speed_50MHz;    //串口2RX( PA3)要设为浮空输入或上拉输入
 	//PA10初始化结构体成员变量赋值
-	GPIO_Init(GPIOA,&GPIO_InitStructure);
+	GPIO_Init(GPIOD,&GPIO_InitStructure);
 	
 	/********************串口配设********** *****/
 	USART_InitStructure.USART_BaudRate=115200;									//波特率115200

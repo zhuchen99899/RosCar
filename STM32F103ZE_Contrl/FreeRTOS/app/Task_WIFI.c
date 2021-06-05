@@ -17,12 +17,16 @@ vTaskSuspend(WIFITask_Handler);
 	//声明消息队列句柄
 	extern QueueHandle_t Motor1_Direction_Queue;
 	extern QueueHandle_t Motor1_PWM_Queue;
+	extern QueueHandle_t Motor2_Direction_Queue;
+	extern QueueHandle_t Motor2_PWM_Queue;
 	extern QueueHandle_t Wifi_buffer_Queue;
 	extern QueueHandle_t Motor1_Ctrl_Parameter_Queue;
 	extern QueueHandle_t Motor1_PID_Parameter_Queue;
 	//声明信号量句柄
 	extern SemaphoreHandle_t BinarySemaphore_Motor1_DirChange;
 	extern SemaphoreHandle_t BinarySemaphore_Motor1_SpeedChange;
+	extern SemaphoreHandle_t BinarySemaphore_Motor2_DirChange;
+	extern SemaphoreHandle_t BinarySemaphore_Motor2_SpeedChange;
 	extern SemaphoreHandle_t BinarySemaphore_USART2ISR;	//串口2信号量句柄
 	//消息队列初始化
 	
@@ -34,6 +38,10 @@ vTaskSuspend(WIFITask_Handler);
 	Motor1_Direction_t *Motor1_Dir;
 	extern Motor1_Direction_t Motor1_Direction_struct_init;
 	Motor1_Dir=&Motor1_Direction_struct_init;
+	
+	Motor2_Direction_t *Motor2_Dir;
+	extern Motor2_Direction_t Motor2_Direction_struct_init;
+	Motor2_Dir=&Motor2_Direction_struct_init;
 	
 
 	M1_ctrl *M1_ctrl_wifi;
@@ -52,6 +60,7 @@ vTaskSuspend(WIFITask_Handler);
 	//信号量参数
 	BaseType_t err=pdFALSE;
 	float motor1_Pwm=0.0;
+	float motor2_Pwm=0.0;
 	u8 rec_flag=0;
 
 
@@ -94,11 +103,11 @@ vTaskSuspend(WIFITask_Handler);
 							switch(arg[2]){
 								
 								case Control_direction://方向控制
-												
+												pr_warn_pure("电机方向控制");
 												switch(arg[3]){
 													case Motor1://电机1
 														if(arg[4]==Motor_dir1){
-															pr_warn_pure("方向1");				
+															pr_warn_pure("电机1方向1");				
 															Motor1_Dir->Negative=1;
 															Motor1_Dir->Positive=0;
 															xQueueOverwrite(Motor1_Direction_Queue,&Motor1_Dir);
@@ -106,7 +115,7 @@ vTaskSuspend(WIFITask_Handler);
 														}
 														else if(arg[4]==Motor_dir2){
 														
-															pr_warn_pure("方向2");				
+															pr_warn_pure("电机1方向2");				
 															Motor1_Dir->Negative=0;
 															Motor1_Dir->Positive=1;
 															xQueueOverwrite(Motor1_Direction_Queue,&Motor1_Dir);
@@ -117,6 +126,51 @@ vTaskSuspend(WIFITask_Handler);
 														
 													case Motor2://电机2
 
+															if(arg[4]==Motor_dir1){
+															pr_warn_pure("电机2方向1");				
+															Motor2_Dir->Negative=1;
+															Motor2_Dir->Positive=0;
+															xQueueOverwrite(Motor2_Direction_Queue,&Motor2_Dir);
+															xSemaphoreGive(BinarySemaphore_Motor2_DirChange);//发送电机2方向更改报文信号				
+														}
+														else if(arg[4]==Motor_dir2){
+														
+															pr_warn_pure("电机2方向2");				
+															Motor2_Dir->Negative=0;
+															Motor2_Dir->Positive=1;
+															xQueueOverwrite(Motor2_Direction_Queue,&Motor2_Dir);
+															xSemaphoreGive(BinarySemaphore_Motor2_DirChange);//发送电机2方向更改报文信号		
+														
+														}
+													break;
+														
+													case Both://同一参数控制
+														if(arg[4]==Motor_dir1){
+															pr_warn_pure("电机Both方向1");		
+															Motor1_Dir->Negative=1;
+															Motor1_Dir->Positive=0;															
+															Motor2_Dir->Negative=1;
+															Motor2_Dir->Positive=0;
+															xQueueOverwrite(Motor1_Direction_Queue,&Motor1_Dir);
+															xQueueOverwrite(Motor2_Direction_Queue,&Motor2_Dir);
+															xSemaphoreGive(BinarySemaphore_Motor1_DirChange);//发送电机1方向更改报文信号				
+															xSemaphoreGive(BinarySemaphore_Motor2_DirChange);//发送电机2方向更改报文信号				
+														}
+														else if(arg[4]==Motor_dir2){
+														
+															pr_warn_pure("电机Both方向2");		
+															Motor1_Dir->Negative=0;
+															Motor1_Dir->Positive=1;															
+															Motor2_Dir->Negative=0;
+															Motor2_Dir->Positive=1;
+															xQueueOverwrite(Motor1_Direction_Queue,&Motor1_Dir);
+															xQueueOverwrite(Motor2_Direction_Queue,&Motor2_Dir);
+															xSemaphoreGive(BinarySemaphore_Motor1_DirChange);//发送电机1方向更改报文信号	
+															xSemaphoreGive(BinarySemaphore_Motor2_DirChange);//发送电机2方向更改报文信号															
+														
+														}
+													
+																							
 													break;
 												
 													default:
@@ -127,7 +181,7 @@ vTaskSuspend(WIFITask_Handler);
 																
 								break;
 								
-								case control_PWM://PWM控制
+								case Control_PWM://PWM控制
 												switch(arg[3]){
 													case Motor1://电机1
 															motor1_Pwm=((float)(arg[4])/100); //速度百分比
@@ -136,9 +190,21 @@ vTaskSuspend(WIFITask_Handler);
 													break;
 														
 													case Motor2://电机2
-
+															motor2_Pwm=((float)(arg[4])/100); //速度百分比
+															xQueueOverwrite(Motor2_PWM_Queue,&motor2_Pwm);
+															xSemaphoreGive(BinarySemaphore_Motor2_SpeedChange);//发送电机2速度更改报文信号
 													break;
 												
+													case Both://同一参数控制
+															motor1_Pwm=((float)(arg[4])/100); //速度百分比
+															motor2_Pwm=((float)(arg[4])/100); //速度百分比
+															xQueueOverwrite(Motor1_PWM_Queue,&motor1_Pwm);
+															xQueueOverwrite(Motor2_PWM_Queue,&motor2_Pwm);
+															xSemaphoreGive(BinarySemaphore_Motor1_SpeedChange);//发送电机2速度更改报文信号
+															xSemaphoreGive(BinarySemaphore_Motor2_SpeedChange);//发送电机2速度更改报文信号
+													break;
+								
+													
 													default:
 													break;
 												
