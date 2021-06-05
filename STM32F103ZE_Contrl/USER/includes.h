@@ -21,7 +21,8 @@
 
 /*freertos»ŒŒÒAPP*/
 #include "Task_Motor1_Dir.h"
-#include "Task_Motor1_Speed.h"
+#include "Task_Motor1_PWM.h"
+#include "Task_Motor1_PID.h"
 #include "Task_Encoder1.h"
 #include "Task_WIFI.h"
 #include "Task_IdleTask.h"
@@ -43,7 +44,8 @@
 #include "config.h"
 #include "data_init.h"
 #include "Car_config.h"
-
+#include "pid.h"
+#include "protocol.h"
 
 #endif
 

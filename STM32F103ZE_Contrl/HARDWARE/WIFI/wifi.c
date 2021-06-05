@@ -242,8 +242,8 @@ NVIC_cofig_Init();
 
 void USART2_IRQHandler(void)  
 {
-	wifibuff wifi_tMsg;
-
+	
+	extern wifibuff wifibuff_struct_init;
 	extern QueueHandle_t Wifi_buffer_Queue;
 	extern SemaphoreHandle_t BinarySemaphore_USART2ISR;	//二值信号量句柄
 	wifibuff *receivebuff;
@@ -253,7 +253,7 @@ void USART2_IRQHandler(void)
 	DMA_Channel_TypeDef *DMA1_CH6 = DMA1_Channel6;
 	USART_TypeDef *uart2 = USART2;
 	
-			receivebuff=&wifi_tMsg;//消息结构体初始化
+			receivebuff=&wifibuff_struct_init;//消息结构体初始化
 			receivebuff->wifi_lenth=0;//消息结构体初始化
 	
 
@@ -283,7 +283,7 @@ void USART2_IRQHandler(void)
 				memcpy(receivebuff->wifi_buffer,DMA_Receive_Buf,DMA_Rec_Len);
 				xQueueOverwriteFromISR(Wifi_buffer_Queue,(void *)&receivebuff,&xHigherPriorityTaskWoken);		
 
-					//printf("标记6");
+//					printf("标记6");
 				xSemaphoreGiveFromISR(BinarySemaphore_USART2ISR,&xHigherPriorityTaskWoken);	//释放二值信号量
 				
 //			uart_to_keyboard_msg.address = DMA_Receive_Buf;

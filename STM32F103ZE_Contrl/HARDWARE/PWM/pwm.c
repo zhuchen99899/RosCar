@@ -44,8 +44,7 @@ void TIM3_Int_Init(u16 arr,u16 psc)
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; //IRQ通道被使能
 	NVIC_Init(&NVIC_InitStructure);  //根据NVIC_InitStruct中指定的参数初始化外设NVIC寄存器
 
-	TIM_Cmd(TIM3, ENABLE);  //使能TIMx外设
-							 
+	TIM_Cmd(TIM3, ENABLE);  //使能TIMx外设							 
 }
 //定时器3中断服务程序
 void TIM3_IRQHandler(void)   //TIM3中断

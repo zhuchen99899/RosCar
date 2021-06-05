@@ -47,4 +47,5 @@
 ..\obj\task_motor1_dir.o: ..\USER\OS_AppObjCreate.h
 ..\obj\task_motor1_dir.o: ..\FreeRTOS\include\semphr.h
 ..\obj\task_motor1_dir.o: ..\USER\config.h
+..\obj\task_motor1_dir.o: ..\USER\Car_config.h
 ..\obj\task_motor1_dir.o: ..\HARDWARE\GPIO\Motor_Dir_Output.h

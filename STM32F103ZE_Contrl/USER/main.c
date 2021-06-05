@@ -2,13 +2,14 @@
 
 /***************************Freertos通讯句柄初始化***********************/
 /*********消息队列句柄********/
-QueueHandle_t Key_Queue;
+
 QueueHandle_t Motor1_Direction_Queue;
 QueueHandle_t Motor1_PWM_Queue;
 QueueHandle_t Wifi_buffer_Queue;
 QueueHandle_t Encoder1_Overflow_Queue;
-QueueHandle_t Encoder1_last_count_Queue;
 QueueHandle_t Encoder1_Status_Queue;
+QueueHandle_t Motor1_PID_Parameter_Queue;
+QueueHandle_t Motor1_Ctrl_Parameter_Queue;
 
 /*********信号量句柄********/
 SemaphoreHandle_t BinarySemaphore_Motor1_DirChange;//电机1方向更改报文二值信号量句柄
@@ -44,14 +45,25 @@ void motor1_dir_task(void *pvParameters);
 /**********电机1速度控制任务***********/
 
 //任务优先级
-#define MOTOR1_SPEED_TASK_PRIO		2
+#define MOTOR1_PWM_TASK_PRIO		2
 //任务堆栈大小	
-#define MOTOR1_SPEED_STK_SIZE 		256  
+#define MOTOR1_PWM_STK_SIZE 		256  
 //任务句柄
-TaskHandle_t MOTOR1_SPEED_TASK_Handler;
+TaskHandle_t MOTOR1_PWM_TASK_Handler;
 //任务函数
-void motor1_speed_task(void *pvParameters);
+void motor1_pwm_task(void *pvParameters);
 
+
+/*********电机1PID计算任务************/
+
+//任务优先级
+#define MOTOR1_PID_TASK_PRIO		3
+//任务堆栈大小	
+#define MOTOR1_PID_STK_SIZE 		512  
+//任务句柄
+TaskHandle_t MOTOR1_PID_TASK_Handler;
+//任务函数
+void motor1_PID_task(void *pvParameters);
 
 /**********编码器1任务***********/
 
@@ -88,6 +100,10 @@ TaskHandle_t IdleTask_Handler;
 //任务函数
 void Idle_task(void *pvParameters);
 
+
+
+
+
 int main(void)
 {
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);//设置系统中断优先级分组4	 
@@ -119,12 +135,21 @@ void start_task(void *pvParameters)
                 (UBaseType_t    )MOTOR1_TASK_PRIO,	
                 (TaskHandle_t*  )&MOTOR1Task_Handler);   
 		//创建电机1速度控制任务
-    xTaskCreate((TaskFunction_t )motor1_speed_task,     
-                (const char*    )"motor1_speed_task",   
-                (uint16_t       )MOTOR1_SPEED_STK_SIZE, 
+    xTaskCreate((TaskFunction_t )motor1_pwm_task,     
+                (const char*    )"motor1_pwm_task",   
+                (uint16_t       )MOTOR1_PWM_STK_SIZE, 
                 (void*          )NULL,
-                (UBaseType_t    )MOTOR1_SPEED_TASK_PRIO,
-                (TaskHandle_t*  )&MOTOR1_SPEED_TASK_Handler);     
+                (UBaseType_t    )MOTOR1_PWM_TASK_PRIO,
+                (TaskHandle_t*  )&MOTOR1_PWM_TASK_Handler);     
+		//创建电机1PID计算任务
+    xTaskCreate((TaskFunction_t )motor1_PID_task,     
+                (const char*    )"motor1_PID_task",   
+                (uint16_t       )MOTOR1_PID_STK_SIZE, 
+                (void*          )NULL,
+                (UBaseType_t    )MOTOR1_PID_TASK_PRIO,
+                (TaskHandle_t*  )&MOTOR1_PID_TASK_Handler);     
+								
+								
     //创建电机1编码器任务
     xTaskCreate((TaskFunction_t )Encoder1_task,     
                 (const char*    )"Encoder1_task",   

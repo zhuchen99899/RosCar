@@ -49,6 +49,6 @@
 ..\obj\task_wifi.o: ..\USER\OS_AppObjCreate.h
 ..\obj\task_wifi.o: ..\FreeRTOS\include\semphr.h
 ..\obj\task_wifi.o: ..\USER\config.h
+..\obj\task_wifi.o: ..\USER\Car_config.h
 ..\obj\task_wifi.o: ..\CRC16\CRC16.h
 ..\obj\task_wifi.o: ..\USER\protocol.h
-..\obj\task_wifi.o: ..\USER\Car_config.h

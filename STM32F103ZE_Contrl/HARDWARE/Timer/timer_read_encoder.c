@@ -4,8 +4,10 @@
 int last_count=0;
 int Overflow_count=0;
 int capture_count=0;
+float S_K=Perimeter*(1000/timer6_IRQ_time)/(Motor_Reduction_ratio*Encoder1_n_lines*period_rate); //速度计算系数
+float S_L=Perimeter/(Motor_Reduction_ratio*Encoder1_n_lines*period_rate); //路程系数
 
- void TIM6_Int_Init(u16 arr,u16 psc)
+void TIM6_Int_Init(u16 arr,u16 psc)
 {
   TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
@@ -24,7 +26,7 @@ int capture_count=0;
 	  TIM_ClearFlag(TIM6, TIM_FLAG_Update); 
 	//中断优先级NVIC设置
 	NVIC_InitStructure.NVIC_IRQChannel = TIM6_IRQn;  //TIM6中断
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 15;  //先占优先级0级
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 14;  //先占优先级0级
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;  //从优先级3级
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; //IRQ通道被使能
 	NVIC_Init(&NVIC_InitStructure);  //初始化NVIC寄存器
@@ -49,34 +51,41 @@ void timer6_my_init(void){
 //定时器6中断服务程序
 void TIM6_IRQHandler(void)   //TIM6中断
 {
-	extern QueueHandle_t Encoder1_last_count_Queue;
+
 	extern QueueHandle_t Encoder1_Overflow_Queue;
 	extern QueueHandle_t Encoder1_Status_Queue;
+	extern QueueHandle_t Motor1_Encoder_speed_Queue;
 
+	
 
-
-	BaseType_t xHigherPriorityTaskWoken;
 
 	Encoder1_status_t *Encoder_calculate;
-	Encoder1_status_t Encoder_struct_init;
+
+	extern Encoder1_status_t Encoder_struct_init;
 	Encoder_calculate = &Encoder_struct_init;
+	
+	BaseType_t xHigherPriorityTaskWoken;
+	
+
 	if (TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET)  //检查TIM6更新中断发生与否
 		{
 			
-		
+		last_count=capture_count;
 
-			/*取出上次记录的总计数和溢出计数*/
-		xQueueReceiveFromISR(Encoder1_last_count_Queue,&last_count,&xHigherPriorityTaskWoken);
+
 
 
 		xQueuePeekFromISR(Encoder1_Overflow_Queue,&Overflow_count);	
-//								pr_warn_pure("取出Overflow_count %d",Overflow_count);
+//pr_warn_pure("取出Overflow_count %d",Overflow_count);
 
 
 
 		/*计算当前总计数，并写入历史总计数消息队列*/
 		capture_count=TIM_GetCounter(TIM5)+Overflow_count*Encoder1_period;
-		xQueueSendFromISR(Encoder1_last_count_Queue,&capture_count,&xHigherPriorityTaskWoken);
+		
+
+
+#if Car_ctrl_speed_loop  		
 		/*计算车轮速度*/
 		/*速度=小车车轮周长* 单位时间内总计数 *时间系数 / 编码器总分辨率
 			@Perimeter 车轮周长: 测量得出,宏定义
@@ -84,18 +93,26 @@ void TIM6_IRQHandler(void)   //TIM6中断
 			@时间系数 : 定时器时长为i(s)时  时间系数K= 1/ i
 			@编码器总分辨率 :编码器线束 * 电机减速比 * 电机齿轮减速(直接连车轮无)*倍频系数
 		*/
-	  Encoder_calculate->Encoder1_Speed=fabs(Perimeter*((float)capture_count-(float)last_count)*(1000/20)/(Motor_Reduction_ratio*Encoder1_n_lines*period_rate));
+	//  Encoder_calculate->Encoder1_Speed=fabs(Perimeter*((float)capture_count-(float)last_count)*(1000/20)/(Motor_Reduction_ratio*Encoder1_n_lines*period_rate));
+		Encoder_calculate->Encoder1_Speed=fabs(S_K*(capture_count-last_count));
 
+#endif
+
+
+#if Car_ctrl_length_loop
 		/*计算车轮路程*/
 		/*小车路程= 累计圈数 *小车车轮周长
 		@累计圈数=当前计算计数总数量capture_count/编码器总分辨率
 		@Perimeter 车轮周长: 测量得出,宏定义
 		*/
-		
-		
-		Encoder_calculate->Encoder1_distance=Perimeter*(float)capture_count/(Motor_Reduction_ratio*Encoder1_n_lines*period_rate);
-		
 
+		
+		//Encoder_calculate->Encoder1_distance=Perimeter*(float)capture_count/(Motor_Reduction_ratio*Encoder1_n_lines*period_rate);
+		Encoder_calculate->Encoder1_distance=S_L*capture_count;
+
+#endif
+
+#if Car_ctrl_dirc_inquiry 	
 		/*计算车轮方向*/
 			
 			if((TIM5->CR1>>4 & 0x01)==0){ //DIR==1  //正向
@@ -105,19 +122,19 @@ void TIM6_IRQHandler(void)   //TIM6中断
       else if((TIM5->CR1>>4 & 0x01)==1){//DIR==2  //反向
 				Encoder_calculate->Encoder1_Direction=0;
 			}	
+		
+#endif
 			
-		xQueueOverwriteFromISR(Encoder1_Status_Queue,&Encoder_calculate,&xHigherPriorityTaskWoken);	
-			
-			
-			
+	xQueueOverwriteFromISR(Encoder1_Status_Queue,(void *)&Encoder_calculate,&xHigherPriorityTaskWoken);	
+
 //		pr_warn_pure("读编码器中断:,速度%f",Encoder_calculate->Encoder1_Speed);
-			
+			portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+		
 			TIM_ClearITPendingBit(TIM6, TIM_IT_Update);  //清除TIMx更新中断标志
 			
 				 
 		}
 
 }
-
 
 

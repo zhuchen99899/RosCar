@@ -1,33 +1,29 @@
 #include <OS_AppObjCreate.h>
 
+/*全局结构体*/
+//用于消息队列传递指针
+Encoder1_status_t Encoder_struct_init; //全局结构体
+M1_ctrl   Motor1_ctrl_struct_init;
+M1_PID    Motor1_PID_struct_init;
+Motor1_Direction_t  Motor1_Direction_struct_init;
+wifibuff wifibuff_struct_init;
+
 /***************消息队列创建**************/
 
 
-#define KEY_Q_NUM    1  		//按键消息队列的数量  
+//WIFI 接收消息队列结构体
+
+
+
+
 #define Motor1_Direction_Q_NUM 1//电机1方向消息队列的数量  
 #define Motor1_PWM_Q_NUM 1// 电机1速度消息队列的数量
 #define WIFIMESSAGE_buffer_Q_NUM   1   	//wifi接收数据的消息队列的数量 
 #define Encoder1_Overflow_Q_NUM 1  //编码器溢出计数队列数量
 #define Encoder1_Status_Q_NUM 1 //编码器状态计数
-#define Encoder1_last_count_Q_NUM 5 //编码器计数缓存队列数量
-//按键消息队列
-static void Key_QueueCreate(void)
-{
-	extern QueueHandle_t Key_Queue;
-	Key_Queue =xQueueCreate(KEY_Q_NUM,sizeof(uint8_t));
-	
-	if (Key_Queue==0)
-	{
-	/*消息创建失败处理机制*/
-	pr_warn_pure("按键消息队列创建失败\r\n");
-	pr_entry_pure("按键消息队列创建失败\r\n");
-	}
-	else 
-	{
-	pr_warn_pure("按键消息队列创建成功\r\n");
-	pr_entry_pure("按键消息队列创建成功\r\n");
-	}
-}
+#define Motor1_PID_Parameter_Q_NUM 1
+#define Motor1_Ctrl_Parameter_Q_NUM  1
+
 
 //电机1方向向消息队列
 static void Motor1_Direction_QueueCreate(void)
@@ -121,29 +117,11 @@ static void Encoder1_Overflow_QueueCreat(void)
 
 
 
-static void Encoder1_last_count_QueueCreat(void)
-{
-	extern QueueHandle_t Encoder1_last_count_Queue;
-	Encoder1_last_count_Queue =xQueueCreate(Encoder1_last_count_Q_NUM,sizeof(int));
-	
-	if (Encoder1_last_count_Queue==0)
-	{
-	/*消息创建失败处理机制*/
-	pr_warn_pure("Encoder1计数缓存消息队列创建失败\r\n");
-	pr_entry_pure("Encoder1计数缓存消息队列创建失败\r\n");
-	}
-	else 
-	{
-	pr_warn_pure("Encoder1计数缓存消息队列创建成功\r\n");
-	pr_entry_pure("Encoder1计数缓存消息队列创建成功\r\n");
-	}
-}
-
 
 static void Encoder1_Status_QueueCreat(void)
 {
 	extern QueueHandle_t Encoder1_Status_Queue;
-	Encoder1_Status_Queue =xQueueCreate(Encoder1_Status_Q_NUM,sizeof(struct Encoder1_status *));
+	Encoder1_Status_Queue =xQueueCreate(Encoder1_Status_Q_NUM,sizeof(struct Encoder1_status_t *));
 	
 	if (Encoder1_Status_QueueCreat==0)
 	{
@@ -159,17 +137,70 @@ static void Encoder1_Status_QueueCreat(void)
 }
 
 
+
+//控制参数消息队列
+
+
+static void Motor1_Ctrl_Parameter_QueueCreat(void)
+{
+	extern QueueHandle_t Motor1_Ctrl_Parameter_Queue;
+	Motor1_Ctrl_Parameter_Queue =xQueueCreate(Motor1_Ctrl_Parameter_Q_NUM,sizeof(struct M1_ctrl *));
+	
+	if (Encoder1_Status_QueueCreat==0)
+	{
+	/*消息创建失败处理机制*/
+	pr_warn_pure("Ctrl_Parameter_Queue队列创建失败\r\n");
+	pr_entry_pure("Ctrl_Parameter_Queue队列创建失败\r\n");
+	}
+	else 
+	{
+	pr_warn_pure("Ctrl_Parameter_Queue队列创建成功\r\n");
+	pr_entry_pure("Ctrl_Parameter_Queue队列创建成功\r\n");
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+static void Motor1_PID_Parameter_QueueCreat(void)
+{
+	extern QueueHandle_t Motor1_PID_Parameter_Queue;
+	Motor1_PID_Parameter_Queue =xQueueCreate(Motor1_PID_Parameter_Q_NUM,sizeof(struct M1_PID *));
+	
+	if (Encoder1_Status_QueueCreat==0)
+	{
+	/*消息创建失败处理机制*/
+	pr_warn_pure("Motor1_PID_Parameter队列创建失败\r\n");
+	pr_entry_pure("Motor1_PID_Parameter队列创建失败\r\n");
+	}
+	else 
+	{
+	pr_warn_pure("Motor1_PID_Parameter队列创建成功\r\n");
+	pr_entry_pure("Motor1_PID_Parameter队列创建成功\r\n");
+	}
+}
+
+
+
 static void QueueCreate(void)
 {
 
-Key_QueueCreate();
 Motor1_Direction_QueueCreate();
 Motor1_PWM_QueueCreate();
 WIFI_buffer_QueueCreat();
 Encoder1_Overflow_QueueCreat();
-Encoder1_last_count_QueueCreat();
 Encoder1_Status_QueueCreat();
+Motor1_PID_Parameter_QueueCreat();
+Motor1_Ctrl_Parameter_QueueCreat();
 	
+
 }
 
 

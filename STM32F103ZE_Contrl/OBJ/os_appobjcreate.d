@@ -43,3 +43,4 @@
 ..\obj\os_appobjcreate.o: ..\FreeRTOS\include\queue.h
 ..\obj\os_appobjcreate.o: ..\FreeRTOS\include\semphr.h
 ..\obj\os_appobjcreate.o: ..\USER\config.h
+..\obj\os_appobjcreate.o: ..\USER\Car_config.h

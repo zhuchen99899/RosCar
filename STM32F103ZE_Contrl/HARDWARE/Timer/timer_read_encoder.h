@@ -13,8 +13,8 @@
 
 
 
-
-#define timer6_IRQ_time 60  //100ms进入一次定时器中断
+//S_K=Perimeter*(1000/timer6_IRQ_time)/(Motor_Reduction_ratio*Encoder1_n_lines*period_rate);
+#define timer6_IRQ_time 20  //100ms进入一次定时器中断
 void TIM6_Int_Init(u16 arr,u16 psc);
 void timer6_my_init(void);
 #endif

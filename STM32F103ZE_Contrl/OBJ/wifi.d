@@ -45,3 +45,4 @@
 ..\obj\wifi.o: ..\FreeRTOS\include\mpu_wrappers.h
 ..\obj\wifi.o: ..\FreeRTOS\include\queue.h
 ..\obj\wifi.o: ..\FreeRTOS\include\semphr.h
+..\obj\wifi.o: ..\USER\Car_config.h

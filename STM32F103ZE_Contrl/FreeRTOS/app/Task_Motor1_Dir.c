@@ -16,9 +16,9 @@ void motor1_dir_task(void *pvParameters)
 
 	
 	//消息队列初始化
-	Motor1_Direction_t Motor1_Dir_init;
 	Motor1_Direction_t *Motor1_Dir;
-	Motor1_Dir=&Motor1_Dir_init;
+	Motor1_Direction_t  Motor1_Direction_struct_init;
+	Motor1_Dir=&Motor1_Direction_struct_init;
 
 
     while(1)

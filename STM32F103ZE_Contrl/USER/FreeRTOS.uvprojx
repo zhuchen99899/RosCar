@@ -457,6 +457,11 @@
               <FileType>1</FileType>
               <FilePath>.\protocol.c</FilePath>
             </File>
+            <File>
+              <FileName>PID.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\PID.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -648,9 +653,14 @@
               <FilePath>..\FreeRTOS\app\Task_Motor1_Dir.c</FilePath>
             </File>
             <File>
-              <FileName>Task_Motor1_Speed.c</FileName>
+              <FileName>Task_Motor1_PWM.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\FreeRTOS\app\Task_Motor1_Speed.c</FilePath>
+              <FilePath>..\FreeRTOS\app\Task_Motor1_PWM.c</FilePath>
+            </File>
+            <File>
+              <FileName>Task_Motor1_PID.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\FreeRTOS\app\Task_Motor1_PID.c</FilePath>
             </File>
             <File>
               <FileName>Task_IdleTask.c</FileName>

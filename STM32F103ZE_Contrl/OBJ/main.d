@@ -47,14 +47,16 @@
 ..\obj\main.o: ..\FreeRTOS\include\semphr.h
 ..\obj\main.o: OS_AppObjCreate.h
 ..\obj\main.o: config.h
+..\obj\main.o: Car_config.h
 ..\obj\main.o: ..\FreeRTOS\app\Task_Motor1_Dir.h
 ..\obj\main.o: ..\HARDWARE\LED\led.h
 ..\obj\main.o: ..\HARDWARE\GPIO\Motor_Dir_Output.h
-..\obj\main.o: ..\FreeRTOS\app\Task_Motor1_Speed.h
+..\obj\main.o: ..\FreeRTOS\app\Task_Motor1_PWM.h
 ..\obj\main.o: ..\HARDWARE\PWM\pwm.h
+..\obj\main.o: ..\FreeRTOS\app\Task_Motor1_PID.h
+..\obj\main.o: ..\USER\PID.h
 ..\obj\main.o: ..\FreeRTOS\app\Task_Encoder1.h
 ..\obj\main.o: ..\USER\protocol.h
-..\obj\main.o: ..\USER\Car_config.h
 ..\obj\main.o: ..\CRC16\crc16.h
 ..\obj\main.o: ..\HARDWARE\WIFI\wifi.h
 ..\obj\main.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\string.h

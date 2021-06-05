@@ -6,6 +6,18 @@
 #include "config.h"
 #include "FreeRTOS.h"
 
+/***联合体结构转换float为四字节数  OR 四字节数转换float****/
+union float_trans{
+	float f;
+	unsigned char uch[4];
+};
+	
+union float_trans_rec{
+	float f;
+	unsigned char uch[4];
+	
+};
+
 /************自拟定通讯协议相关*******************/
 #define sendbuffsize 17 //发送协议数组大小
 #define buffersize 16  //协议固定长度 由于上位机可能速度很快，造成帧粘连，丢弃缓冲区中粘连长度
@@ -59,12 +71,14 @@
 //}protocol_t;
 
 void float_to_uchar(float data,unsigned char *uchar_data);
+void uchar_to_float_speed(unsigned char obj,unsigned char *uchar_data,float *data);
+void uchar_to_float_PID(unsigned char obj,unsigned char *uchar_data,float *data);
 void SerializeBuffer(unsigned char *buffer,unsigned char Datahead_Byte,unsigned char obj,float data[]);
 
 
 static unsigned char Deserialize_Ctrl_dir(unsigned char *buffer,unsigned char dir);
 static unsigned char Deserialize_Ctrl_obj(unsigned char *buffer,unsigned char obj);
-void  DeserializeBuffer(unsigned char *buffer,unsigned char arg[]);	
+void  DeserializeBuffer(unsigned char *buffer,unsigned char arg[],float data[]);	
 
 #endif
 

@@ -11,7 +11,6 @@
 
 
 
-
 void Encoder_init(void);
 
 #endif

@@ -47,6 +47,6 @@
 ..\obj\timer_read_encoder.o: ..\FreeRTOS\include\mpu_wrappers.h
 ..\obj\timer_read_encoder.o: ..\FreeRTOS\include\queue.h
 ..\obj\timer_read_encoder.o: ..\FreeRTOS\include\semphr.h
+..\obj\timer_read_encoder.o: ..\USER\Car_config.h
 ..\obj\timer_read_encoder.o: ..\FreeRTOS\include\task.h
 ..\obj\timer_read_encoder.o: ..\FreeRTOS\include\list.h
-..\obj\timer_read_encoder.o: ..\USER\Car_config.h

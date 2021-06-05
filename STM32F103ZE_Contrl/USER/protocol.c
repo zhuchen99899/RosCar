@@ -1,19 +1,13 @@
 /*****十六进制自拟定协议****/
 #include "protocol.h"
 
-/***联合体结构转换float为四字节数  OR 四字节数转换float****/
-union float_trans{
-	float f;
-	unsigned char uch[4];
-};
-	
 
 
 
 
 /*转换float型数据为uchar数据
 @data 输入的float类型数据
-@return 返回四个字节的uchar型数组，注意不能使用局部，局部变量指针调用函数后就会被销毁
+@uchar_data 返回四个字节的uchar型数组，注意不能使用局部，局部变量指针调用函数后就会被销毁
 */
 
 void float_to_uchar(float data,unsigned char *uchar_data)
@@ -26,11 +20,95 @@ uchar_data[1]=trans.uch[1];
 uchar_data[2]=trans.uch[2];
 uchar_data[3]=trans.uch[3];
 	
-
-	
-	
 }
 
+
+
+/*转换uchar型数据为float数据
+@uchar_data 输入的uchar类型数据
+@return 返回3个数量float型数组，注意不能使用局部，局部变量指针调用函数后就会被销毁
+
+*/
+
+void uchar_to_float_speed(unsigned char obj,unsigned char *uchar_data,float *data)
+{
+	
+union float_trans_rec trans;
+	int i=0;
+//trans.f=data;
+	
+	
+if((obj==Motor1)||(obj==Motor2)||(obj==Both)){
+	
+		for(i=0;i<=3;i++){
+			trans.uch[i]=uchar_data[i];
+		}
+	
+		data[0]=trans.f;
+	}
+	
+	
+	else{
+	 //分别控制
+				for(i=0;i<=3;i++){
+			trans.uch[i]=uchar_data[i];
+		}
+	
+		data[0]=trans.f;
+		
+				for(i=0;i<=3;i++){
+			trans.uch[i]=uchar_data[4+i];
+		}
+		data[1]=trans.f;
+		
+				for(i=0;i<=3;i++){
+			trans.uch[i]=uchar_data[8+i];
+		}
+		
+		data[2]=trans.f;
+	}
+}
+
+/*转换uchar型数据为float数据
+@uchar_data 输入的uchar类型数据
+@return 返回3个数量float型数组，注意不能使用局部，局部变量指针调用函数后就会被销毁
+
+*/
+
+void uchar_to_float_PID(unsigned char obj,unsigned char *uchar_data,float *data)
+{
+	
+union float_trans_rec trans;
+	int i=0;
+//trans.f=data;
+	
+	
+if((obj==Motor1)||(obj==Motor2)||(obj==Both)){
+	
+				for(i=0;i<=3;i++){
+			trans.uch[i]=uchar_data[i];
+		}
+	
+		data[0]=trans.f;
+		
+				for(i=0;i<=3;i++){
+			trans.uch[i]=uchar_data[4+i];
+		}
+		data[1]=trans.f;
+		
+				for(i=0;i<=3;i++){
+			trans.uch[i]=uchar_data[8+i];
+		}
+		
+		data[2]=trans.f;
+	}
+	
+	
+	else{
+	 //分别控制
+
+	}
+}
 
 
 
@@ -94,9 +172,77 @@ switch(Datahead_Byte)
 
 /*****************解帧函数*****************************/
 
+/*解帧PID负载
+@buffer 帧指针
+@PID 数组 根据控制对象不同
+*/
+static void Deserialize_Ctrl_PID(unsigned char *buffer,unsigned char PID[])
+{
+	int i=0;
+	if((buffer[2]==Both)||(buffer[2]==Motor1)||(buffer[2]==Motor2)){
+
+		for(i=0;i<=11;i++)
+		{
+		//取出PID数值
+		PID[i]=buffer[3+i];
+		}
+		
+
+	}
+	else{//无each
+	
+	
+	}
+		
+
+}
+
+/*解帧中的speed负载
+@buffer 帧指针
+@speed 数组 根据控制对象不同
+*/
+static void Deserialize_Ctrl_speed(unsigned char *buffer,unsigned char speed[])
+{
+	switch(buffer[2]){
+		case Both:
+			speed[0]=buffer[3];
+			speed[1]=buffer[4];
+			speed[2]=buffer[5];
+			speed[3]=buffer[6];
+		break;
+		case Motor1:
+
+			speed[0]=buffer[3];
+			speed[1]=buffer[4];
+			speed[2]=buffer[5];
+			speed[3]=buffer[6];
+
+		break;
+		
+		case Motor2:
+			speed[0]=buffer[3];
+			speed[1]=buffer[4];
+			speed[2]=buffer[5];
+			speed[3]=buffer[6];
+		break;
+		case Each:
+			
+		
+		break;
+		default:
+		break;
+	}
+
+
+
+}
+
+
+
+
+
 /*解帧中的PWM负载
 @buffer 帧指针
-@dir 方向宏
 @PWM 数值 （百分数需要除以100）
 */
 static unsigned char Deserialize_Ctrl_PWM(unsigned char *buffer,unsigned char PWM_val)
@@ -180,17 +326,21 @@ arg[0]为剩余长度校验标志位
 arg[1]为CRC校验标志位
 arg[2]为数据/指令控制字节 标志位
 arg[3]为控制对象字节 标志位
-arg[4]PWM幅度百分比
+arg[4]PWM幅度百分比  // 方向  
+arg[4~12] 负载
 
 */
 
-void  DeserializeBuffer(unsigned char *buffer,unsigned char arg[])	
+void  DeserializeBuffer(unsigned char *buffer,unsigned char arg[],float data[])	
 {
+
 	unsigned long crc_res;
 	unsigned long crc_combine_2byte;
 	unsigned char obj;
 	unsigned char dir;
 	unsigned char pwm_val;
+	unsigned char ctrl_speed[12]; 
+	unsigned char ctrl_PID[12];
 	
 	
 	if(buffer[1]==residue_length)//首先校验剩余长度
@@ -219,6 +369,7 @@ void  DeserializeBuffer(unsigned char *buffer,unsigned char arg[])
 											arg[3]=Deserialize_Ctrl_obj(buffer,obj);			
 											arg[4]=Deserialize_Ctrl_dir(buffer,dir);
 
+
 											
 											
 									break;
@@ -226,22 +377,37 @@ void  DeserializeBuffer(unsigned char *buffer,unsigned char arg[])
 									
 									case Control_PWM://PWM控制报文
 											arg[2]=Control_PWM;
-											arg[3]=Deserialize_Ctrl_obj(buffer,obj);
+											arg[3]=Deserialize_Ctrl_obj(buffer,obj);										
 											arg[4]=Deserialize_Ctrl_PWM(buffer,pwm_val);
 									
 									break;
 									
 									case Control_speed:
+											arg[2]=Control_speed;
+											arg[3]=Deserialize_Ctrl_obj(buffer,obj);
+											Deserialize_Ctrl_speed(buffer,ctrl_speed);
+											uchar_to_float_speed(arg[3],ctrl_speed,data);
+				
+											
+
+									
 									break;
 									
-									case Control_PID:
+									case Control_PID://PID控制报文
+										arg[2]=Control_PID;
+										arg[3]=Deserialize_Ctrl_obj(buffer,obj);
+										Deserialize_Ctrl_PID(buffer,ctrl_PID);
+										uchar_to_float_PID(arg[3],ctrl_PID,data);
+									
 									break;
 									
 
 									case Data_Line_speed: 
+										
 									break;
 									
 									case Data_Angular_speed:
+										
 									break;
 									
 									default:

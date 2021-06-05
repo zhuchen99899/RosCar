@@ -18,20 +18,36 @@ vTaskSuspend(WIFITask_Handler);
 	extern QueueHandle_t Motor1_Direction_Queue;
 	extern QueueHandle_t Motor1_PWM_Queue;
 	extern QueueHandle_t Wifi_buffer_Queue;
+	extern QueueHandle_t Motor1_Ctrl_Parameter_Queue;
+	extern QueueHandle_t Motor1_PID_Parameter_Queue;
 	//声明信号量句柄
 	extern SemaphoreHandle_t BinarySemaphore_Motor1_DirChange;
 	extern SemaphoreHandle_t BinarySemaphore_Motor1_SpeedChange;
 	extern SemaphoreHandle_t BinarySemaphore_USART2ISR;	//串口2信号量句柄
 	//消息队列初始化
-	Motor1_Direction_t Motor1_Dir_init;
-	Motor1_Direction_t *Motor1_Dir;
-	Motor1_Dir=&Motor1_Dir_init;
 	
 	wifibuff *wifireceive;
-	wifibuff wifi_msgt;
+	extern wifibuff wifibuff_struct_init;
+	wifireceive=&wifibuff_struct_init;
 	
-	unsigned char arg[5];
 	
+	Motor1_Direction_t *Motor1_Dir;
+	extern Motor1_Direction_t Motor1_Direction_struct_init;
+	Motor1_Dir=&Motor1_Direction_struct_init;
+	
+
+	M1_ctrl *M1_ctrl_wifi;
+	extern M1_ctrl Motor1_ctrl_struct_init;
+	M1_ctrl_wifi=&Motor1_ctrl_struct_init;
+	
+  M1_PID *M1_speed_PID_wifiset;
+	extern M1_PID  Motor1_PID_struct_init;
+	M1_speed_PID_wifiset=&Motor1_PID_struct_init;
+	
+	
+	unsigned char arg[5];//解包参数
+	float Data[3];//解包数据
+		
 
 	//信号量参数
 	BaseType_t err=pdFALSE;
@@ -39,7 +55,6 @@ vTaskSuspend(WIFITask_Handler);
 	u8 rec_flag=0;
 
 
-	wifireceive=&wifi_msgt;
 	int i=0;
 	
 
@@ -66,7 +81,7 @@ vTaskSuspend(WIFITask_Handler);
 			/**消息队列获取成功*/
 			if(rec_flag){
 
-				DeserializeBuffer(wifireceive->wifi_buffer,arg);
+				DeserializeBuffer(wifireceive->wifi_buffer,arg,Data);
 				if(arg[0]==length_true)
 				{
 				
@@ -79,7 +94,7 @@ vTaskSuspend(WIFITask_Handler);
 							switch(arg[2]){
 								
 								case Control_direction://方向控制
-
+												
 												switch(arg[3]){
 													case Motor1://电机1
 														if(arg[4]==Motor_dir1){
@@ -115,7 +130,6 @@ vTaskSuspend(WIFITask_Handler);
 								case control_PWM://PWM控制
 												switch(arg[3]){
 													case Motor1://电机1
-															pr_warn_pure("arg[4]=%d",arg[4]);
 															motor1_Pwm=((float)(arg[4])/100); //速度百分比
 															xQueueOverwrite(Motor1_PWM_Queue,&motor1_Pwm);
 															xSemaphoreGive(BinarySemaphore_Motor1_SpeedChange);//发送电机1速度更改报文信号		
@@ -130,10 +144,56 @@ vTaskSuspend(WIFITask_Handler);
 												
 																								
 												}//控制对象
-									
-			
-												
+								break;
+								case  Control_speed: //速度控制
+														pr_warn_pure("ctrl_speed");
+														switch(arg[3]){
+														case Motor1:
+
+														pr_warn_pure("speed=%f",Data[0]);
+														M1_ctrl_wifi->Speed=Data[0];
+														xQueueOverwrite(Motor1_Ctrl_Parameter_Queue,&M1_ctrl_wifi);
+														
+														
+														break;
+														
+														
+														default:
+														break;
+														
+																									
+														}
+								break;
 								
+
+
+								case Control_PID:
+														pr_warn_pure("ctrl_speed");
+														switch(arg[3]){
+														case Motor1:
+
+														pr_warn_pure("P=%f",Data[0]);
+														pr_warn_pure("I=%f",Data[1]);
+														pr_warn_pure("D=%f",Data[2]);
+														M1_speed_PID_wifiset->Kp=Data[0];
+														M1_speed_PID_wifiset->Ki=Data[1];
+														M1_speed_PID_wifiset->Kd=Data[2];
+														xQueueOverwrite(Motor1_PID_Parameter_Queue,&M1_speed_PID_wifiset);
+														
+														
+														break;
+														
+														
+														default:
+														break;
+														
+																									
+														}
+								
+								
+								
+								break;
+
 								default:
 								break;
 							}//控制/数据

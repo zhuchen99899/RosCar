@@ -28,23 +28,24 @@ float speed[2];
 
     while(1)
     {
-		
-		
 	xQueuePeek(Encoder1_Status_Queue,&Encoder1_status_send,portMAX_DELAY);
 	/*获取速度值*/
 	speed[0]=Encoder1_status_send->Encoder1_Speed;
+
+	pr_warn_pure("Speed:%f\r\n",Encoder1_status_send->Encoder1_Speed);
 	/*组合数据帧*/
 	//暂无电机2
-	speed[1]=0x00;	
+	speed[1]=0x00;			
 	SerializeBuffer(sendbuff,Data_speed,Motor1,speed);	
+	WIFI_send(sendbuff,sendbuffsize);		
 			
 //	for(int i=0;i<=16;i++)
 //	{
 //	pr_warn_pure("%x",sendbuff[i]);
 //	}
-//	WIFI_send(sendbuff,sendbuffsize);		
-//			
-//			
+	
+			
+			
 			
 			
     vTaskDelay(500);
