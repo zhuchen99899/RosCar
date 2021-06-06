@@ -23,7 +23,10 @@
 #include "Task_Motor1_Dir.h"
 #include "Task_Motor1_PWM.h"
 #include "Task_Motor1_PID.h"
-#include "Task_Encoder1.h"
+#include "Task_Motor2_Dir.h"
+#include "Task_Motor2_PWM.h"
+#include "Task_Motor2_PID.h"
+#include "Task_WIFI_send.h"
 #include "Task_WIFI.h"
 #include "Task_IdleTask.h"
 

@@ -44,6 +44,7 @@
 ..\obj\task_motor1_pid.o: ..\FreeRTOS\include\list.h
 ..\obj\task_motor1_pid.o: ..\FreeRTOS\include\queue.h
 ..\obj\task_motor1_pid.o: ..\USER\PID.h
+..\obj\task_motor1_pid.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\math.h
 ..\obj\task_motor1_pid.o: ..\USER\OS_AppObjCreate.h
 ..\obj\task_motor1_pid.o: ..\FreeRTOS\include\semphr.h
 ..\obj\task_motor1_pid.o: ..\USER\config.h

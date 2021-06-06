@@ -105,6 +105,9 @@ if((obj==Motor1)||(obj==Motor2)||(obj==Both)){
 	
 	
 	else{
+		
+		
+		
 	 //分别控制
 
 	}
@@ -151,11 +154,75 @@ switch(Datahead_Byte)
 				buffer[16]=crc_res[1];
 			break;
 			
+			case Motor2:
+				buffer[1]=residue_length;
+				buffer[2]=Motor2;
+				//转化float类型数据
+				float_to_uchar(data[0],uchar_data);
+				buffer[3]=uchar_data[0];
+				buffer[4]=uchar_data[1];
+				buffer[5]=uchar_data[2];
+				buffer[6]=uchar_data[3];
 
+				for(i=7;i<=14;i++)
+				{
+				buffer[i]=0x00;
+				}
+
+				CRC16_uch(buffer,14,crc_res);//去除一帧最后两个CRC校验位计算CRC16值
+				buffer[15]=crc_res[0];
+				buffer[16]=crc_res[1];
+			break;
+			case Both:
+
+				buffer[1]=residue_length;
+				buffer[2]=Both;
+				//转化float类型数据
+				float_to_uchar(data[0],uchar_data);
+				buffer[3]=uchar_data[0];
+				buffer[4]=uchar_data[1];
+				buffer[5]=uchar_data[2];
+				buffer[6]=uchar_data[3];
+
+				for(i=7;i<=14;i++)
+				{
+				buffer[i]=0x00;
+				}
+
+				CRC16_uch(buffer,14,crc_res);//去除一帧最后两个CRC校验位计算CRC16值
+				buffer[15]=crc_res[0];
+				buffer[16]=crc_res[1];
+				break;
+			case Each:
+				buffer[1]=residue_length;
+				buffer[2]=Each;
+				//转化float类型数据
+				float_to_uchar(data[0],uchar_data);
+			
+				for(i=0;i<=3;i++){
+					
+				buffer[3+i]=uchar_data[i];
+				}
+
+				float_to_uchar(data[1],uchar_data);
+				for(i=0;i<=3;i++){
+					
+				buffer[7+i]=uchar_data[i];
+				}
+				for(i=11;i<=14;i++)
+				{
+				buffer[i]=0x00;
+				}
+
+				CRC16_uch(buffer,14,crc_res);//去除一帧最后两个CRC校验位计算CRC16值
+				buffer[15]=crc_res[0];
+				buffer[16]=crc_res[1];
+			break;
 			default:
 			break;
 		}//控制对象
 	
+			
 		break;
 	case Data_Line_speed:
 		break;
@@ -203,6 +270,7 @@ static void Deserialize_Ctrl_PID(unsigned char *buffer,unsigned char PID[])
 */
 static void Deserialize_Ctrl_speed(unsigned char *buffer,unsigned char speed[])
 {
+	int i;
 	switch(buffer[2]){
 		case Both:
 			speed[0]=buffer[3];
@@ -226,9 +294,11 @@ static void Deserialize_Ctrl_speed(unsigned char *buffer,unsigned char speed[])
 			speed[3]=buffer[6];
 		break;
 		case Each:
-			
-		
+			for(i=0;i<=7;i++){
+			speed[i]=buffer[3+i];
+			}					
 		break;
+			
 		default:
 		break;
 	}

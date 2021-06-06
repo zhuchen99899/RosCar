@@ -13,8 +13,9 @@ QueueHandle_t Encoder2_Overflow_Queue;
 QueueHandle_t Encoder1_Status_Queue;
 QueueHandle_t Encoder2_Status_Queue;
 QueueHandle_t Motor1_PID_Parameter_Queue;
+QueueHandle_t Motor2_PID_Parameter_Queue;
 QueueHandle_t Motor1_Ctrl_Parameter_Queue;
-
+QueueHandle_t Motor2_Ctrl_Parameter_Queue;
 /*********信号量句柄********/
 SemaphoreHandle_t BinarySemaphore_Motor1_DirChange;//电机1方向更改报文二值信号量句柄
 SemaphoreHandle_t BinarySemaphore_Motor1_SpeedChange;//电机1速度更改报文二值信号量句柄
@@ -39,7 +40,7 @@ void start_task(void *pvParameters);
 /**********电机1方向控制任务***********/
 
 //任务优先级
-#define MOTOR1_TASK_PRIO		4
+#define MOTOR1_TASK_PRIO		2
 //任务堆栈大小	
 #define MOTOR1_STK_SIZE 		256  
 //任务句柄
@@ -64,7 +65,7 @@ void motor1_pwm_task(void *pvParameters);
 /**********电机2方向控制任务***********/
 
 //任务优先级
-#define MOTOR2_TASK_PRIO		4
+#define MOTOR2_TASK_PRIO		2
 //任务堆栈大小	
 #define MOTOR2_STK_SIZE 		256  
 //任务句柄
@@ -97,16 +98,29 @@ TaskHandle_t MOTOR1_PID_TASK_Handler;
 //任务函数
 void motor1_PID_task(void *pvParameters);
 
+
+
+/*********电机2PID计算任务************/
+
+//任务优先级
+#define MOTOR2_PID_TASK_PRIO		3
+//任务堆栈大小	
+#define MOTOR2_PID_STK_SIZE 		512  
+//任务句柄
+TaskHandle_t MOTOR2_PID_TASK_Handler;
+//任务函数
+void motor2_PID_task(void *pvParameters);
+
 /**********编码器1任务***********/
 
 //任务优先级
-#define Encoder1_TASK_PRIO		1
+#define WIFI_SEND_TASK_PRIO		2
 //任务堆栈大小	
-#define Encoder1_STK_SIZE 		256  
+#define WIFI_SEND_STK_SIZE 		512  
 //任务句柄
-TaskHandle_t Encoder1Task_Handler;
+TaskHandle_t WIFI_SEND_Task_Handler;
 //任务函数
-void Encoder1_task(void *pvParameters);
+void Wifi_send_task(void *pvParameters);
 
 
 
@@ -195,15 +209,20 @@ void start_task(void *pvParameters)
                 (void*          )NULL,
                 (UBaseType_t    )MOTOR1_PID_TASK_PRIO,
                 (TaskHandle_t*  )&MOTOR1_PID_TASK_Handler);     
-								
-								
-    //创建电机1编码器任务
-    xTaskCreate((TaskFunction_t )Encoder1_task,     
-                (const char*    )"Encoder1_task",   
-                (uint16_t       )Encoder1_STK_SIZE, 
+		//创建电机2PID计算任务
+    xTaskCreate((TaskFunction_t )motor2_PID_task,     
+                (const char*    )"motor2_PID_task",   
+                (uint16_t       )MOTOR2_PID_STK_SIZE, 
                 (void*          )NULL,
-                (UBaseType_t    )Encoder1_TASK_PRIO,
-                (TaskHandle_t*  )&Encoder1Task_Handler);     
+                (UBaseType_t    )MOTOR2_PID_TASK_PRIO,
+                (TaskHandle_t*  )&MOTOR2_PID_TASK_Handler);     																				
+    //创建电机1编码器任务
+    xTaskCreate((TaskFunction_t )Wifi_send_task,     
+                (const char*    )"Wifi_send_task",   
+                (uint16_t       )WIFI_STK_SIZE, 
+                (void*          )NULL,
+                (UBaseType_t    )WIFI_SEND_TASK_PRIO,
+                (TaskHandle_t*  )&WIFI_SEND_Task_Handler);     
     //创建WIFI_task任务
     xTaskCreate((TaskFunction_t )WIFI_task,     
                 (const char*    )"wifi_task",   

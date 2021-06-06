@@ -23,7 +23,7 @@ vTaskSuspend(MOTOR1_PID_TASK_Handler);
 #endif
 
 	extern QueueHandle_t Encoder1_Status_Queue;
-	extern QueueHandle_t Encoder2_Status_Queue;
+
 	extern QueueHandle_t Motor1_Ctrl_Parameter_Queue;
 	extern QueueHandle_t Motor1_PWM_Queue;
 	extern QueueHandle_t Motor1_PID_Parameter_Queue;
@@ -41,7 +41,7 @@ float Set_Speed=0.0;
 float pid_result=0.0;
 float Motor1_PWM=0.0;
 
-float Actual_Speed2;
+
 
 
 	
@@ -49,9 +49,7 @@ Encoder1_status_t *Encoder1_status_send_toPID;
 Encoder1_status_t Encoder1_pidcacl_init;	 //全局结构体
 Encoder1_status_send_toPID=&Encoder1_pidcacl_init;
 
-Encoder2_status_t *Encoder2_status_send_toPID;
-Encoder2_status_t Encoder2_pidcacl_init;	 //全局结构体
-Encoder2_status_send_toPID=&Encoder2_pidcacl_init;
+
 
 	M1_ctrl *M1_ctrl_r;
 	M1_ctrl M1_ctrl_init;		
@@ -70,17 +68,17 @@ pid_init();
 
 
 		//编码器1
-		xQueuePeek(Encoder1_Status_Queue,(void *)&Encoder1_status_send_toPID,portMAX_DELAY);
+		xQueuePeek(Encoder1_Status_Queue,(void *)&Encoder1_status_send_toPID,10);
 		xQueuePeek(Motor1_Ctrl_Parameter_Queue,&M1_ctrl_r,10);	
 		xQueuePeek(Motor1_PID_Parameter_Queue,&M1_speed_PID_wifiset,portMAX_DELAY);
 		
-		//编码器2
-		xQueuePeek(Encoder2_Status_Queue,(void *)&Encoder2_status_send_toPID,portMAX_DELAY);
+		//编码器1
+	
 		
 		Actual_Speed1 = Encoder1_status_send_toPID->Encoder1_Speed;
-		Actual_Speed2 = Encoder2_status_send_toPID->Encoder2_Speed;
+
 		
-//		pr_warn_pure("Actual_Speed2=%f",Actual_Speed2);
+		pr_warn_pure("Actual_Speed1=%f",Actual_Speed1);
 
 		Set_Speed= M1_ctrl_r->Speed;
 		
@@ -90,19 +88,18 @@ pid_init();
 		
 
 
-		pid_result=speed_pid_realize(Set_Speed,Actual_Speed1);
+		pid_result=speed_pid_realize1(Set_Speed,Actual_Speed1);
 
+//		pr_warn_pure("pid_result1=%f",pid_result);
+		Motor1_PWM=fabs(pid_result/PWM1_MAX_VAL);
 
-		Motor1_PWM=pid_result/PWM1_MAX_VAL;
-		
-//		pr_warn_pure("Motor1_PWM=%f",Motor1_PWM);
 		xQueueOverwrite(Motor1_PWM_Queue,&Motor1_PWM);	
 		xSemaphoreGive(BinarySemaphore_Motor1_SpeedChange);//发送电机1速度更改报文信号		
 		
 
 
 		
-		vTaskDelay(20);
+		vTaskDelay(100);
 		
 		
 	}

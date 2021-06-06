@@ -1,5 +1,5 @@
-#ifndef __Task_MOTOR1_PWM_H
-#define __Task_MOTOR1_PWM_H
+#ifndef __Task_MOTOR2_PWM_H
+#define __Task_MOTOR2_PWM_H
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"

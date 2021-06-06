@@ -5,7 +5,9 @@
 Encoder1_status_t Encoder1_struct_init; //全局结构体
 Encoder2_status_t Encoder2_struct_init;
 M1_ctrl   Motor1_ctrl_struct_init;
+M2_ctrl   Motor2_ctrl_struct_init;
 M1_PID    Motor1_PID_struct_init;
+M2_PID    Motor2_PID_struct_init;
 Motor1_Direction_t  Motor1_Direction_struct_init;
 Motor2_Direction_t  Motor2_Direction_struct_init;
 wifibuff wifibuff_struct_init;
@@ -33,8 +35,9 @@ wifibuff wifibuff_struct_init;
 #define Encoder1_Status_Q_NUM 1 //编码器状态计数
 #define Encoder2_Status_Q_NUM 1
 #define Motor1_PID_Parameter_Q_NUM 1
+#define Motor2_PID_Parameter_Q_NUM 1
 #define Motor1_Ctrl_Parameter_Q_NUM  1
-
+#define Motor2_Ctrl_Parameter_Q_NUM  1
 
 //电机1方向向消息队列
 static void Motor1_Direction_QueueCreate(void)
@@ -244,7 +247,26 @@ static void Motor1_Ctrl_Parameter_QueueCreat(void)
 	extern QueueHandle_t Motor1_Ctrl_Parameter_Queue;
 	Motor1_Ctrl_Parameter_Queue =xQueueCreate(Motor1_Ctrl_Parameter_Q_NUM,sizeof(struct M1_ctrl *));
 	
-	if (Encoder1_Status_QueueCreat==0)
+	if (Motor1_Ctrl_Parameter_Queue==0)
+	{
+	/*消息创建失败处理机制*/
+	pr_warn_pure("Ctrl_Parameter_Queue队列创建失败\r\n");
+	pr_entry_pure("Ctrl_Parameter_Queue队列创建失败\r\n");
+	}
+	else 
+	{
+	pr_warn_pure("Ctrl_Parameter_Queue队列创建成功\r\n");
+	pr_entry_pure("Ctrl_Parameter_Queue队列创建成功\r\n");
+	}
+}
+
+
+static void Motor2_Ctrl_Parameter_QueueCreat(void)
+{
+	extern QueueHandle_t Motor2_Ctrl_Parameter_Queue;
+	Motor2_Ctrl_Parameter_Queue =xQueueCreate(Motor2_Ctrl_Parameter_Q_NUM,sizeof(struct M2_ctrl *));
+	
+	if (Motor2_Ctrl_Parameter_Queue==0)
 	{
 	/*消息创建失败处理机制*/
 	pr_warn_pure("Ctrl_Parameter_Queue队列创建失败\r\n");
@@ -267,12 +289,14 @@ static void Motor1_Ctrl_Parameter_QueueCreat(void)
 
 
 
+
+
 static void Motor1_PID_Parameter_QueueCreat(void)
 {
 	extern QueueHandle_t Motor1_PID_Parameter_Queue;
 	Motor1_PID_Parameter_Queue =xQueueCreate(Motor1_PID_Parameter_Q_NUM,sizeof(struct M1_PID *));
 	
-	if (Encoder1_Status_QueueCreat==0)
+	if (Motor1_PID_Parameter_Queue==0)
 	{
 	/*消息创建失败处理机制*/
 	pr_warn_pure("Motor1_PID_Parameter队列创建失败\r\n");
@@ -284,6 +308,29 @@ static void Motor1_PID_Parameter_QueueCreat(void)
 	pr_entry_pure("Motor1_PID_Parameter队列创建成功\r\n");
 	}
 }
+
+
+
+
+
+static void Motor2_PID_Parameter_QueueCreat(void)
+{
+	extern QueueHandle_t Motor2_PID_Parameter_Queue;
+	Motor2_PID_Parameter_Queue =xQueueCreate(Motor2_PID_Parameter_Q_NUM,sizeof(struct M2_PID *));
+	
+	if (Motor2_PID_Parameter_Queue==0)
+	{
+	/*消息创建失败处理机制*/
+	pr_warn_pure("Motor2_PID_Parameter队列创建失败\r\n");
+	pr_entry_pure("Motor1_PID_Parameter队列创建失败\r\n");
+	}
+	else 
+	{
+	pr_warn_pure("Motor1_PID_Parameter队列创建成功\r\n");
+	pr_entry_pure("Motor1_PID_Parameter队列创建成功\r\n");
+	}
+}
+
 
 
 
@@ -300,8 +347,9 @@ Encoder2_Overflow_QueueCreat();
 Encoder1_Status_QueueCreat();
 Encoder2_Status_QueueCreat();
 Motor1_PID_Parameter_QueueCreat();
+Motor2_PID_Parameter_QueueCreat();
 Motor1_Ctrl_Parameter_QueueCreat();
-	
+Motor2_Ctrl_Parameter_QueueCreat();
 
 }
 

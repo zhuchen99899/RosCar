@@ -643,11 +643,6 @@
           <GroupName>FreeRTOS_Task_App</GroupName>
           <Files>
             <File>
-              <FileName>Task_Encoder1.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\FreeRTOS\app\Task_Encoder1.c</FilePath>
-            </File>
-            <File>
               <FileName>Task_Motor1_Dir.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\FreeRTOS\app\Task_Motor1_Dir.c</FilePath>
@@ -673,6 +668,11 @@
               <FilePath>..\FreeRTOS\app\Task_Motor2_PWM.c</FilePath>
             </File>
             <File>
+              <FileName>Task_Motor2_PID.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\FreeRTOS\app\Task_Motor2_PID.c</FilePath>
+            </File>
+            <File>
               <FileName>Task_IdleTask.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\FreeRTOS\app\Task_IdleTask.c</FilePath>
@@ -681,6 +681,11 @@
               <FileName>Task_WIFI.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\FreeRTOS\app\Task_WIFI.c</FilePath>
+            </File>
+            <File>
+              <FileName>Task_WIFI_send.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\FreeRTOS\app\Task_WIFI_send.c</FilePath>
             </File>
           </Files>
         </Group>

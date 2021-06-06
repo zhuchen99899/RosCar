@@ -34,14 +34,15 @@
 "..\obj\stm32f10x_tim.o"
 "..\obj\heap_4.o"
 "..\obj\port.o"
-"..\obj\task_encoder1.o"
 "..\obj\task_motor1_dir.o"
 "..\obj\task_motor1_pwm.o"
 "..\obj\task_motor1_pid.o"
 "..\obj\task_motor2_dir.o"
 "..\obj\task_motor2_pwm.o"
+"..\obj\task_motor2_pid.o"
 "..\obj\task_idletask.o"
 "..\obj\task_wifi.o"
+"..\obj\task_wifi_send.o"
 "..\obj\crc16.o"
 --ro-base 0x08000000 --entry 0x08000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

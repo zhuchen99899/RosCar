@@ -20,10 +20,11 @@ void usart2_init(u32 bound)
 	/************USART/GPIO RCC时钟使能*********************/
 	
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2,ENABLE); //串口2时钟使能  
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);//串口2引脚TX,RX(PA2,PA3)时钟使能
-	
-	
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD,ENABLE);//串口2引脚TX,RX(PA2,PA3)时钟使能
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE); //重映射需要开启AFIO总线时钟
+
 	GPIO_PinRemapConfig(GPIO_Remap_USART2, ENABLE);   /*完全重映射串口2IO*/
+
 //	PA2(TX)->PD5,PA3(RX)->PD6
 	
 	/************gpio配设************************/

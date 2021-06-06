@@ -1,5 +1,6 @@
 ..\obj\pid.o: PID.c
 ..\obj\pid.o: PID.h
+..\obj\pid.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\math.h
 ..\obj\pid.o: ..\HARDWARE\PWM\pwm.h
 ..\obj\pid.o: ..\SYSTEM\sys\sys.h
 ..\obj\pid.o: ..\USER\stm32f10x.h

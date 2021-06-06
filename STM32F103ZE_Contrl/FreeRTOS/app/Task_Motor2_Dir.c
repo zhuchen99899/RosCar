@@ -24,7 +24,7 @@ void motor2_dir_task(void *pvParameters)
     while(1)
     {
 
-		err=xSemaphoreTake(BinarySemaphore_Motor2_DirChange,portMAX_DELAY);	//获取电机1方向信号量	
+		err=xSemaphoreTake(BinarySemaphore_Motor2_DirChange,portMAX_DELAY);	//获取电机2方向信号量	
 			
 			if(err==pdTRUE)
 			{

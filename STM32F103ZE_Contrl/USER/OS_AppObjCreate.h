@@ -33,6 +33,23 @@ float moment;
 }M1_ctrl;
 
 
+typedef struct Motor2_ctrl
+{
+#if Car_ctrl_speed_loop
+float Speed;
+#endif
+	
+#if Car_ctrl_length_loop	
+	
+float Length;
+#endif
+
+#if 	Car_ctrl_force_loop
+float moment;
+#endif
+}M2_ctrl;
+
+
 
 
 //电机1PID参数
@@ -44,6 +61,16 @@ typedef struct Motor1_PID
 		
 		
 	}M1_PID;
+
+//电机2PID参数
+typedef struct Motor2_PID
+	{
+		float Kp;
+		float Ki;
+		float Kd;
+		
+		
+	}M2_PID;
 
 
 

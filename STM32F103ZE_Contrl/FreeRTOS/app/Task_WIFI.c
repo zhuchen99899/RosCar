@@ -22,6 +22,8 @@ vTaskSuspend(WIFITask_Handler);
 	extern QueueHandle_t Wifi_buffer_Queue;
 	extern QueueHandle_t Motor1_Ctrl_Parameter_Queue;
 	extern QueueHandle_t Motor1_PID_Parameter_Queue;
+	extern QueueHandle_t Motor2_Ctrl_Parameter_Queue;
+	extern QueueHandle_t Motor2_PID_Parameter_Queue;
 	//声明信号量句柄
 	extern SemaphoreHandle_t BinarySemaphore_Motor1_DirChange;
 	extern SemaphoreHandle_t BinarySemaphore_Motor1_SpeedChange;
@@ -48,10 +50,19 @@ vTaskSuspend(WIFITask_Handler);
 	extern M1_ctrl Motor1_ctrl_struct_init;
 	M1_ctrl_wifi=&Motor1_ctrl_struct_init;
 	
+	M2_ctrl *M2_ctrl_wifi;
+	extern M2_ctrl Motor2_ctrl_struct_init;
+	M2_ctrl_wifi=&Motor2_ctrl_struct_init;
+	
+	
   M1_PID *M1_speed_PID_wifiset;
 	extern M1_PID  Motor1_PID_struct_init;
 	M1_speed_PID_wifiset=&Motor1_PID_struct_init;
 	
+	
+	M2_PID *M2_speed_PID_wifiset;
+	extern M2_PID  Motor2_PID_struct_init;
+	M2_speed_PID_wifiset=&Motor2_PID_struct_init;
 	
 	unsigned char arg[5];//解包参数
 	float Data[3];//解包数据
@@ -214,16 +225,44 @@ vTaskSuspend(WIFITask_Handler);
 								case  Control_speed: //速度控制
 														pr_warn_pure("ctrl_speed");
 														switch(arg[3]){
-														case Motor1:
-
+														case Motor1: //电机1
+														pr_warn_pure("M1");
 														pr_warn_pure("speed=%f",Data[0]);
 														M1_ctrl_wifi->Speed=Data[0];
 														xQueueOverwrite(Motor1_Ctrl_Parameter_Queue,&M1_ctrl_wifi);
 														
 														
 														break;
+														 
+														case Motor2:  //电机2
+														pr_warn_pure("M2");
+														pr_warn_pure("speed=%f",Data[0]);
+														M2_ctrl_wifi->Speed=Data[0];
+														xQueueOverwrite(Motor2_Ctrl_Parameter_Queue,&M2_ctrl_wifi);
 														
 														
+														break;
+														
+														case Both:  //同一参数
+														pr_warn_pure("M1&M2");
+														pr_warn_pure("speed=%f",Data[0]);
+														M1_ctrl_wifi->Speed=Data[0];
+														M2_ctrl_wifi->Speed=Data[0];
+														xQueueOverwrite(Motor1_Ctrl_Parameter_Queue,&M1_ctrl_wifi);
+														xQueueOverwrite(Motor2_Ctrl_Parameter_Queue,&M2_ctrl_wifi);
+														
+														break;
+															
+														case Each:		
+														pr_warn_pure("M2|M2");															
+														pr_warn_pure("speed=%f",Data[0]);
+														pr_warn_pure("speed=%f",Data[1]);
+														M1_ctrl_wifi->Speed=Data[0];
+														M2_ctrl_wifi->Speed=Data[1];
+														xQueueOverwrite(Motor1_Ctrl_Parameter_Queue,&M1_ctrl_wifi);
+														xQueueOverwrite(Motor2_Ctrl_Parameter_Queue,&M2_ctrl_wifi);
+														
+														break;
 														default:
 														break;
 														
@@ -234,10 +273,10 @@ vTaskSuspend(WIFITask_Handler);
 
 
 								case Control_PID:
-														pr_warn_pure("ctrl_speed");
+														pr_warn_pure("PIDset");
 														switch(arg[3]){
-														case Motor1:
-
+														case Motor1: //电机1
+														pr_warn_pure("M1");
 														pr_warn_pure("P=%f",Data[0]);
 														pr_warn_pure("I=%f",Data[1]);
 														pr_warn_pure("D=%f",Data[2]);
@@ -248,7 +287,31 @@ vTaskSuspend(WIFITask_Handler);
 														
 														
 														break;
+														case Motor2: //电机2
+														pr_warn_pure("M2");
+														pr_warn_pure("P=%f",Data[0]);
+														pr_warn_pure("I=%f",Data[1]);
+														pr_warn_pure("D=%f",Data[2]);
+														M2_speed_PID_wifiset->Kp=Data[0];
+														M2_speed_PID_wifiset->Ki=Data[1];
+														M2_speed_PID_wifiset->Kd=Data[2];
+														xQueueOverwrite(Motor2_PID_Parameter_Queue,&M2_speed_PID_wifiset);
+														break;
 														
+														case Both: //同一参数
+														pr_warn_pure("M1&M2");
+														pr_warn_pure("P=%f",Data[0]);
+														pr_warn_pure("I=%f",Data[1]);
+														pr_warn_pure("D=%f",Data[2]);
+														M1_speed_PID_wifiset->Kp=Data[0];
+														M1_speed_PID_wifiset->Ki=Data[1];
+														M1_speed_PID_wifiset->Kd=Data[2];
+														M2_speed_PID_wifiset->Kp=Data[0];
+														M2_speed_PID_wifiset->Ki=Data[1];
+														M2_speed_PID_wifiset->Kd=Data[2];
+														xQueueOverwrite(Motor1_PID_Parameter_Queue,&M1_speed_PID_wifiset);
+														xQueueOverwrite(Motor2_PID_Parameter_Queue,&M2_speed_PID_wifiset);
+														break;
 														
 														default:
 														break;
