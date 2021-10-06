@@ -37,6 +37,8 @@
 ..\obj\wifi.o: ..\FreeRTOS\include\FreeRTOS.h
 ..\obj\wifi.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stddef.h
 ..\obj\wifi.o: ..\FreeRTOS\include\FreeRTOSConfig.h
+..\obj\wifi.o: ..\HARDWARE\PWM\pwm.h
+..\obj\wifi.o: ..\HARDWARE\LED\led.h
 ..\obj\wifi.o: ..\SYSTEM\usart\usart.h
 ..\obj\wifi.o: ..\FreeRTOS\include\projdefs.h
 ..\obj\wifi.o: ..\FreeRTOS\include\portable.h

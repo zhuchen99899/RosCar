@@ -39,6 +39,8 @@
 ..\obj\timer_read_encoder.o: ..\FreeRTOS\include\FreeRTOS.h
 ..\obj\timer_read_encoder.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stddef.h
 ..\obj\timer_read_encoder.o: ..\FreeRTOS\include\FreeRTOSConfig.h
+..\obj\timer_read_encoder.o: ..\HARDWARE\PWM\pwm.h
+..\obj\timer_read_encoder.o: ..\HARDWARE\LED\led.h
 ..\obj\timer_read_encoder.o: ..\SYSTEM\usart\usart.h
 ..\obj\timer_read_encoder.o: ..\FreeRTOS\include\projdefs.h
 ..\obj\timer_read_encoder.o: ..\FreeRTOS\include\portable.h

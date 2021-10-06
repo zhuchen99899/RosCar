@@ -4,6 +4,7 @@
 ..\obj\task_motor1_dir.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stddef.h
 ..\obj\task_motor1_dir.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdint.h
 ..\obj\task_motor1_dir.o: ..\FreeRTOS\include\FreeRTOSConfig.h
+..\obj\task_motor1_dir.o: ..\HARDWARE\PWM\pwm.h
 ..\obj\task_motor1_dir.o: ..\SYSTEM\sys\sys.h
 ..\obj\task_motor1_dir.o: ..\USER\stm32f10x.h
 ..\obj\task_motor1_dir.o: ..\CORE\core_cm3.h
@@ -33,6 +34,7 @@
 ..\obj\task_motor1_dir.o: ..\STM32F10x_FWLib\inc\stm32f10x_usart.h
 ..\obj\task_motor1_dir.o: ..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h
 ..\obj\task_motor1_dir.o: ..\STM32F10x_FWLib\inc\misc.h
+..\obj\task_motor1_dir.o: ..\HARDWARE\LED\led.h
 ..\obj\task_motor1_dir.o: ..\SYSTEM\usart\usart.h
 ..\obj\task_motor1_dir.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\task_motor1_dir.o: ..\FreeRTOS\include\projdefs.h
@@ -43,7 +45,6 @@
 ..\obj\task_motor1_dir.o: ..\FreeRTOS\include\task.h
 ..\obj\task_motor1_dir.o: ..\FreeRTOS\include\list.h
 ..\obj\task_motor1_dir.o: ..\FreeRTOS\include\queue.h
-..\obj\task_motor1_dir.o: ..\HARDWARE\LED\led.h
 ..\obj\task_motor1_dir.o: ..\USER\OS_AppObjCreate.h
 ..\obj\task_motor1_dir.o: ..\FreeRTOS\include\semphr.h
 ..\obj\task_motor1_dir.o: ..\USER\config.h

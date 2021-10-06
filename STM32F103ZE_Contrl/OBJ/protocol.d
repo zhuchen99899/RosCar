@@ -36,6 +36,8 @@
 ..\obj\protocol.o: ..\FreeRTOS\include\FreeRTOS.h
 ..\obj\protocol.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stddef.h
 ..\obj\protocol.o: ..\FreeRTOS\include\FreeRTOSConfig.h
+..\obj\protocol.o: ..\HARDWARE\PWM\pwm.h
+..\obj\protocol.o: ..\HARDWARE\LED\led.h
 ..\obj\protocol.o: ..\SYSTEM\usart\usart.h
 ..\obj\protocol.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\protocol.o: ..\FreeRTOS\include\projdefs.h

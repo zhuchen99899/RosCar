@@ -15,12 +15,20 @@
 //All rights reserved									  
 //********************************************************************************
 
-#define PWM1_MAX_VAL 1000
-#define PWM2_MAX_VAL 1000
+#define PWM1_MAX_VAL 1449
+#define PWM2_MAX_VAL 1449
 
 void TIM3_Int_Init(u16 arr,u16 psc);
 void TIM3_PWM_Init(u16 arr,u16 psc);
 
 void TIM2_Int_Init(u16 arr,u16 psc);
 void TIM2_PWM_Init(u16 arr,u16 psc);
+
+
+
+
+//void TIM7_Int_Init(u16 arr,u16 psc);
+
+//extern volatile unsigned long long FreeRTOSRunTimeTicks;
+//void ConfigureTimeForRunTimeStats(void);
 #endif

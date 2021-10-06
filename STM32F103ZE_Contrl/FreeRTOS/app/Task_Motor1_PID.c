@@ -70,7 +70,7 @@ pid_init();
 		//±àÂëÆ÷1
 		xQueuePeek(Encoder1_Status_Queue,(void *)&Encoder1_status_send_toPID,10);
 		xQueuePeek(Motor1_Ctrl_Parameter_Queue,&M1_ctrl_r,10);	
-		xQueuePeek(Motor1_PID_Parameter_Queue,&M1_speed_PID_wifiset,portMAX_DELAY);
+		xQueuePeek(Motor1_PID_Parameter_Queue,&M1_speed_PID_wifiset,10);
 		
 		//±àÂëÆ÷1
 	
@@ -78,7 +78,7 @@ pid_init();
 		Actual_Speed1 = Encoder1_status_send_toPID->Encoder1_Speed;
 
 		
-		pr_warn_pure("Actual_Speed1=%f",Actual_Speed1);
+//		pr_warn_pure("Actual_Speed1=%f",Actual_Speed1);
 
 		Set_Speed= M1_ctrl_r->Speed;
 		

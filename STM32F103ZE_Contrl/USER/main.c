@@ -90,7 +90,7 @@ void motor2_pwm_task(void *pvParameters);
 /*********电机1PID计算任务************/
 
 //任务优先级
-#define MOTOR1_PID_TASK_PRIO		3
+#define MOTOR1_PID_TASK_PRIO		1
 //任务堆栈大小	
 #define MOTOR1_PID_STK_SIZE 		512  
 //任务句柄
@@ -103,7 +103,7 @@ void motor1_PID_task(void *pvParameters);
 /*********电机2PID计算任务************/
 
 //任务优先级
-#define MOTOR2_PID_TASK_PRIO		3
+#define MOTOR2_PID_TASK_PRIO		1
 //任务堆栈大小	
 #define MOTOR2_PID_STK_SIZE 		512  
 //任务句柄
@@ -111,7 +111,7 @@ TaskHandle_t MOTOR2_PID_TASK_Handler;
 //任务函数
 void motor2_PID_task(void *pvParameters);
 
-/**********编码器1任务***********/
+/**********WIFI发送任务***********/
 
 //任务优先级
 #define WIFI_SEND_TASK_PRIO		2
@@ -136,6 +136,21 @@ TaskHandle_t WIFITask_Handler;
 void WIFI_task(void *pvParameters);
 
 
+
+
+/**********IMU任务*************/
+
+//任务优先级
+#define MPU6050_TASK_PRIO		1
+//任务堆栈大小	
+#define MPU6050_STK_SIZE 		1024  
+//任务句柄
+TaskHandle_t MPU6050_Task_Handler;
+//任务函数
+void MPU6050_task(void *pvParameters);
+
+
+
 /********空闲任务***************/
 //任务优先级
 #define Idle_TASK_PRIO		0
@@ -156,6 +171,7 @@ int main(void)
 	delay_init();	    				//延时函数初始化	  
 	Bsp_init();  							//板级驱动初始化
 	OS_AppObjCreate();        //Freertos任务通讯机制初始化
+
 	//创建开始任务
     xTaskCreate((TaskFunction_t )start_task,            //任务函数
                 (const char*    )"start_task",          //任务名称
@@ -169,6 +185,7 @@ int main(void)
 //开始任务任务函数
 void start_task(void *pvParameters)
 {
+
 	
 		init_set();//开机需要初始化的数据与配置
 	
@@ -229,7 +246,18 @@ void start_task(void *pvParameters)
                 (uint16_t       )WIFI_STK_SIZE, 
                 (void*          )NULL,
                 (UBaseType_t    )WIFI_TASK_PRIO,
-                (TaskHandle_t*  )&WIFITask_Handler);     
+                (TaskHandle_t*  )&WIFITask_Handler);   
+									
+								
+		//创建mpu6050任务					
+		xTaskCreate((TaskFunction_t )MPU6050_task,     
+                (const char*    )"MPU6050_task",   
+                (uint16_t       )MPU6050_STK_SIZE, 
+                (void*          )NULL,
+                (UBaseType_t    )MPU6050_TASK_PRIO,
+                (TaskHandle_t*  )&MPU6050_Task_Handler);     
+								
+																				
     //创建空闲任务
     xTaskCreate((TaskFunction_t )Idle_task,     
                 (const char*    )"Idle_task",   

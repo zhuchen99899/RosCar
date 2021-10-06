@@ -71,15 +71,17 @@ pid_init();
 		//±àÂëÆ÷2
 		xQueuePeek(Encoder2_Status_Queue,(void *)&Encoder2_status_send_toPID,10);
 		xQueuePeek(Motor2_Ctrl_Parameter_Queue,&M2_ctrl_r,10);	
-		xQueuePeek(Motor2_PID_Parameter_Queue,&M2_speed_PID_wifiset,portMAX_DELAY);
+		xQueuePeek(Motor2_PID_Parameter_Queue,&M2_speed_PID_wifiset,10);
 	
 
 		Actual_Speed2 = Encoder2_status_send_toPID->Encoder2_Speed;
 		
-		pr_warn_pure("Actual_Speed2=%f",Actual_Speed2);
+//		pr_warn_pure("Actual_Speed2=%f",Actual_Speed2);
 
 		Set_Speed= M2_ctrl_r->Speed;
-		
+//		
+//		printf("Set_Speed:%f",Set_Speed);
+//		printf("Actual_Speed2:%f",Actual_Speed2);
 	M2_S_PID.Kp=M2_speed_PID_wifiset->Kp;
 	M2_S_PID.Ki=M2_speed_PID_wifiset->Ki;
 	M2_S_PID.Kd=M2_speed_PID_wifiset->Kd;

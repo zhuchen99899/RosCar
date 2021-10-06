@@ -98,8 +98,9 @@ float speed_pid_realize2(float setSpeed,float Actual_Speed)
 	M2_S_PID.err=M2_S_PID.Set_Speed-M2_S_PID.Actual_Speed;
 	M2_S_PID.integral+=M2_S_PID.err;
 	
-//	printf("integral=%f",M1_S_PID.integral);
-	
+//	printf("integral=%f",M2_S_PID.integral);
+//	printf("err=%f",M2_S_PID.err);
+//	printf("err=%f",M2_S_PID.err-M2_S_PID.err_last);
 	
 	M2_S_PID.voltage=M2_S_PID.Kp*M2_S_PID.err+M2_S_PID.Ki*M2_S_PID.integral+M2_S_PID.Kd*(M2_S_PID.err-M2_S_PID.err_last);
 	
@@ -115,8 +116,10 @@ float speed_pid_realize2(float setSpeed,float Actual_Speed)
 	else if(M2_S_PID.voltage<0)
 	{
 	M2_S_PID.voltage=0;
+		
 	
 	}
+//	printf("M2_S_PID:%f",M2_S_PID.voltage);
 	return M2_S_PID.voltage;
 
 

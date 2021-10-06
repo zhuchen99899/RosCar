@@ -33,6 +33,8 @@
 ..\obj\delay.o: ..\FreeRTOS\include\FreeRTOS.h
 ..\obj\delay.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stddef.h
 ..\obj\delay.o: ..\FreeRTOS\include\FreeRTOSConfig.h
+..\obj\delay.o: ..\HARDWARE\PWM\pwm.h
+..\obj\delay.o: ..\HARDWARE\LED\led.h
 ..\obj\delay.o: ..\SYSTEM\usart\usart.h
 ..\obj\delay.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\delay.o: ..\FreeRTOS\include\projdefs.h

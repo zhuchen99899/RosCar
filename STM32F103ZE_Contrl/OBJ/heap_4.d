@@ -4,6 +4,7 @@
 ..\obj\heap_4.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stddef.h
 ..\obj\heap_4.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdint.h
 ..\obj\heap_4.o: ..\FreeRTOS\include\FreeRTOSConfig.h
+..\obj\heap_4.o: ..\HARDWARE\PWM\pwm.h
 ..\obj\heap_4.o: ..\SYSTEM\sys\sys.h
 ..\obj\heap_4.o: ..\USER\stm32f10x.h
 ..\obj\heap_4.o: ..\CORE\core_cm3.h
@@ -33,6 +34,7 @@
 ..\obj\heap_4.o: ..\STM32F10x_FWLib\inc\stm32f10x_usart.h
 ..\obj\heap_4.o: ..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h
 ..\obj\heap_4.o: ..\STM32F10x_FWLib\inc\misc.h
+..\obj\heap_4.o: ..\HARDWARE\LED\led.h
 ..\obj\heap_4.o: ..\SYSTEM\usart\usart.h
 ..\obj\heap_4.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\heap_4.o: ..\FreeRTOS\include\projdefs.h

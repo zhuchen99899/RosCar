@@ -4,6 +4,7 @@
 ..\obj\os_appobjcreate.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stddef.h
 ..\obj\os_appobjcreate.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdint.h
 ..\obj\os_appobjcreate.o: ..\FreeRTOS\include\FreeRTOSConfig.h
+..\obj\os_appobjcreate.o: ..\HARDWARE\PWM\pwm.h
 ..\obj\os_appobjcreate.o: ..\SYSTEM\sys\sys.h
 ..\obj\os_appobjcreate.o: ..\USER\stm32f10x.h
 ..\obj\os_appobjcreate.o: ..\CORE\core_cm3.h
@@ -33,6 +34,7 @@
 ..\obj\os_appobjcreate.o: ..\STM32F10x_FWLib\inc\stm32f10x_usart.h
 ..\obj\os_appobjcreate.o: ..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h
 ..\obj\os_appobjcreate.o: ..\STM32F10x_FWLib\inc\misc.h
+..\obj\os_appobjcreate.o: ..\HARDWARE\LED\led.h
 ..\obj\os_appobjcreate.o: ..\SYSTEM\usart\usart.h
 ..\obj\os_appobjcreate.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\os_appobjcreate.o: ..\FreeRTOS\include\projdefs.h

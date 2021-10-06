@@ -369,7 +369,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\USER;..\CORE;..\STM32F10x_FWLib\inc;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\HARDWARE\LED;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM3;..\HARDWARE\PWM;..\FreeRTOS\app;..\HARDWARE\KEY;..\HARDWARE\BSP_Init;..\HARDWARE\GPIO;..\HARDWARE\Timer_Encoder;..\CRC16;..\HARDWARE\WIFI;..\HARDWARE\Timer</IncludePath>
+              <IncludePath>..\USER;..\CORE;..\STM32F10x_FWLib\inc;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\HARDWARE\LED;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM3;..\HARDWARE\PWM;..\FreeRTOS\app;..\HARDWARE\KEY;..\HARDWARE\BSP_Init;..\HARDWARE\GPIO;..\HARDWARE\Timer_Encoder;..\CRC16;..\HARDWARE\WIFI;..\HARDWARE\Timer;..\HARDWARE\IIC;..\HARDWARE\MPU6050;..\HARDWARE\MPU6050\DMP</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -462,6 +462,11 @@
               <FileType>1</FileType>
               <FilePath>.\PID.c</FilePath>
             </File>
+            <File>
+              <FileName>IMU_config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\IMU_config.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -506,6 +511,26 @@
               <FileName>timer_read_encoder.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\Timer\timer_read_encoder.c</FilePath>
+            </File>
+            <File>
+              <FileName>iic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\IIC\iic.c</FilePath>
+            </File>
+            <File>
+              <FileName>mpu6050.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\MPU6050\mpu6050.c</FilePath>
+            </File>
+            <File>
+              <FileName>inv_mpu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\MPU6050\DMP\inv_mpu.c</FilePath>
+            </File>
+            <File>
+              <FileName>inv_mpu_dmp_motion_driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\MPU6050\DMP\inv_mpu_dmp_motion_driver.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -673,11 +698,6 @@
               <FilePath>..\FreeRTOS\app\Task_Motor2_PID.c</FilePath>
             </File>
             <File>
-              <FileName>Task_IdleTask.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\FreeRTOS\app\Task_IdleTask.c</FilePath>
-            </File>
-            <File>
               <FileName>Task_WIFI.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\FreeRTOS\app\Task_WIFI.c</FilePath>
@@ -686,6 +706,16 @@
               <FileName>Task_WIFI_send.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\FreeRTOS\app\Task_WIFI_send.c</FilePath>
+            </File>
+            <File>
+              <FileName>Task_MPU6050.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\FreeRTOS\app\Task_MPU6050.c</FilePath>
+            </File>
+            <File>
+              <FileName>Task_IdleTask.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\FreeRTOS\app\Task_IdleTask.c</FilePath>
             </File>
           </Files>
         </Group>

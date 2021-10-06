@@ -4,6 +4,7 @@
 ..\obj\task_wifi.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stddef.h
 ..\obj\task_wifi.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdint.h
 ..\obj\task_wifi.o: ..\FreeRTOS\include\FreeRTOSConfig.h
+..\obj\task_wifi.o: ..\HARDWARE\PWM\pwm.h
 ..\obj\task_wifi.o: ..\SYSTEM\sys\sys.h
 ..\obj\task_wifi.o: ..\USER\stm32f10x.h
 ..\obj\task_wifi.o: ..\CORE\core_cm3.h
@@ -33,6 +34,7 @@
 ..\obj\task_wifi.o: ..\STM32F10x_FWLib\inc\stm32f10x_usart.h
 ..\obj\task_wifi.o: ..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h
 ..\obj\task_wifi.o: ..\STM32F10x_FWLib\inc\misc.h
+..\obj\task_wifi.o: ..\HARDWARE\LED\led.h
 ..\obj\task_wifi.o: ..\SYSTEM\usart\usart.h
 ..\obj\task_wifi.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\task_wifi.o: ..\FreeRTOS\include\projdefs.h

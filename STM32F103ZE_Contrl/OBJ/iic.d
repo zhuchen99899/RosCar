@@ -1,0 +1,47 @@
+..\obj\iic.o: ..\HARDWARE\IIC\iic.c
+..\obj\iic.o: ..\HARDWARE\IIC\iic.h
+..\obj\iic.o: ..\SYSTEM\sys\sys.h
+..\obj\iic.o: ..\USER\stm32f10x.h
+..\obj\iic.o: ..\CORE\core_cm3.h
+..\obj\iic.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\iic.o: ..\USER\system_stm32f10x.h
+..\obj\iic.o: ..\USER\stm32f10x_conf.h
+..\obj\iic.o: ..\STM32F10x_FWLib\inc\stm32f10x_adc.h
+..\obj\iic.o: ..\USER\stm32f10x.h
+..\obj\iic.o: ..\STM32F10x_FWLib\inc\stm32f10x_bkp.h
+..\obj\iic.o: ..\STM32F10x_FWLib\inc\stm32f10x_can.h
+..\obj\iic.o: ..\STM32F10x_FWLib\inc\stm32f10x_cec.h
+..\obj\iic.o: ..\STM32F10x_FWLib\inc\stm32f10x_crc.h
+..\obj\iic.o: ..\STM32F10x_FWLib\inc\stm32f10x_dac.h
+..\obj\iic.o: ..\STM32F10x_FWLib\inc\stm32f10x_dbgmcu.h
+..\obj\iic.o: ..\STM32F10x_FWLib\inc\stm32f10x_dma.h
+..\obj\iic.o: ..\STM32F10x_FWLib\inc\stm32f10x_exti.h
+..\obj\iic.o: ..\STM32F10x_FWLib\inc\stm32f10x_flash.h
+..\obj\iic.o: ..\STM32F10x_FWLib\inc\stm32f10x_fsmc.h
+..\obj\iic.o: ..\STM32F10x_FWLib\inc\stm32f10x_gpio.h
+..\obj\iic.o: ..\STM32F10x_FWLib\inc\stm32f10x_i2c.h
+..\obj\iic.o: ..\STM32F10x_FWLib\inc\stm32f10x_iwdg.h
+..\obj\iic.o: ..\STM32F10x_FWLib\inc\stm32f10x_pwr.h
+..\obj\iic.o: ..\STM32F10x_FWLib\inc\stm32f10x_rcc.h
+..\obj\iic.o: ..\STM32F10x_FWLib\inc\stm32f10x_rtc.h
+..\obj\iic.o: ..\STM32F10x_FWLib\inc\stm32f10x_sdio.h
+..\obj\iic.o: ..\STM32F10x_FWLib\inc\stm32f10x_spi.h
+..\obj\iic.o: ..\STM32F10x_FWLib\inc\stm32f10x_tim.h
+..\obj\iic.o: ..\STM32F10x_FWLib\inc\stm32f10x_usart.h
+..\obj\iic.o: ..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h
+..\obj\iic.o: ..\STM32F10x_FWLib\inc\misc.h
+..\obj\iic.o: ..\SYSTEM\delay\delay.h
+..\obj\iic.o: ..\FreeRTOS\include\freertos.h
+..\obj\iic.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stddef.h
+..\obj\iic.o: ..\FreeRTOS\include\FreeRTOSConfig.h
+..\obj\iic.o: ..\HARDWARE\PWM\pwm.h
+..\obj\iic.o: ..\HARDWARE\LED\led.h
+..\obj\iic.o: ..\SYSTEM\usart\usart.h
+..\obj\iic.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\iic.o: ..\FreeRTOS\include\projdefs.h
+..\obj\iic.o: ..\FreeRTOS\include\portable.h
+..\obj\iic.o: ..\FreeRTOS\include\deprecated_definitions.h
+..\obj\iic.o: ..\FreeRTOS\portable\RVDS\ARM_CM3\portmacro.h
+..\obj\iic.o: ..\FreeRTOS\include\mpu_wrappers.h
+..\obj\iic.o: ..\FreeRTOS\include\task.h
+..\obj\iic.o: ..\FreeRTOS\include\list.h

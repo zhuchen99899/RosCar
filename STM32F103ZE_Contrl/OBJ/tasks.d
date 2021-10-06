@@ -5,6 +5,7 @@
 ..\obj\tasks.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stddef.h
 ..\obj\tasks.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdint.h
 ..\obj\tasks.o: ..\FreeRTOS\include\FreeRTOSConfig.h
+..\obj\tasks.o: ..\HARDWARE\PWM\pwm.h
 ..\obj\tasks.o: ..\SYSTEM\sys\sys.h
 ..\obj\tasks.o: ..\USER\stm32f10x.h
 ..\obj\tasks.o: ..\CORE\core_cm3.h
@@ -34,6 +35,7 @@
 ..\obj\tasks.o: ..\STM32F10x_FWLib\inc\stm32f10x_usart.h
 ..\obj\tasks.o: ..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h
 ..\obj\tasks.o: ..\STM32F10x_FWLib\inc\misc.h
+..\obj\tasks.o: ..\HARDWARE\LED\led.h
 ..\obj\tasks.o: ..\SYSTEM\usart\usart.h
 ..\obj\tasks.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\tasks.o: ..\FreeRTOS\include\projdefs.h

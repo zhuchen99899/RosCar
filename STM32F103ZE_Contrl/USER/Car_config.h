@@ -20,7 +20,7 @@
 /* 启用 WIFI小车*/
 #define Car_Wifi_Receive_OFF  0
 #define Car_Wifi_Send_OFF  0
-#define Car_PWM_ctrl  0  //小车PWM控制，开启后所有闭环控制失效
+#define Car_PWM_ctrl  1  //小车PWM控制，开启后所有闭环控制失效
 
 
 

@@ -34,6 +34,8 @@
 ..\obj\usart.o: ..\FreeRTOS\include\FreeRTOS.h
 ..\obj\usart.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stddef.h
 ..\obj\usart.o: ..\FreeRTOS\include\FreeRTOSConfig.h
+..\obj\usart.o: ..\HARDWARE\PWM\pwm.h
+..\obj\usart.o: ..\HARDWARE\LED\led.h
 ..\obj\usart.o: ..\FreeRTOS\include\projdefs.h
 ..\obj\usart.o: ..\FreeRTOS\include\portable.h
 ..\obj\usart.o: ..\FreeRTOS\include\deprecated_definitions.h

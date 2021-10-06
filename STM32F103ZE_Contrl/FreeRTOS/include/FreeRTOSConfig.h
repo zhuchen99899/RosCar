@@ -70,7 +70,7 @@
 
 #ifndef FREERTOS_CONFIG_H
 #define FREERTOS_CONFIG_H
-
+#include "pwm.h"
 #include "sys.h"
 #include "usart.h"
 //针对不同的编译器调用不同的stdint.h文件
@@ -118,7 +118,9 @@
 /*                                FreeRTOS与内存申请有关配置选项                                                */
 /***************************************************************************************************************/
 #define configSUPPORT_DYNAMIC_ALLOCATION        1                       //支持动态内存申请
-#define configTOTAL_HEAP_SIZE					((size_t)(20*1024))     //系统所有总的堆大小
+#define configTOTAL_HEAP_SIZE					((size_t)(25*1024))     //系统所有总的堆大小
+
+/*freertos每创建一个任务将在系统总堆中抽取,如果总堆大小不够，任务将无法创建，在此项目中，任务超过8个后应当将默认的20*1024改为25*1024*/
 
 /***************************************************************************************************************/
 /*                                FreeRTOS与钩子函数有关的配置选项                                              */
@@ -130,6 +132,10 @@
 /*                                FreeRTOS与运行时间和任务状态收集有关的配置选项                                 */
 /***************************************************************************************************************/
 #define configGENERATE_RUN_TIME_STATS	        0                       //为1时启用运行时间统计功能
+//#define configGENERATE_RUN_TIME_STATS	        1                       //为1时启用运行时间统计功能
+//#define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS()  ConfigureTimeForRunTimeStats()//定时器3提供时间统计的时基，频率为10K，即周期为100us
+//#define portGET_RUN_TIME_COUNTER_VALUE()		FreeRTOSRunTimeTicks	//获取时间统计时间值
+
 #define configUSE_TRACE_FACILITY				1                       //为1启用可视化跟踪调试
 #define configUSE_STATS_FORMATTING_FUNCTIONS	1                       //与宏configUSE_TRACE_FACILITY同时为1时会编译下面3个函数
                                                                         //prvWriteNameToBuffer(),vTaskList(),
@@ -182,6 +188,8 @@
 /***************************************************************************************************************/
 #define xPortPendSVHandler 	PendSV_Handler
 #define vPortSVCHandler 	SVC_Handler
+
+
 
 #endif /* FREERTOS_CONFIG_H */
 

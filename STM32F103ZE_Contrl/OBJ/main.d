@@ -34,6 +34,8 @@
 ..\obj\main.o: ..\FreeRTOS\include\FreeRTOS.h
 ..\obj\main.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stddef.h
 ..\obj\main.o: ..\FreeRTOS\include\FreeRTOSConfig.h
+..\obj\main.o: ..\HARDWARE\PWM\pwm.h
+..\obj\main.o: ..\HARDWARE\LED\led.h
 ..\obj\main.o: ..\SYSTEM\usart\usart.h
 ..\obj\main.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\main.o: ..\FreeRTOS\include\projdefs.h
@@ -49,10 +51,8 @@
 ..\obj\main.o: config.h
 ..\obj\main.o: Car_config.h
 ..\obj\main.o: ..\FreeRTOS\app\Task_Motor1_Dir.h
-..\obj\main.o: ..\HARDWARE\LED\led.h
 ..\obj\main.o: ..\HARDWARE\GPIO\Motor_Dir_Output.h
 ..\obj\main.o: ..\FreeRTOS\app\Task_Motor1_PWM.h
-..\obj\main.o: ..\HARDWARE\PWM\pwm.h
 ..\obj\main.o: ..\FreeRTOS\app\Task_Motor1_PID.h
 ..\obj\main.o: ..\USER\PID.h
 ..\obj\main.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\math.h
@@ -67,8 +67,13 @@
 ..\obj\main.o: ..\FreeRTOS\app\Task_WIFI.h
 ..\obj\main.o: ..\HARDWARE\KEY\key.h
 ..\obj\main.o: ..\FreeRTOS\app\Task_IdleTask.h
+..\obj\main.o: ..\FreeRTOS\app\Task_MPU6050.h
+..\obj\main.o: ..\HARDWARE\MPU6050\mpu6050.h
+..\obj\main.o: ..\HARDWARE\IIC\iic.h
+..\obj\main.o: ..\HARDWARE\MPU6050\DMP\inv_mpu.h
 ..\obj\main.o: ..\HARDWARE\BSP_Init\Bsp_init.h
 ..\obj\main.o: ..\HARDWARE\Timer_Encoder\timer_Encoder.h
 ..\obj\main.o: ..\HARDWARE\Timer\timer_read_encoder.h
 ..\obj\main.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\obj\main.o: data_init.h
+..\obj\main.o: IMU_config.h

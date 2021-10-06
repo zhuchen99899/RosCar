@@ -64,7 +64,7 @@ vTaskSuspend(WIFITask_Handler);
 	extern M2_PID  Motor2_PID_struct_init;
 	M2_speed_PID_wifiset=&Motor2_PID_struct_init;
 	
-	unsigned char arg[5];//解包参数
+	unsigned char arg[6];//解包参数
 	float Data[3];//解包数据
 		
 
@@ -95,8 +95,14 @@ vTaskSuspend(WIFITask_Handler);
 				for(i=0;i<=buffersize;i++)
 				{
 				wifireceive->wifi_buffer[i]=wifireceive->wifi_buffer[i];
-//				pr_warn_pure("%x",wifireceive->wifi_buffer[i]);
+//				printf("%x",wifireceive->wifi_buffer[i]);
 				};
+				
+//				for(i=0;i<=buffersize-1;i++)
+//				{
+//				wifireceive->wifi_buffer[i]=wifireceive->wifi_buffer[i];
+//				printf("%x",wifireceive->wifi_buffer[i]);
+//				}
 				
 			/**消息队列获取成功*/
 			if(rec_flag){
@@ -254,7 +260,7 @@ vTaskSuspend(WIFITask_Handler);
 														break;
 															
 														case Each:		
-														pr_warn_pure("M2|M2");															
+														pr_warn_pure("M1|M2");															
 														pr_warn_pure("speed=%f",Data[0]);
 														pr_warn_pure("speed=%f",Data[1]);
 														M1_ctrl_wifi->Speed=Data[0];
@@ -322,7 +328,161 @@ vTaskSuspend(WIFITask_Handler);
 								
 								
 								break;
+								
+														
+														
+								case Control_speedAnddir:
+														pr_warn_pure("Control_speedAnddir");
+														switch(arg[3]){
+														case Motor1: //电机1
+															pr_warn_pure("M1");
+															if(arg[4]==Motor_dir1){
+															pr_warn_pure("电机1方向1");		
+															Motor1_Dir->Negative=1;
+															Motor1_Dir->Positive=0;			
+															xQueueOverwrite(Motor1_Direction_Queue,&Motor1_Dir);
+															xSemaphoreGive(BinarySemaphore_Motor1_DirChange);//发送电机1方向更改报文信号																				
+															}
+															else if(arg[4]==Motor_dir2){
+															pr_warn_pure("电机1方向2");		
+															Motor1_Dir->Negative=0;
+															Motor1_Dir->Positive=1;		
+															xQueueOverwrite(Motor1_Direction_Queue,&Motor1_Dir);
+															xSemaphoreGive(BinarySemaphore_Motor1_DirChange);//发送电机1方向更改报文信号																				
+															}
+															pr_warn_pure("speed=%f",Data[0]);
+															M1_ctrl_wifi->Speed=Data[0];
+															xQueueOverwrite(Motor1_Ctrl_Parameter_Queue,&M1_ctrl_wifi);
+															
+																								
+														break;
+														case Motor2: //电机2
+															pr_warn_pure("M2");
+															if(arg[4]==Motor_dir1){
+																pr_warn_pure("电机2方向1");				
+																Motor2_Dir->Negative=1;
+																Motor2_Dir->Positive=0;
+																xQueueOverwrite(Motor2_Direction_Queue,&Motor2_Dir);
+																xSemaphoreGive(BinarySemaphore_Motor2_DirChange);//发送电机2方向更改报文信号				
+															}
+															else if(arg[4]==Motor_dir2){
+														
+																pr_warn_pure("电机2方向2");				
+																Motor2_Dir->Negative=0;
+																Motor2_Dir->Positive=1;
+																xQueueOverwrite(Motor2_Direction_Queue,&Motor2_Dir);
+																xSemaphoreGive(BinarySemaphore_Motor2_DirChange);//发送电机2方向更改报文信号		
+														
+															}
+															pr_warn_pure("speed=%f",Data[0]);
+															M2_ctrl_wifi->Speed=Data[0];
+															xQueueOverwrite(Motor2_Ctrl_Parameter_Queue,&M2_ctrl_wifi);
+														
+														break;
+														
+														case Both: //同一参数
+															pr_warn_pure("M1&M2");
+															if(arg[4]==Motor_dir1){
+																pr_warn_pure("电机Both方向1");		
+																Motor1_Dir->Negative=1;
+																Motor1_Dir->Positive=0;															
+																Motor2_Dir->Negative=1;
+																Motor2_Dir->Positive=0;
+																xQueueOverwrite(Motor1_Direction_Queue,&Motor1_Dir);
+																xQueueOverwrite(Motor2_Direction_Queue,&Motor2_Dir);
+																xSemaphoreGive(BinarySemaphore_Motor1_DirChange);//发送电机1方向更改报文信号				
+																xSemaphoreGive(BinarySemaphore_Motor2_DirChange);//发送电机2方向更改报文信号				
+														}
+														else if(arg[4]==Motor_dir2){
+														
+																pr_warn_pure("电机Both方向2");		
+																Motor1_Dir->Negative=0;
+																Motor1_Dir->Positive=1;															
+																Motor2_Dir->Negative=0;
+																Motor2_Dir->Positive=1;
+																xQueueOverwrite(Motor1_Direction_Queue,&Motor1_Dir);
+																xQueueOverwrite(Motor2_Direction_Queue,&Motor2_Dir);
+																xSemaphoreGive(BinarySemaphore_Motor1_DirChange);//发送电机1方向更改报文信号	
+																xSemaphoreGive(BinarySemaphore_Motor2_DirChange);//发送电机2方向更改报文信号															
+														
+														}
+																												
+														pr_warn_pure("speed=%f",Data[0]);
+														M1_ctrl_wifi->Speed=Data[0];
+														M2_ctrl_wifi->Speed=Data[0];
+														xQueueOverwrite(Motor1_Ctrl_Parameter_Queue,&M1_ctrl_wifi);
+														xQueueOverwrite(Motor2_Ctrl_Parameter_Queue,&M2_ctrl_wifi);
+														
+														break;
+														
+														
+														case Each:
+															//方向提取
+															switch(arg[4])
+															{
+																case Motor_dir1:
+																	pr_warn_pure("M1_DIR方向1");
+																	Motor1_Dir->Negative=1;
+																	Motor1_Dir->Positive=0;			
+																	xQueueOverwrite(Motor1_Direction_Queue,&Motor1_Dir);
+																	xSemaphoreGive(BinarySemaphore_Motor1_DirChange);//发送电机1方向更改报文信号				
+																
+																break;
+																
+																case Motor_dir2:
+																	pr_warn_pure("M1_DIR方向2");
+																	Motor1_Dir->Negative=0;
+																	Motor1_Dir->Positive=1;			
+																	xQueueOverwrite(Motor1_Direction_Queue,&Motor1_Dir);
+																	xSemaphoreGive(BinarySemaphore_Motor1_DirChange);//发送电机1方向更改报文信号			
+																
+																break;
+															
+															}
+														
+															switch(arg[5])
+															{
+																case Motor_dir1:
+																	pr_warn_pure("M2_DIR方向1");
+																	Motor2_Dir->Negative=1;
+																	Motor2_Dir->Positive=0;			
+																	xQueueOverwrite(Motor2_Direction_Queue,&Motor2_Dir);
+																	xSemaphoreGive(BinarySemaphore_Motor2_DirChange);//发送电机2方向更改报文信号		
+																
+																break;
+																
+																case Motor_dir2:
+																	pr_warn_pure("M2_DIR方向2");
+																	Motor2_Dir->Negative=0;
+																	Motor2_Dir->Positive=1;			
+																	xQueueOverwrite(Motor2_Direction_Queue,&Motor2_Dir);
+																	xSemaphoreGive(BinarySemaphore_Motor2_DirChange);//发送电机2方向更改报文信号		
+																
+																break;
+																
+															}
+														
+															//速度提取
+															pr_warn_pure("M1|M2");															
+															pr_warn_pure("speed=%f",Data[0]);
+															pr_warn_pure("speed=%f",Data[1]);
+															M1_ctrl_wifi->Speed=Data[0];
+															M2_ctrl_wifi->Speed=Data[1];
+															xQueueOverwrite(Motor1_Ctrl_Parameter_Queue,&M1_ctrl_wifi);
+															xQueueOverwrite(Motor2_Ctrl_Parameter_Queue,&M2_ctrl_wifi);
+															
+															
+															
+															
+														break;
+															
+														default:
+														break;
+													}//obj
+								break;	//speedAnddir		
 
+
+														
 								default:
 								break;
 							}//控制/数据

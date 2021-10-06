@@ -56,3 +56,6 @@
 ..\obj\bsp_init.o: ..\HARDWARE\Timer\timer_read_encoder.h
 ..\obj\bsp_init.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\math.h
 ..\obj\bsp_init.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdlib.h
+..\obj\bsp_init.o: ..\HARDWARE\IIC\iic.h
+..\obj\bsp_init.o: ..\HARDWARE\MPU6050\mpu6050.h
+..\obj\bsp_init.o: ..\HARDWARE\MPU6050\DMP\inv_mpu.h

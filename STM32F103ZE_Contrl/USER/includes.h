@@ -29,7 +29,7 @@
 #include "Task_WIFI_send.h"
 #include "Task_WIFI.h"
 #include "Task_IdleTask.h"
-
+#include "Task_MPU6050.h"
 
 
 /*bsp驱动*/
@@ -41,13 +41,20 @@
 #include "key.h"
 #include "timer_Encoder.h"
 #include "timer_read_encoder.h"
-
+#include "iic.h"
+#include "mpu6050.h"
+#include "inv_mpu.h"
 
 /*其他*/
 #include "config.h"
 #include "data_init.h"
 #include "Car_config.h"
+#include "IMU_config.h"
 #include "pid.h"
+
+
+
+/*通讯协议*/
 #include "protocol.h"
 
 #endif

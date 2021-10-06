@@ -4,6 +4,7 @@
 ..\obj\data_init.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stddef.h
 ..\obj\data_init.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdint.h
 ..\obj\data_init.o: ..\FreeRTOS\include\FreeRTOSConfig.h
+..\obj\data_init.o: ..\HARDWARE\PWM\pwm.h
 ..\obj\data_init.o: ..\SYSTEM\sys\sys.h
 ..\obj\data_init.o: ..\USER\stm32f10x.h
 ..\obj\data_init.o: ..\CORE\core_cm3.h
@@ -33,6 +34,7 @@
 ..\obj\data_init.o: ..\STM32F10x_FWLib\inc\stm32f10x_usart.h
 ..\obj\data_init.o: ..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h
 ..\obj\data_init.o: ..\STM32F10x_FWLib\inc\misc.h
+..\obj\data_init.o: ..\HARDWARE\LED\led.h
 ..\obj\data_init.o: ..\SYSTEM\usart\usart.h
 ..\obj\data_init.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\data_init.o: ..\FreeRTOS\include\projdefs.h

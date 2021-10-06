@@ -14,6 +14,10 @@
 "..\obj\timer_encoder.o"
 "..\obj\wifi.o"
 "..\obj\timer_read_encoder.o"
+"..\obj\iic.o"
+"..\obj\mpu6050.o"
+"..\obj\inv_mpu.o"
+"..\obj\inv_mpu_dmp_motion_driver.o"
 "..\obj\delay.o"
 "..\obj\sys.o"
 "..\obj\usart.o"
@@ -40,9 +44,10 @@
 "..\obj\task_motor2_dir.o"
 "..\obj\task_motor2_pwm.o"
 "..\obj\task_motor2_pid.o"
-"..\obj\task_idletask.o"
 "..\obj\task_wifi.o"
 "..\obj\task_wifi_send.o"
+"..\obj\task_mpu6050.o"
+"..\obj\task_idletask.o"
 "..\obj\crc16.o"
 --ro-base 0x08000000 --entry 0x08000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

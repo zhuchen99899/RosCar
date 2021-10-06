@@ -37,8 +37,9 @@ static void Encoder1_init(u32 ENCODER_TIM_PERIOD,u16 TIM_ICPolarity_Mode1,u16 TI
 	/************同时对下降沿上升沿计算，即为四倍频模式********************************************/
 
   TIM_EncoderInterfaceConfig(TIM5, TIM_EncoderMode_TI12, TIM_ICPolarity_Mode1 ,TIM_ICPolarity_Mode2);
-//  TIM_ICStructInit(&TIM_ICInitStructure);
-//  TIM_ICInitStructure.TIM_ICFilter = 9;//指定输入捕获滤波器
+		/***编码器滤波***/
+  TIM_ICStructInit(&TIM_ICInitStructure);
+  TIM_ICInitStructure.TIM_ICFilter = 9;//指定输入捕获滤波器
   TIM_ICInit(TIM5, &TIM_ICInitStructure);
 	TIM_SetCounter(TIM5,0);
 
@@ -101,8 +102,12 @@ static void Encoder1_init(u32 ENCODER_TIM_PERIOD,u16 TIM_ICPolarity_Mode1,u16 TI
 	/************同时对下降沿上升沿计算，即为四倍频模式********************************************/
 
   TIM_EncoderInterfaceConfig(TIM4, TIM_EncoderMode_TI12, TIM_ICPolarity_Mode1 ,TIM_ICPolarity_Mode2);
-//  TIM_ICStructInit(&TIM_ICInitStructure);
-//  TIM_ICInitStructure.TIM_ICFilter = 9;//指定输入捕获滤波器
+	/***编码器滤波***/
+  TIM_ICStructInit(&TIM_ICInitStructure);
+  TIM_ICInitStructure.TIM_ICFilter = 8;//指定输入捕获滤波器
+
+
+
   TIM_ICInit(TIM4, &TIM_ICInitStructure);
 	TIM_SetCounter(TIM4,0);
 							 
@@ -140,24 +145,24 @@ void Encoder_init(void){
 	switch(period_mode){
 		case 0:
 		period_mode_1=TIM_ICPolarity_Rising;
-		period_mode_1=TIM_ICPolarity_Falling;
+		period_mode_2=TIM_ICPolarity_Falling;
 		break;
 		case 1:
 		period_mode_1=TIM_ICPolarity_Falling;
-		period_mode_1=TIM_ICPolarity_Rising;
+		period_mode_2=TIM_ICPolarity_Rising;
 		break;
 			
 		case 2:
 		period_mode_1=TIM_ICPolarity_Rising;
-		period_mode_1=TIM_ICPolarity_Rising;	
+		period_mode_2=TIM_ICPolarity_Rising;	
 		break;
 		case 3:
 		period_mode_1=TIM_ICPolarity_Falling;
-		period_mode_1=TIM_ICPolarity_Falling;	
+		period_mode_2=TIM_ICPolarity_Falling;	
 		break;
 		case 4: //四倍频模式
 		period_mode_1=TIM_ICPolarity_BothEdge;
-		period_mode_1=TIM_ICPolarity_BothEdge;
+		period_mode_2=TIM_ICPolarity_BothEdge;
 		break;
 	}
 	

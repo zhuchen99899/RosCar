@@ -28,13 +28,14 @@ union float_trans_rec{
 
 
 //首字节
-#define Data_speed         0x00
-#define Control_direction  0x01
-#define Control_PWM        0x02
-#define Control_speed      0x03
-#define Control_PID        0x04
-#define Data_Line_speed    0x05
-#define Data_Angular_speed 0x06
+#define Data_speed          0x00
+#define Control_direction   0x01
+#define Control_PWM         0x02
+#define Control_speed       0x03
+#define Control_PID         0x04
+#define Data_Line_speed     0x05
+#define Data_Angular_speed  0x06
+#define Control_speedAnddir 0x07
 
 //剩余长度字节
 #define residue_length     0x0f
@@ -54,8 +55,7 @@ union float_trans_rec{
 #define Motor_dir1         0x01
 #define Motor_dir2         0x02
 
-////电机PWM控制相关宏
-//#define control_PWM        0x02
+
 
 
 

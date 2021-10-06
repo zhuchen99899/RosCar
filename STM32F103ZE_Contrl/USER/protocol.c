@@ -15,10 +15,10 @@ void float_to_uchar(float data,unsigned char *uchar_data)
 
 union float_trans trans;
 trans.f=data;
-uchar_data[0]=trans.uch[0];
-uchar_data[1]=trans.uch[1];
-uchar_data[2]=trans.uch[2];
-uchar_data[3]=trans.uch[3];
+uchar_data[0]=trans.uch[3];
+uchar_data[1]=trans.uch[2];
+uchar_data[2]=trans.uch[1];
+uchar_data[3]=trans.uch[0];
 	
 }
 
@@ -41,7 +41,7 @@ union float_trans_rec trans;
 if((obj==Motor1)||(obj==Motor2)||(obj==Both)){
 	
 		for(i=0;i<=3;i++){
-			trans.uch[i]=uchar_data[i];
+			trans.uch[i]=uchar_data[3-i];
 		}
 	
 		data[0]=trans.f;
@@ -51,21 +51,21 @@ if((obj==Motor1)||(obj==Motor2)||(obj==Both)){
 	else{
 	 //分别控制
 				for(i=0;i<=3;i++){
-			trans.uch[i]=uchar_data[i];
+			trans.uch[i]=uchar_data[3-i];
 		}
 	
 		data[0]=trans.f;
 		
 				for(i=0;i<=3;i++){
-			trans.uch[i]=uchar_data[4+i];
+			trans.uch[i]=uchar_data[7-i];
 		}
 		data[1]=trans.f;
 		
-				for(i=0;i<=3;i++){
-			trans.uch[i]=uchar_data[8+i];
-		}
-		
-		data[2]=trans.f;
+//				for(i=0;i<=3;i++){
+//			trans.uch[i]=uchar_data[11-i];
+//		}
+//		
+//		data[2]=trans.f;
 	}
 }
 
@@ -86,18 +86,18 @@ union float_trans_rec trans;
 if((obj==Motor1)||(obj==Motor2)||(obj==Both)){
 	
 				for(i=0;i<=3;i++){
-			trans.uch[i]=uchar_data[i];
+			trans.uch[i]=uchar_data[3-i];
 		}
 	
 		data[0]=trans.f;
 		
 				for(i=0;i<=3;i++){
-			trans.uch[i]=uchar_data[4+i];
+			trans.uch[i]=uchar_data[7-i];
 		}
 		data[1]=trans.f;
 		
 				for(i=0;i<=3;i++){
-			trans.uch[i]=uchar_data[8+i];
+			trans.uch[i]=uchar_data[11-i];
 		}
 		
 		data[2]=trans.f;
@@ -149,7 +149,7 @@ switch(Datahead_Byte)
 				buffer[i]=0x00;
 				}
 
-				CRC16_uch(buffer,14,crc_res);//去除一帧最后两个CRC校验位计算CRC16值
+				CRC16_uch(buffer,buffersize-1,crc_res);//去除一帧最后两个CRC校验位计算CRC16值
 				buffer[15]=crc_res[0];
 				buffer[16]=crc_res[1];
 			break;
@@ -169,7 +169,7 @@ switch(Datahead_Byte)
 				buffer[i]=0x00;
 				}
 
-				CRC16_uch(buffer,14,crc_res);//去除一帧最后两个CRC校验位计算CRC16值
+				CRC16_uch(buffer,buffersize-1,crc_res);//去除一帧最后两个CRC校验位计算CRC16值
 				buffer[15]=crc_res[0];
 				buffer[16]=crc_res[1];
 			break;
@@ -189,7 +189,7 @@ switch(Datahead_Byte)
 				buffer[i]=0x00;
 				}
 
-				CRC16_uch(buffer,14,crc_res);//去除一帧最后两个CRC校验位计算CRC16值
+				CRC16_uch(buffer,buffersize-1,crc_res);//去除一帧最后两个CRC校验位计算CRC16值
 				buffer[15]=crc_res[0];
 				buffer[16]=crc_res[1];
 				break;
@@ -214,7 +214,7 @@ switch(Datahead_Byte)
 				buffer[i]=0x00;
 				}
 
-				CRC16_uch(buffer,14,crc_res);//去除一帧最后两个CRC校验位计算CRC16值
+				CRC16_uch(buffer,buffersize-1,crc_res);//去除一帧最后两个CRC校验位计算CRC16值
 				buffer[15]=crc_res[0];
 				buffer[16]=crc_res[1];
 			break;
@@ -308,6 +308,57 @@ static void Deserialize_Ctrl_speed(unsigned char *buffer,unsigned char speed[])
 }
 
 
+/*解帧中的speed 和 dir 负载
+@buffer 帧指针
+@speed 数组 根据控制对象不同
+@dir   数组 根据控制对象不同
+*/
+static void Deserialize_Ctrl_speedAnddir(unsigned char *buffer,unsigned char speed[],unsigned char dir[])
+{
+	int i;
+	switch(buffer[2]){
+		case Both:
+			speed[0]=buffer[3];
+			speed[1]=buffer[4];
+			speed[2]=buffer[5];
+			speed[3]=buffer[6];
+			dir[0]=buffer[7];
+		break;
+		
+		case Motor1:
+
+			speed[0]=buffer[3];
+			speed[1]=buffer[4];
+			speed[2]=buffer[5];
+			speed[3]=buffer[6];
+			dir[0]=buffer[7];
+		break;
+		
+		case Motor2:
+			speed[0]=buffer[3];
+			speed[1]=buffer[4];
+			speed[2]=buffer[5];
+			speed[3]=buffer[6];
+			dir[0]=buffer[7];
+		break;
+		
+		case Each:
+			for(i=0;i<=7;i++){
+			speed[i]=buffer[3+i];
+			}					
+			dir[0]=buffer[11];
+			dir[1]=buffer[12];
+		break;
+			
+		default:
+		break;
+	}
+
+
+
+}
+
+
 
 
 
@@ -389,6 +440,8 @@ static unsigned char Deserialize_Ctrl_obj(unsigned char *buffer,unsigned char ob
 
 }
 
+
+
 /*解数据帧 并存储解帧参数
 @buffer:为数据帧
 @arg为解包参数:
@@ -411,17 +464,17 @@ void  DeserializeBuffer(unsigned char *buffer,unsigned char arg[],float data[])
 	unsigned char pwm_val;
 	unsigned char ctrl_speed[12]; 
 	unsigned char ctrl_PID[12];
-	
+	unsigned char ctrl_dir[2];
 	
 	if(buffer[1]==residue_length)//首先校验剩余长度
 	{
 	
 					arg[0]=length_true;
 					/**********校验CRC(成功后解包)***********/
-					crc_res=CRC16(buffer,buffersize-2);//去除一帧最后两个CRC校验位计算CRC16值
+					crc_res=CRC16(buffer,buffersize-1);//去除一帧最后两个CRC校验位计算CRC16值
 					crc_combine_2byte=Combine_CRC_2Byte(buffer[15],buffer[16]);
-				////			pr_warn_pure("打印CRC:%x\r\n",crc_ret);
-				////			pr_warn_pure("打印CRC组合:%x\r\n",crc_2byte);
+//							pr_warn_pure("打印CRC:%x\r\n",crc_res);
+//							pr_warn_pure("打印CRC组合:%x\r\n",crc_combine_2byte);
 					if(crc_res == crc_combine_2byte){
 
 					arg[1]=CRC_success;
@@ -479,6 +532,19 @@ void  DeserializeBuffer(unsigned char *buffer,unsigned char arg[],float data[])
 									case Data_Angular_speed:
 										
 									break;
+									
+									case Control_speedAnddir:
+										arg[2]=Control_speedAnddir;
+										arg[3]=Deserialize_Ctrl_obj(buffer,obj);
+										
+										Deserialize_Ctrl_speedAnddir(buffer,ctrl_speed,ctrl_dir);	
+										arg[4]=ctrl_dir[0];
+										arg[5]=ctrl_dir[1];
+										uchar_to_float_speed(arg[3],ctrl_speed,data);
+									
+									
+									break;
+									
 									
 									default:
 									break;

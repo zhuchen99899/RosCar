@@ -3,6 +3,7 @@
 ..\obj\croutine.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stddef.h
 ..\obj\croutine.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdint.h
 ..\obj\croutine.o: ..\FreeRTOS\include\FreeRTOSConfig.h
+..\obj\croutine.o: ..\HARDWARE\PWM\pwm.h
 ..\obj\croutine.o: ..\SYSTEM\sys\sys.h
 ..\obj\croutine.o: ..\USER\stm32f10x.h
 ..\obj\croutine.o: ..\CORE\core_cm3.h
@@ -32,6 +33,7 @@
 ..\obj\croutine.o: ..\STM32F10x_FWLib\inc\stm32f10x_usart.h
 ..\obj\croutine.o: ..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h
 ..\obj\croutine.o: ..\STM32F10x_FWLib\inc\misc.h
+..\obj\croutine.o: ..\HARDWARE\LED\led.h
 ..\obj\croutine.o: ..\SYSTEM\usart\usart.h
 ..\obj\croutine.o: D:\tools\code tools\keil\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\croutine.o: ..\FreeRTOS\include\projdefs.h
